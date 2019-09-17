@@ -8,6 +8,8 @@ import javax.swing.*;
 public class Minesweeper extends JFrame {
 
     private Field field;
+    private boolean isStarted = false;
+    private Gui gui;
 
     /**
      * Creates the app
@@ -32,12 +34,17 @@ public class Minesweeper extends JFrame {
 
 
         this.field = new Field(Level.EASY);
-        Gui gui = new Gui(this);
+        gui = new Gui(this);
         setContentPane(gui);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
     }
+
+    /**
+     * Setter for the boolean indicating if the game was started or not
+     * @param isStarted boolean indicating if the game was started or not
+     */
 
     /**
      * Main function
@@ -52,6 +59,26 @@ public class Minesweeper extends JFrame {
      */
     public void quit() {
         System.exit(0);
+    }
+
+    public void setIsStarted(boolean isStarted) {
+        this.isStarted = isStarted;
+    }
+
+    /**
+     * Getter for the boolean indicating if the game was started or not
+     * @return boolean indicating if the game was started or not
+     */
+    public boolean getIsStarted() {
+        return isStarted;
+    }
+
+    /**
+     * Getter for the minesweeper GUI
+     * @return GUI
+     */
+    public Gui getGui() {
+        return gui;
     }
 
     /**

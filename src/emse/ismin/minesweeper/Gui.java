@@ -1,8 +1,11 @@
 package emse.ismin.minesweeper;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import javax.swing.KeyStroke;
 
 /**
@@ -19,11 +22,11 @@ public class Gui extends JPanel {
     private JMenuItem mLicense;
     private JMenuItem mNew;
     private JLabel difficultyLabel;
-    private JLabel scoreLabel;
     private JRadioButtonMenuItem easyRadio;
     private JRadioButtonMenuItem mediumRadio;
     private JRadioButtonMenuItem hardRadio;
     private Case[][] tabCase;
+    private Counter counter;
 
     /**
      * Creates a Gui according to the given <code>Minesweeper</code>
@@ -79,18 +82,10 @@ public class Gui extends JPanel {
         minesweeper.setJMenuBar(menuBar);
 
         //Labels for top panel of the main BorderLayout
-        JLabel title = new JLabel("Good Luck !");
-        title.setForeground(new Color(44,62,80));
-        title.setFont(new Font("Nunito", Font.BOLD, 18));
-        title.setHorizontalAlignment(JLabel.CENTER);
         difficultyLabel = new JLabel("Level: "+minesweeper.getField().getLevel().toString());
         difficultyLabel.setForeground(new Color(44,62,80));
         difficultyLabel.setFont(new Font("Nunito", Font.BOLD, 18));
         difficultyLabel.setHorizontalAlignment(JLabel.CENTER);
-        scoreLabel = new JLabel("Score: 77");
-        scoreLabel.setForeground(new Color(44,62,80));
-        scoreLabel.setFont(new Font("Nunito", Font.BOLD, 18));
-        scoreLabel.setHorizontalAlignment(JLabel.CENTER);
 
         //Labels for bottom panel of the main BorderLayout
         quitButton = new JButton("Quit");
@@ -107,8 +102,9 @@ public class Gui extends JPanel {
         topPanel.setBackground(new Color(189,195,199));
         topPanel.setLayout(new BorderLayout());
         topPanel.add(difficultyLabel, BorderLayout.WEST);
-        topPanel.add(title, BorderLayout.CENTER);
-        topPanel.add(scoreLabel, BorderLayout.EAST);
+        counter = new Counter();
+        topPanel.add(counter, BorderLayout.EAST);
+
         this.add(topPanel, BorderLayout.NORTH);
 
         //bottomPanel of the main BorderLayout
@@ -141,6 +137,14 @@ public class Gui extends JPanel {
                 hardRadio.setSelected(true);
                 break;
         }
+    }
+
+    /**
+     * Getter for the GUI counter
+     * @return
+     */
+    public Counter getCounter() {
+        return counter;
     }
 
     /**
@@ -248,6 +252,8 @@ public class Gui extends JPanel {
                 tabCase[i][j].newCase();
             }
         }
+        counter.stop2();
+        minesweeper.setIsStarted(false);
     }
 
     /**
@@ -260,6 +266,8 @@ public class Gui extends JPanel {
         gridPanel.removeAll();
         fillGridPanel(gridPanel);
         minesweeper.pack();
+        counter.stop2();
+        minesweeper.setIsStarted(false);
     }
 }
 

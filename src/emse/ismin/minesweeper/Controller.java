@@ -82,10 +82,5 @@ public class Controller implements ActionListener {
                     "SOFTWARE.", "License", JOptionPane.PLAIN_MESSAGE);
         }
     }
-
-    private void restart(Level level) {
-        //gui.getMinesweeper().setField(new Field(level));
-        //gui.getMinesweeper().setContentPane(new Gui(gui.getMinesweeper()));
-    }
 }
 

@@ -20,7 +20,6 @@ public class Case extends JPanel implements MouseListener {
     private boolean isClicked = false;
     private boolean rClick = false;
     private boolean isFlaged = false;
-    //private boolean isVisited = false;
 
     /**
      * Constructor
@@ -126,27 +125,8 @@ public class Case extends JPanel implements MouseListener {
         isClicked = false;
         rClick = false;
         isFlaged = false;
-        //isVisited = false;
         repaint();
     }
-/*
-    public void revealEmpty(Case[][] tabCase, int x, int y, Graphics gc) {
-        if(!minesweeper.getField().outsideField(x, y)) {
-            if(!tabCase[x][y].isVisited && tabCase[x][y].nearbyMinesCount == 0) {
-                tabCase[x][y].isVisited = true;
-                tabCase[x][y].drawAdaptativeImage(gc, "img/0.png");
-                revealEmpty(tabCase, x-1, y-1, gc);
-                revealEmpty(tabCase, x, y-1, gc);
-                revealEmpty(tabCase, x+1, y-1, gc);
-                revealEmpty(tabCase, x+1, y, gc);
-                revealEmpty(tabCase, x+1, y+1, gc);
-                revealEmpty(tabCase, x, y+1, gc);
-                revealEmpty(tabCase, x-1, y+1, gc);
-                revealEmpty(tabCase, x-1, y, gc);
-            }
-        }
-    }
- */
 
     /**
      * Handles mouse events
@@ -160,6 +140,10 @@ public class Case extends JPanel implements MouseListener {
         rClick = SwingUtilities.isRightMouseButton(e);
         if(!rClick) {
             isClicked = true;
+        }
+        if(!minesweeper.getIsStarted()) {
+            minesweeper.getGui().getCounter().restart();
+            minesweeper.setIsStarted(true);
         }
         repaint();
     }

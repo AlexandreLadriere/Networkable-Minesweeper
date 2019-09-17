@@ -2,114 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5abd3417-2b4b-408a-9018-83429485001a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/allclasses-index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/allpackages-index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/constant-values.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/darrylbu/icon/StretchIcon.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/darrylbu/icon/class-use/StretchIcon.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/darrylbu/icon/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/darrylbu/icon/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/darrylbu/icon/package-use.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/deprecated-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/element-list" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/Case.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/Controller.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/Field.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/Gui.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/Level.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/Minesweeper.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/class-use/Case.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/class-use/Controller.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/class-use/Field.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/class-use/Gui.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/class-use/Level.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/class-use/Minesweeper.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/emse/ismin/minesweeper/package-use.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/help-doc.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-10.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-11.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-12.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-13.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-14.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-15.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-16.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-17.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-18.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-19.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-20.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-6.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-7.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-8.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index-files/index-9.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/external/jquery/jquery.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-bg_glass_65_dadada_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-bg_glass_75_dadada_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-icons_222222_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-icons_2e83ff_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-icons_454545_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-icons_888888_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/images/ui-icons_cd0a0a_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-3.3.1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-migrate-3.0.1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-ui.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-ui.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-ui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-ui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-ui.structure.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jquery-ui.structure.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jszip-utils/dist/jszip-utils-ie.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jszip-utils/dist/jszip-utils-ie.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jszip-utils/dist/jszip-utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jszip-utils/dist/jszip-utils.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jszip/dist/jszip.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/jquery/jszip/dist/jszip.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/member-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/member-search-index.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/overview-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/overview-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/package-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/package-search-index.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/resources/glass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/resources/x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/search.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/serialized-form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/stylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/type-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Javadoc/type-search-index.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Minesweeper.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/darrylbu/icon/StretchIcon.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Case.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Controller.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Field$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Field.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Level.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Case.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Field.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Level.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/StretchIcon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Counter.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Counter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Case.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Case.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Case.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Case.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -181,7 +85,8 @@
       <option name="presentableId" value="Default" />
       <updated>1567713299668</updated>
       <workItem from="1567713303379" duration="13045000" />
-      <workItem from="1568044240307" duration="36357000" />
+      <workItem from="1568044240307" duration="37571000" />
+      <workItem from="1568718648312" duration="8096000" />
     </task>
     <servers />
   </component>
@@ -193,7 +98,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
