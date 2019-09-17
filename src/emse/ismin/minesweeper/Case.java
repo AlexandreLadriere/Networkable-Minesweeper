@@ -6,7 +6,6 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -21,6 +20,7 @@ public class Case extends JPanel implements MouseListener {
     private boolean isClicked = false;
     private boolean rClick = false;
     private boolean isFlaged = false;
+    private boolean isRevealed = false;
 
     /**
      * Constructor
@@ -106,7 +106,6 @@ public class Case extends JPanel implements MouseListener {
      */
     private void drawAdaptativeImage(Graphics gc, String filePath) {
         try {
-            //BufferedImage mineImage = ImageIO.read(new File(filePath));
             BufferedImage mineImage = ImageIO.read(getClass().getResourceAsStream(filePath));
             gc.drawImage(mineImage, 0, 0, this.getWidth(), this.getHeight(), this);
         } catch (IOException e) {
@@ -121,6 +120,7 @@ public class Case extends JPanel implements MouseListener {
         isClicked = false;
         rClick = false;
         isFlaged = false;
+        isRevealed = false;
         repaint();
     }
 
@@ -134,11 +134,17 @@ public class Case extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         rClick = SwingUtilities.isRightMouseButton(e);
+
         if(!rClick) {
             isClicked = true;
         }
+
         if(!minesweeper.getIsLost()) {
             nearbyMinesCount = minesweeper.getField().countNearbyMines(x, y);
+            if(nearbyMinesCount != -1 && !isRevealed && !rClick) {
+                minesweeper.setNbRevealed(minesweeper.getNbRevealed()+1);
+                isRevealed = true;
+            }
             if (!minesweeper.getIsStarted()) {
                 minesweeper.getGui().getCounter().restart();
                 minesweeper.setIsStarted(true);
@@ -148,7 +154,15 @@ public class Case extends JPanel implements MouseListener {
             if(nearbyMinesCount == -1 && !rClick && !isFlaged) {
                 minesweeper.getGui().getCounter().stop2();
                 minesweeper.setIsLost(true);
-                JOptionPane.showMessageDialog(null, "You suck !", "Try Again !", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "You suck !", "Try Again !", JOptionPane.WARNING_MESSAGE);
+                minesweeper.getGui().newGame();
+            }
+        }
+        if(minesweeper.isWin()) {
+            minesweeper.getGui().getCounter().stop2();
+            minesweeper.setNbRevealed(minesweeper.getNbRevealed()-1); //to make sure that the dialog box will not pop-up again
+            if(JOptionPane.showConfirmDialog(null, "You are a genius !!\nYour Score: "+minesweeper.getGui().getCounter().getCounterValue() + "\n\nDo you want to restart a game ?", "Wahou !!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                minesweeper.getGui().newGame();
             }
         }
     }

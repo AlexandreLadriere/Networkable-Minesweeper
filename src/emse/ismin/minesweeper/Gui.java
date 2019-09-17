@@ -257,7 +257,7 @@ public class Gui extends JPanel {
 
     /**
      * Restarts a new game according to the specified difficulty level
-     * @param level Difficutly level
+     * @param level Difficulty level
      */
     public void newGame(Level level) {
         difficultyLabel.setText("Level: "+level.toString());
@@ -275,6 +275,7 @@ public class Gui extends JPanel {
         counter.stop2();
         minesweeper.setIsStarted(false);
         minesweeper.setIsLost(false);
+        minesweeper.setNbRevealed(0);
     }
 }
 

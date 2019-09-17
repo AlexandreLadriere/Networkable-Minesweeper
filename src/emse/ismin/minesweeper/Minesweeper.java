@@ -1,16 +1,22 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * This class is the main app class
  */
 public class Minesweeper extends JFrame {
 
+    private static final String SCORE_FILENAME = "scores.dat";
     private Field field;
     private boolean isStarted = false;
     private Gui gui;
     private boolean isLost = false;
+    private int nbRevealed = 0;
 
     /**
      * Creates the app
@@ -55,11 +61,44 @@ public class Minesweeper extends JFrame {
         new Minesweeper();
     }
 
+    public boolean isWin() {
+        boolean win = getField().getDimX()*getField().getDimY()-nbRevealed == getField().getNbMines();
+        if(win) {
+            //saveScores();
+        }
+        return win;
+    }
+
+    /*
+    private void saveScores() {
+        Path path = Paths.get(SCORE_FILENAME);
+        if(!Files.exists(path)) {
+
+        }
+    }
+     */
+
     /**
      * Quits the app
      */
     public void quit() {
         System.exit(0);
+    }
+
+    /**
+     * Setter for the number of case revealed by the player
+     * @param nbRevealed number of case revealed by the user
+     */
+    public void setNbRevealed(int nbRevealed) {
+        this.nbRevealed = nbRevealed;
+    }
+
+    /**
+     * Getter for the number of cases revealed by the player
+     * @return the number of cases revealed by the user
+     */
+    public int getNbRevealed() {
+        return nbRevealed;
     }
 
     public void setIsStarted(boolean isStarted) {

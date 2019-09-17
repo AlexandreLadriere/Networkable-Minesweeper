@@ -53,4 +53,12 @@ public class Counter extends JPanel implements Runnable {
     public void stop2() {
         counterProcess = null;
     }
+
+    /**
+     * Getter for the counter value
+     * @return counter value
+     */
+    public int getCounterValue() {
+        return counter;
+    }
 }

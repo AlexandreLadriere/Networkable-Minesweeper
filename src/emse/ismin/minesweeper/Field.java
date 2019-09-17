@@ -180,17 +180,7 @@ public class Field {
      */
     public void newGame(Level level) {
         this.level = level;
-        switch(level) {
-            case EASY:
-                iniField(DIM_EASY, DIM_EASY, 2*DIM_EASY);
-                break;
-            case MEDIUM:
-                iniField(DIM_MEDIUM, DIM_MEDIUM, 2*DIM_MEDIUM);
-                break;
-            case HARD:
-                iniField(DIM_HARD, DIM_HARD, 2*DIM_HARD);
-                break;
-        }
+        iniField(level.dimX, level.dimY, level.nbMines);
     }
 
     /**
@@ -215,6 +205,14 @@ public class Field {
      */
     public Level getLevel() {
         return level;
+    }
+
+    /**
+     * Getter for the number of mines in the field
+     * @return the number of mines in the field
+     */
+    public int getNbMines() {
+        return nbMines;
     }
 }
 
