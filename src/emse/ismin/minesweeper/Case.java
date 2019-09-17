@@ -145,7 +145,7 @@ public class Case extends JPanel implements MouseListener {
                 minesweeper.setIsLost(false);
             }
             repaint();
-            if(nearbyMinesCount == -1) {
+            if(nearbyMinesCount == -1 && !rClick && !isFlaged) {
                 minesweeper.getGui().getCounter().stop2();
                 minesweeper.setIsLost(true);
                 JOptionPane.showMessageDialog(null, "You suck !", "Try Again !", JOptionPane.INFORMATION_MESSAGE);
