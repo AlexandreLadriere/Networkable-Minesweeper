@@ -10,6 +10,7 @@ public class Minesweeper extends JFrame {
     private Field field;
     private boolean isStarted = false;
     private Gui gui;
+    private boolean isLost = false;
 
     /**
      * Creates the app
@@ -63,6 +64,22 @@ public class Minesweeper extends JFrame {
 
     public void setIsStarted(boolean isStarted) {
         this.isStarted = isStarted;
+    }
+
+    /**
+     * Getter for the boolean which indicates if the game is lost or not
+     * @return the boolean which indicates if the game is lost or not
+     */
+    public boolean getIsLost() {
+        return isLost;
+    }
+
+    /**
+     * Setter for the boolean which indicates if the game is lost or not
+     * @param isLost boolean which indicates if the game is lost or not
+     */
+    public void setIsLost(boolean isLost) {
+        this.isLost = isLost;
     }
 
     /**

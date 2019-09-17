@@ -252,8 +252,7 @@ public class Gui extends JPanel {
                 tabCase[i][j].newCase();
             }
         }
-        counter.stop2();
-        minesweeper.setIsStarted(false);
+        iniMinesweeper();
     }
 
     /**
@@ -266,8 +265,16 @@ public class Gui extends JPanel {
         gridPanel.removeAll();
         fillGridPanel(gridPanel);
         minesweeper.pack();
+        iniMinesweeper();
+    }
+
+    /**
+     * Initializes all the Minesweeper booleans and stop the counter
+     */
+    public void iniMinesweeper() {
         counter.stop2();
         minesweeper.setIsStarted(false);
+        minesweeper.setIsLost(false);
     }
 }
 

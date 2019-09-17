@@ -43,26 +43,22 @@ public class Case extends JPanel implements MouseListener {
     public void paintComponent(Graphics gc) {
         super.paintComponent(gc);
         int nearbyMinesCount = minesweeper.getField().countNearbyMines(x, y);
-        if(!isClicked) {
-            if(rClick && !isFlaged) {
+        if (!isClicked) {
+            if (rClick && !isFlaged) {
                 isFlaged = true;
                 drawAdaptativeImage(gc, "/img/flag.png");
                 rClick = false;
-            }
-            else if(rClick) {
+            } else if (rClick) {
                 isFlaged = false;
                 rClick = false;
                 drawAdaptativeImage(gc, "/img/tile.png");
-            }
-            else {
+            } else {
                 drawAdaptativeImage(gc, "/img/tile.png");
             }
-        }
-        else {
-            if(!isFlaged) {
+        } else {
+            if (!isFlaged) {
                 drawImageNumber(gc, nearbyMinesCount);
-            }
-            else {
+            } else {
                 drawAdaptativeImage(gc, "/img/flag.png");
                 isClicked = false;
             }
@@ -73,6 +69,8 @@ public class Case extends JPanel implements MouseListener {
         switch(nearByCount) {
             case -1:
                 drawAdaptativeImage(gc, "/img/bomb.png");
+                minesweeper.getGui().getCounter().stop2();
+                minesweeper.setIsLost(true);
                 break;
             case 0:
                 drawAdaptativeImage(gc, "/img/0.png");
@@ -141,11 +139,17 @@ public class Case extends JPanel implements MouseListener {
         if(!rClick) {
             isClicked = true;
         }
-        if(!minesweeper.getIsStarted()) {
-            minesweeper.getGui().getCounter().restart();
-            minesweeper.setIsStarted(true);
+        if(!minesweeper.getIsLost()) {
+            if (!minesweeper.getIsStarted()) {
+                minesweeper.getGui().getCounter().restart();
+                minesweeper.setIsStarted(true);
+                minesweeper.setIsLost(false);
+            }
+            repaint();
+            if(minesweeper.getField().countNearbyMines(x, y) == -1) {
+                JOptionPane.showMessageDialog(null, "You suck !", "Try Again !", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
-        repaint();
     }
 
     @Override
