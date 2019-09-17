@@ -16,6 +16,7 @@ public class Case extends JPanel implements MouseListener {
     private final static int DIM = 50;
     private int x;
     private int y;
+    private int nearbyMinesCount;
     private Minesweeper minesweeper;
     private boolean isClicked = false;
     private boolean rClick = false;
@@ -42,7 +43,6 @@ public class Case extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics gc) {
         super.paintComponent(gc);
-        int nearbyMinesCount = minesweeper.getField().countNearbyMines(x, y);
         if (!isClicked) {
             if (rClick && !isFlaged) {
                 isFlaged = true;
@@ -69,8 +69,6 @@ public class Case extends JPanel implements MouseListener {
         switch(nearByCount) {
             case -1:
                 drawAdaptativeImage(gc, "/img/bomb.png");
-                minesweeper.getGui().getCounter().stop2();
-                minesweeper.setIsLost(true);
                 break;
             case 0:
                 drawAdaptativeImage(gc, "/img/0.png");
@@ -140,13 +138,16 @@ public class Case extends JPanel implements MouseListener {
             isClicked = true;
         }
         if(!minesweeper.getIsLost()) {
+            nearbyMinesCount = minesweeper.getField().countNearbyMines(x, y);
             if (!minesweeper.getIsStarted()) {
                 minesweeper.getGui().getCounter().restart();
                 minesweeper.setIsStarted(true);
                 minesweeper.setIsLost(false);
             }
             repaint();
-            if(minesweeper.getField().countNearbyMines(x, y) == -1) {
+            if(nearbyMinesCount == -1) {
+                minesweeper.getGui().getCounter().stop2();
+                minesweeper.setIsLost(true);
                 JOptionPane.showMessageDialog(null, "You suck !", "Try Again !", JOptionPane.INFORMATION_MESSAGE);
             }
         }
