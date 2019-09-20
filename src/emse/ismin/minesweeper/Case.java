@@ -20,7 +20,8 @@ public class Case extends JPanel implements MouseListener {
     private boolean isClicked = false;
     private boolean rClick = false;
     private boolean isFlaged = false;
-    private boolean isRevealed = false;
+    //modif
+    public boolean isRevealed = false;
 
     /**
      * Constructor
@@ -124,6 +125,28 @@ public class Case extends JPanel implements MouseListener {
         repaint();
     }
 
+    private void revealZeros(int x, int y) {
+        if(!minesweeper.getField().outsideField(x, y)) {
+            boolean isZero = minesweeper.getField().countNearbyMines(x, y) == 0;
+            if(!minesweeper.getGui().getTabCase()[x][y].isRevealed) {
+                minesweeper.getGui().getTabCase()[x][y].isRevealed = true;
+                minesweeper.setNbRevealed(minesweeper.getNbRevealed()+1);
+                //drawAdaptativeImage(minesweeper.getGui().getTabCase()[x][y].getGraphics(), "/img/0.png");
+                drawImageNumber(minesweeper.getGui().getTabCase()[x][y].getGraphics(), minesweeper.getField().countNearbyMines(x, y));
+                if(isZero) {
+                    revealZeros(x + 1, y);
+                    revealZeros(x + 1, y + 1);
+                    revealZeros(x, y + 1);
+                    revealZeros(x - 1, y + 1);
+                    revealZeros(x - 1, y);
+                    revealZeros(x - 1, y - 1);
+                    revealZeros(x, y - 1);
+                    revealZeros(x + 1, y - 1);
+                }
+            }
+        }
+    }
+
     /**
      * Handles mouse events
      * @param e <code>MouseEvent</code> that needs to be handled
@@ -141,7 +164,10 @@ public class Case extends JPanel implements MouseListener {
 
         if(!minesweeper.getIsLost()) {
             nearbyMinesCount = minesweeper.getField().countNearbyMines(x, y);
-            if(nearbyMinesCount != -1 && !isRevealed && !rClick) {
+            if(nearbyMinesCount == 0 && !isRevealed && !rClick) {
+                revealZeros(x, y);
+            }
+            if(nearbyMinesCount != -1 && !isRevealed && !rClick && nearbyMinesCount != 0) {
                 minesweeper.setNbRevealed(minesweeper.getNbRevealed()+1);
                 isRevealed = true;
             }

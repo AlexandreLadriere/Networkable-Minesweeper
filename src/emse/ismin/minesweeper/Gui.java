@@ -227,6 +227,11 @@ public class Gui extends JPanel {
         return minesweeper;
     }
 
+    //modifié (add)
+    public Case[][] getTabCase() {
+        return tabCase;
+    }
+
     /**
      * Fills the grid panel with the case field
      * @param gridPanel <code>JPanel</code> object used to contain the case field
