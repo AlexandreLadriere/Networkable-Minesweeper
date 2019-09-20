@@ -1,6 +1,7 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import java.awt.*;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,6 +39,7 @@ public class Minesweeper extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("/img/bomb.png"));
 
 
         this.field = new Field(Level.EASY);

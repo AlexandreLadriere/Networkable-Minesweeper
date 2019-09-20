@@ -125,13 +125,17 @@ public class Case extends JPanel implements MouseListener {
         repaint();
     }
 
+    /**
+     * Reveals nearby cases when an empty case is clicked
+     * @param x column of the case
+     * @param y row of the case
+     */
     private void revealZeros(int x, int y) {
         if(!minesweeper.getField().outsideField(x, y)) {
             boolean isZero = minesweeper.getField().countNearbyMines(x, y) == 0;
             if(!minesweeper.getGui().getTabCase()[x][y].isRevealed) {
                 minesweeper.getGui().getTabCase()[x][y].isRevealed = true;
                 minesweeper.setNbRevealed(minesweeper.getNbRevealed()+1);
-                //drawAdaptativeImage(minesweeper.getGui().getTabCase()[x][y].getGraphics(), "/img/0.png");
                 drawImageNumber(minesweeper.getGui().getTabCase()[x][y].getGraphics(), minesweeper.getField().countNearbyMines(x, y));
                 if(isZero) {
                     revealZeros(x + 1, y);
@@ -147,13 +151,13 @@ public class Case extends JPanel implements MouseListener {
         }
     }
 
-    /**
-     * Handles mouse events
-     * @param e <code>MouseEvent</code> that needs to be handled
-     */
     @Override
     public void mouseClicked(MouseEvent e) {}
 
+    /**
+     * Handles mouse pressed event
+     * @param e <code>MouseEvent</code> that needs to be handled
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         rClick = SwingUtilities.isRightMouseButton(e);

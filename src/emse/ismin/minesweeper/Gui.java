@@ -1,11 +1,8 @@
 package emse.ismin.minesweeper;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import javax.swing.KeyStroke;
 
 /**
@@ -227,7 +224,10 @@ public class Gui extends JPanel {
         return minesweeper;
     }
 
-    //modifié (add)
+    /**
+     * Getter for the array of cases
+     * @return <code>tabCase</code> the array of cases
+     */
     public Case[][] getTabCase() {
         return tabCase;
     }
