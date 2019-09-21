@@ -1,11 +1,12 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
-import java.awt.*;
-import java.net.URI;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
 
 /**
  * This class is the main app class
@@ -39,7 +40,7 @@ public class Minesweeper extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("/img/bomb.png"));
+        //this.setIconImage(Toolkit.getDefaultToolkit().getImage("/img/bomb.png"));
 
 
         this.field = new Field(Level.EASY);
@@ -66,19 +67,71 @@ public class Minesweeper extends JFrame {
     public boolean isWin() {
         boolean win = getField().getDimX()*getField().getDimY()-nbRevealed == getField().getNbMines();
         if(win) {
-            //saveScores();
+            saveScores();
         }
         return win;
     }
 
-    /*
+    /**
+     * Saves the score in the score file
+     */
     private void saveScores() {
         Path path = Paths.get(SCORE_FILENAME);
+        String currentScoreStr = getField().getLevel().toString() + " " + getField().getLevel().dimX + " " + getField().getLevel().dimY + " " + getField().getLevel().nbMines + " " + getGui().getCounter().getCounterValue();
         if(!Files.exists(path)) {
-
+            try {
+                Files.write(path, (currentScoreStr + "\n").getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(Files.exists(path)) {
+            try {
+                List<String> allLines = Files.readAllLines(path);
+                if(isNewLevel(allLines, currentScoreStr)) {
+                    Files.write(path, (currentScoreStr + "\n").getBytes(), StandardOpenOption.APPEND);
+                }
+                else {
+                    for (int i = 0; i<allLines.size(); i++) {
+                        String[] tmpStrTab = allLines.get(i).split(" ");
+                        if (tmpStrTab[0].equals(getField().getLevel().toString()) &&
+                                tmpStrTab[1].equals(String.valueOf(getField().getLevel().dimX)) &&
+                                tmpStrTab[2].equals(String.valueOf(getField().getLevel().dimY)) &&
+                                tmpStrTab[3].equals(String.valueOf(getField().getLevel().nbMines)) &&
+                                Integer.parseInt(tmpStrTab[4]) > getGui().getCounter().getCounterValue()) {
+                            allLines.set(i, currentScoreStr);
+                        }
+                    }
+                    Files.write(path, "".getBytes());
+                    for(int i = 0; i<allLines.size(); i++) {
+                        Files.write(path, (allLines.get(i)+"\n").getBytes(), StandardOpenOption.APPEND);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
+
+    /**
+     * Cjecks if the current score correspond to a new level or not
+     * @param allLines all lines in the score file
+     * @param currentScore current score and level
+     * @return a boolean that indicates if the level is already in the score file or not
      */
+    private boolean isNewLevel(List<String> allLines, String currentScore) {
+        boolean isNew = true;
+        for(String line : allLines) {
+            String[] tmpStrTab = line.split(" ");
+            if (tmpStrTab[0].equals(getField().getLevel().toString()) &&
+                    tmpStrTab[1].equals(String.valueOf(getField().getLevel().dimX)) &&
+                    tmpStrTab[2].equals(String.valueOf(getField().getLevel().dimY)) &&
+                    tmpStrTab[3].equals(String.valueOf(getField().getLevel().nbMines))) {
+                isNew = false;
+            }
+        }
+        return isNew;
+    }
 
     /**
      * Quits the app
