@@ -25,6 +25,7 @@ public class Gui extends JPanel {
     private JRadioButtonMenuItem hardRadio;
     private Case[][] tabCase;
     private Counter counter;
+    private FlagCounter flagCounter;
 
     /**
      * Creates a Gui according to the given <code>Minesweeper</code>
@@ -85,7 +86,7 @@ public class Gui extends JPanel {
         minesweeper.setJMenuBar(menuBar);
 
         //Labels for top panel of the main BorderLayout
-        difficultyLabel = new JLabel("Level: "+minesweeper.getField().getLevel().toString());
+        difficultyLabel = new JLabel("         Level: "+minesweeper.getField().getLevel().toString());
         difficultyLabel.setForeground(new Color(44,62,80));
         difficultyLabel.setFont(new Font("Nunito", Font.BOLD, 18));
         difficultyLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -102,12 +103,14 @@ public class Gui extends JPanel {
 
         //topPanel of the main BorderLayout
         JPanel topPanel = new JPanel();
-        topPanel.setBackground(new Color(189,195,199));
         topPanel.setLayout(new BorderLayout());
         topPanel.add(difficultyLabel, BorderLayout.WEST);
+        flagCounter = new FlagCounter();
+        //flagCounter.setBackground(new Color(189,195,199));
+        topPanel.add(flagCounter, BorderLayout.CENTER);
         counter = new Counter();
         topPanel.add(counter, BorderLayout.EAST);
-
+        topPanel.setBackground(new Color(189,195,199));
         this.add(topPanel, BorderLayout.NORTH);
 
         //bottomPanel of the main BorderLayout
@@ -123,6 +126,8 @@ public class Gui extends JPanel {
         gridPanel.setBackground(new Color(189,195,199));
         fillGridPanel(gridPanel);
         this.add(gridPanel, BorderLayout.CENTER);
+
+        flagCounter.setNbMines(minesweeper.getField().getNbMines());
     }
 
     /**
@@ -144,10 +149,18 @@ public class Gui extends JPanel {
 
     /**
      * Getter for the GUI counter
-     * @return
+     * @return current Counter Object
      */
     public Counter getCounter() {
         return counter;
+    }
+
+    /**
+     * Getter for the GUI flag counter
+     * @return current FlagCounter Object
+     */
+    public FlagCounter getFlagCounter() {
+        return flagCounter;
     }
 
     /**
@@ -279,7 +292,7 @@ public class Gui extends JPanel {
      * @param level Difficulty level
      */
     public void newGame(Level level) {
-        difficultyLabel.setText("Level: "+level.toString());
+        difficultyLabel.setText("         Level: "+level.toString());
         minesweeper.getField().newGame(level);
         gridPanel.removeAll();
         fillGridPanel(gridPanel);
@@ -295,6 +308,8 @@ public class Gui extends JPanel {
         minesweeper.setIsStarted(false);
         minesweeper.setIsLost(false);
         minesweeper.setNbRevealed(0);
+        flagCounter.setNbMines(minesweeper.getField().getNbMines());
+        flagCounter.setOperation(0);
     }
 }
 

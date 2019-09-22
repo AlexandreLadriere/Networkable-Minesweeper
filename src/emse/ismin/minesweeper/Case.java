@@ -20,7 +20,6 @@ public class Case extends JPanel implements MouseListener {
     private boolean isClicked = false;
     private boolean rClick = false;
     private boolean isFlaged = false;
-    //modif
     public boolean isRevealed = false;
 
     /**
@@ -48,11 +47,13 @@ public class Case extends JPanel implements MouseListener {
             if (rClick && !isFlaged) {
                 isFlaged = true;
                 drawAdaptativeImage(gc, "/img/flag.png");
+                minesweeper.getGui().getFlagCounter().setOperation(1);
                 rClick = false;
             } else if (rClick) {
                 isFlaged = false;
                 rClick = false;
                 drawAdaptativeImage(gc, "/img/tile.png");
+                minesweeper.getGui().getFlagCounter().setOperation(-1);
             } else {
                 drawAdaptativeImage(gc, "/img/tile.png");
             }
