@@ -78,6 +78,7 @@ public class Minesweeper extends JFrame {
     private void saveScores() {
         Path path = Paths.get(SCORE_FILENAME);
         String currentScoreStr = getField().getLevel().toString() + " " + getField().getLevel().dimX + " " + getField().getLevel().dimY + " " + getField().getLevel().nbMines + " " + getGui().getCounter().getCounterValue();
+        String[] currentScoreTab = currentScoreStr.split(" ");
         if(!Files.exists(path)) {
             try {
                 Files.write(path, (currentScoreStr + "\n").getBytes());
@@ -88,8 +89,8 @@ public class Minesweeper extends JFrame {
         else if(Files.exists(path)) {
             try {
                 List<String> allLines = Files.readAllLines(path);
-                if(isNewLevel(allLines, currentScoreStr)) {
-                    Files.write(path, (currentScoreStr + "\n").getBytes(), StandardOpenOption.APPEND);
+                if(isNewLevel(allLines, currentScoreTab)) {
+                    allLines.add(currentScoreStr);
                 }
                 else {
                     for (int i = 0; i<allLines.size(); i++) {
@@ -102,10 +103,10 @@ public class Minesweeper extends JFrame {
                             allLines.set(i, currentScoreStr);
                         }
                     }
-                    Files.write(path, "".getBytes());
-                    for(int i = 0; i<allLines.size(); i++) {
-                        Files.write(path, (allLines.get(i)+"\n").getBytes(), StandardOpenOption.APPEND);
-                    }
+                }
+                Files.write(path, "".getBytes());
+                for(int i = 0; i<allLines.size(); i++) {
+                    Files.write(path, (allLines.get(i)+"\n").getBytes(), StandardOpenOption.APPEND);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -114,23 +115,47 @@ public class Minesweeper extends JFrame {
     }
 
     /**
-     * Cjecks if the current score correspond to a new level or not
+     * Checks if the current score correspond to a new level or not
      * @param allLines all lines in the score file
-     * @param currentScore current score and level
+     * @param currentScoreTab current score in string array format
      * @return a boolean that indicates if the level is already in the score file or not
      */
-    private boolean isNewLevel(List<String> allLines, String currentScore) {
+    private boolean isNewLevel(List<String> allLines, String[] currentScoreTab) {
         boolean isNew = true;
-        for(String line : allLines) {
-            String[] tmpStrTab = line.split(" ");
-            if (tmpStrTab[0].equals(getField().getLevel().toString()) &&
-                    tmpStrTab[1].equals(String.valueOf(getField().getLevel().dimX)) &&
-                    tmpStrTab[2].equals(String.valueOf(getField().getLevel().dimY)) &&
-                    tmpStrTab[3].equals(String.valueOf(getField().getLevel().nbMines))) {
-                isNew = false;
+        if(allLines != null) {
+            for (String line : allLines) {
+                String[] tmpStrTab = line.split(" ");
+                if (tmpStrTab[0].equals(currentScoreTab[0]) &&
+                        tmpStrTab[1].equals(currentScoreTab[1]) &&
+                        tmpStrTab[2].equals(currentScoreTab[2]) &&
+                        tmpStrTab[3].equals(currentScoreTab[3])) {
+                    isNew = false;
+                    break;
+                }
             }
         }
         return isNew;
+    }
+
+    /**
+     * Transforms the information in the score file to a prettier list of string, ready to be displayed by the GUI
+     * @return a list of string in which each string is a score written in a way that its ready to be displayed
+     */
+    public String getAllScoresToDisplay() {
+        StringBuilder scores = new StringBuilder();
+        Path path = Paths.get(SCORE_FILENAME);
+        if(Files.exists(path)) {
+            try {
+                List<String> scoresInFile = Files.readAllLines(path);
+                for (String s : scoresInFile) {
+                    String[] tmpStrTab = s.split(" ");
+                    scores.append(tmpStrTab[0]).append(" [").append(tmpStrTab[1]).append("x").append(tmpStrTab[2]).append(", ").append(tmpStrTab[3]).append("] = ").append(tmpStrTab[4]).append("\n\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return scores.toString();
     }
 
     /**

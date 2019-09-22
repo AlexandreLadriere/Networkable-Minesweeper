@@ -58,6 +58,9 @@ public class Controller implements ActionListener {
         else if(cmd.equals(gui.getmInfo())) {
             JOptionPane.showMessageDialog(null, "Author: Alexandre Ladrière\nDate: September 2019\nLanguage: Java", "Information", JOptionPane.INFORMATION_MESSAGE);
         }
+        else if(cmd.equals(gui.getmScores())) {
+            JOptionPane.showMessageDialog(null, gui.getMinesweeper().getAllScoresToDisplay(), "Best scores by level", JOptionPane.INFORMATION_MESSAGE);
+        }
         else if(cmd.equals(gui.getmLicense())) {
             JOptionPane.showMessageDialog(null, "MIT License\n" +
                     "\n" +

@@ -17,6 +17,7 @@ public class Gui extends JPanel {
     private JMenuItem mQuit;
     private JMenuItem mInfo;
     private JMenuItem mLicense;
+    private JMenuItem mScores;
     private JMenuItem mNew;
     private JLabel difficultyLabel;
     private JRadioButtonMenuItem easyRadio;
@@ -54,6 +55,11 @@ public class Gui extends JPanel {
             mLicense.addActionListener(new Controller(this));
             mLicense.setToolTipText("License information");
             mLicense.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, KeyEvent.CTRL_MASK));
+            mScores = new JMenuItem("Scores", KeyEvent.VK_S);
+            moreMenu.add(mScores);
+            mScores.addActionListener(new Controller(this));
+            mScores.setToolTipText("Best scores by level");
+            mScores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
             //"Game" menu
             gameMenu.add(difficultyMenu);
             mNew = new JMenuItem("New Game", KeyEvent.VK_N);
@@ -174,6 +180,14 @@ public class Gui extends JPanel {
      */
     public JMenuItem getmLicense() {
         return mLicense;
+    }
+
+    /**
+     * Getter for the <code>Scores</code> button
+     * @return Scores button
+     */
+    public JMenuItem getmScores() {
+        return mScores;
     }
 
     /**
