@@ -4,7 +4,7 @@ package emse.ismin.minesweeper;
  * Defines the levels of difficulty
  */
 public enum Level {
-    EASY(10, 10, 10),
+    EASY(10, 10, 3),
     MEDIUM(20, 20, 40),
     HARD(30, 30, 150);
 

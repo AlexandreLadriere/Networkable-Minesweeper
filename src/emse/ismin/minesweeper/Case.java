@@ -134,7 +134,7 @@ public class Case extends JPanel implements MouseListener {
     private void revealZeros(int x, int y) {
         if(!minesweeper.getField().outsideField(x, y)) {
             boolean isZero = minesweeper.getField().countNearbyMines(x, y) == 0;
-            if(!minesweeper.getGui().getTabCase()[x][y].isRevealed) {
+            if(!minesweeper.getGui().getTabCase()[x][y].isRevealed && !minesweeper.getGui().getTabCase()[x][y].isFlaged) {
                 minesweeper.getGui().getTabCase()[x][y].isRevealed = true;
                 minesweeper.setNbRevealed(minesweeper.getNbRevealed()+1);
                 drawImageNumber(minesweeper.getGui().getTabCase()[x][y].getGraphics(), minesweeper.getField().countNearbyMines(x, y));
