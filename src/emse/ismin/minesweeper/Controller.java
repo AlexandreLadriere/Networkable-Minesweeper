@@ -1,8 +1,12 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * This class implements the Controller for the application
@@ -56,7 +60,20 @@ public class Controller implements ActionListener {
             gui.newGame(Level.HARD);
         }
         else if(cmd.equals(gui.getmInfo())) {
-            JOptionPane.showMessageDialog(null, "Author: Alexandre Ladrière\nDate: September 2019\nLanguage: Java", "Information", JOptionPane.INFORMATION_MESSAGE);
+            JEditorPane ep = new JEditorPane("text/html", "<html><body> <b>Author:</b> <a href=\"https://www.linkedin.com/in/alexandre-ladriere/\">Alexandre Ladrière</a> <br><br> <b>Github:</b> <a href=\"https://github.com/AlexandreLadriere\">AlexandreLadriere</a> <br><br> <b>Date:</b> September 2019 <br><br> <b>Language:</b> JAVA </body></html>");
+            ep.addHyperlinkListener(e1 -> {
+                if (e1.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
+                    try {
+                        Desktop.getDesktop().browse(e1.getURL().toURI());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (URISyntaxException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+            ep.setEditable(false);
+            JOptionPane.showMessageDialog(null, ep);
         }
         else if(cmd.equals(gui.getmScores())) {
             JOptionPane.showMessageDialog(null, gui.getMinesweeper().getAllScoresToDisplay(), "Best scores by level", JOptionPane.INFORMATION_MESSAGE);
