@@ -14,6 +14,7 @@ import java.util.List;
 public class Minesweeper extends JFrame {
 
     private static final String SCORE_FILENAME = "scores.dat";
+    private static final String STATS_FILENAME = "stats.dat";
     private Field field;
     private boolean isStarted = false;
     private Gui gui;
@@ -40,8 +41,6 @@ public class Minesweeper extends JFrame {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        //this.setIconImage(Toolkit.getDefaultToolkit().getImage("/img/bomb.png"));
-
 
         this.field = new Field(Level.EASY);
         gui = new Gui(this);
@@ -52,11 +51,6 @@ public class Minesweeper extends JFrame {
     }
 
     /**
-     * Setter for the boolean indicating if the game was started or not
-     * @param isStarted boolean indicating if the game was started or not
-     */
-
-    /**
      * Main function
      * @param args
      */
@@ -64,10 +58,15 @@ public class Minesweeper extends JFrame {
         new Minesweeper();
     }
 
+    /**
+     * Tells if the game is win or not
+     * @return a boolean indicating if the game is win or not
+     */
     public boolean isWin() {
         boolean win = getField().getDimX()*getField().getDimY()-nbRevealed == getField().getNbMines();
         if(win) {
             saveScores();
+            updateStats(true, getField().getLevel());
         }
         return win;
     }
@@ -76,7 +75,7 @@ public class Minesweeper extends JFrame {
      * Saves the score in the score file
      */
     private void saveScores() {
-        Path path = Paths.get(SCORE_FILENAME);
+        Path path = Paths.get(FileNames.SCORE_FILENAME.toString());
         String currentScoreStr = getField().getLevel().toString() + " " + getField().getLevel().dimX + " " + getField().getLevel().dimY + " " + getField().getLevel().nbMines + " " + getGui().getCounter().getCounterValue();
         String[] currentScoreTab = currentScoreStr.split(" ");
         if(!Files.exists(path)) {
@@ -88,7 +87,7 @@ public class Minesweeper extends JFrame {
         }
         else if(Files.exists(path)) {
             try {
-                List<String> allLines = Files.readAllLines(path);
+                List<String> allLines = getAllLines(FileNames.SCORE_FILENAME.toString());
                 if(isNewLevel(allLines, currentScoreTab)) {
                     allLines.add(currentScoreStr);
                 }
@@ -143,19 +142,106 @@ public class Minesweeper extends JFrame {
      */
     public String getAllScoresToDisplay() {
         StringBuilder scores = new StringBuilder();
-        Path path = Paths.get(SCORE_FILENAME);
+        Path path = Paths.get(FileNames.SCORE_FILENAME.toString());
         if(Files.exists(path)) {
+            List<String> scoresInFile = getAllLines(FileNames.SCORE_FILENAME.toString());
+            for (String s : scoresInFile) {
+                String[] tmpStrTab = s.split(" ");
+                scores.append(tmpStrTab[0]).append(" [").append(tmpStrTab[1]).append("x").append(tmpStrTab[2]).append(", ").append(tmpStrTab[3]).append("] = ").append(tmpStrTab[4]).append("\n\n");
+            }
+        }
+        return scores.toString();
+    }
+
+    /**
+     * Updates the statistics file
+     * @param win boolean that indicates if the game was won or not
+     * @param level level difficulty
+     */
+    public void updateStats(boolean win, Level level) {
+        String eol = "\n";
+        float played = 0, won = 0, loss = 0, easyPlayed = 0, easyWon = 0, mediumPlayed = 0, mediumWon = 0, hardPlayed = 0, hardWon = 0, customPlayed = 0, customWon = 0;
+        float winRatio = 0, easyWinRatio = 0, mediumWinRatio = 0, hardWinRatio = 0, customWinRatio = 0;
+        Path path = Paths.get(FileNames.STATS_FILENAME.toString());
+        if (!Files.exists(path)) {
             try {
-                List<String> scoresInFile = Files.readAllLines(path);
-                for (String s : scoresInFile) {
-                    String[] tmpStrTab = s.split(" ");
-                    scores.append(tmpStrTab[0]).append(" [").append(tmpStrTab[1]).append("x").append(tmpStrTab[2]).append(", ").append(tmpStrTab[3]).append("] = ").append(tmpStrTab[4]).append("\n\n");
-                }
+                Files.write(path, (played + eol + won + eol + loss + eol + winRatio + eol
+                        + easyPlayed + eol + easyWon + eol + easyWinRatio + eol
+                        + mediumPlayed + eol + mediumWon + eol + mediumWinRatio + eol
+                        + hardPlayed + eol + hardWon + eol + hardWinRatio + eol
+                        + customPlayed + eol + customWon + eol + customWinRatio).getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return scores.toString();
+        List<String> allLines = getAllLines(FileNames.STATS_FILENAME.toString());
+        played = Float.parseFloat(allLines.get(0)); won = Float.parseFloat(allLines.get(1)); loss = Float.parseFloat(allLines.get(2)); winRatio = Float.parseFloat(allLines.get(3));
+        easyPlayed = Float.parseFloat(allLines.get(4)); easyWon = Float.parseFloat(allLines.get(5)); easyWinRatio = Float.parseFloat(allLines.get(6));
+        mediumPlayed = Float.parseFloat(allLines.get(7)); mediumWon = Float.parseFloat(allLines.get(8)); mediumWinRatio = Float.parseFloat(allLines.get(9));
+        hardPlayed = Float.parseFloat(allLines.get(10)); hardWon = Float.parseFloat(allLines.get(11)); hardWinRatio = Float.parseFloat(allLines.get(12));
+        customPlayed = Float.parseFloat(allLines.get(13)); customWon = Float.parseFloat(allLines.get(14));
+        customWinRatio = Float.parseFloat(allLines.get(15));
+        played += 1;
+        if(win) {
+            won += 1;
+        }
+        else {
+            loss += 1;
+        }
+        winRatio = won / played;
+        switch (level) {
+            case EASY:
+                easyPlayed += 1;
+                if(win)
+                    easyWon += 1;
+                easyWinRatio = easyWon/easyPlayed;
+                break;
+            case MEDIUM:
+                mediumPlayed += 1;
+                if(win)
+                    mediumWon += 1;
+                mediumWinRatio = mediumWon/mediumPlayed;
+                break;
+            case HARD:
+                hardPlayed += 1;
+                if(win)
+                    hardWon += 1;
+                hardWinRatio = hardWon/hardPlayed;
+                break;
+            case CUSTOM:
+                customPlayed += 1;
+                if(win)
+                    customWon += 1;
+                customWinRatio = customWon/customPlayed;
+                break;
+        }
+        try {
+            Files.write(path, (played + eol + won + eol + loss + eol + winRatio + eol
+                    + easyPlayed + eol + easyWon + eol + easyWinRatio + eol
+                    + mediumPlayed + eol + mediumWon + eol + mediumWinRatio + eol
+                    + hardPlayed + eol + hardWon + eol + hardWinRatio + eol
+                    + customPlayed + eol + customWon + eol + customWinRatio).getBytes(), StandardOpenOption.WRITE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Gets all the lines of a file in a <code>List<String></code> object
+     * @param fileName filename of the file you want to get all the lines
+     * @return String list of all the lines (one line = one element in the list)
+     */
+    public List<String> getAllLines(String fileName) {
+        List<String> allLines = List.of();
+        Path path = Paths.get(fileName);
+        if(Files.exists(path)) {
+            try {
+                allLines = Files.readAllLines(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return allLines;
     }
 
     /**
@@ -181,6 +267,10 @@ public class Minesweeper extends JFrame {
         return nbRevealed;
     }
 
+    /**
+     * Setter for the boolean indicating if the game was started or not
+     * @param isStarted boolean indicating if the game was started or not
+     */
     public void setIsStarted(boolean isStarted) {
         this.isStarted = isStarted;
     }

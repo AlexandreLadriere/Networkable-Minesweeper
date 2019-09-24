@@ -18,6 +18,7 @@ public class Gui extends JPanel {
     private JMenuItem mInfo;
     private JMenuItem mLicense;
     private JMenuItem mScores;
+    private JMenuItem mStatistics;
     private JMenuItem mNew;
     private JLabel difficultyLabel;
     private JRadioButtonMenuItem easyRadio;
@@ -36,53 +37,63 @@ public class Gui extends JPanel {
         this.minesweeper = minesweeper;
         this.setLayout(new BorderLayout());
         setBackground(new Color(189,195,199));
-
         //menu bar
         JMenuBar menuBar = new JMenuBar();
-        JMenu gameMenu = new JMenu("Game");
-        JMenu moreMenu = new JMenu("More...");
-        JMenu difficultyMenu = new JMenu("Difficulty");
+            //"More..." menu
+            JMenu moreMenu = new JMenu("More...");
+                //Info menu item
+                mInfo = new JMenuItem("Info", KeyEvent.VK_I);
+                mInfo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_MASK));
+                mInfo.setToolTipText("Software information");
+                moreMenu.add(mInfo);
+                mInfo.addActionListener(new Controller(this));
+                //License menu item
+                mLicense = new JMenuItem("License", KeyEvent.VK_L);
+                moreMenu.add(mLicense);
+                mLicense.addActionListener(new Controller(this));
+                mLicense.setToolTipText("License information");
+                mLicense.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, KeyEvent.CTRL_MASK));
+            //"Game" menu
+            JMenu gameMenu = new JMenu("Game");
+                //difficulty selection group
+                JMenu difficultyMenu = new JMenu("Difficulty");
+                gameMenu.add(difficultyMenu);
+                ButtonGroup bg = new ButtonGroup();
+                easyRadio = new JRadioButtonMenuItem("Easy");
+                mediumRadio = new JRadioButtonMenuItem("Medium");
+                hardRadio = new JRadioButtonMenuItem("Hard");
+                bg.add(easyRadio); bg.add(mediumRadio); bg.add(hardRadio);
+                difficultyMenu.add(easyRadio); difficultyMenu.add(mediumRadio); difficultyMenu.add(hardRadio);
+                checkDifficultyRadioButton();
+                easyRadio.addActionListener(new Controller(this));
+                mediumRadio.addActionListener(new Controller(this));
+                hardRadio.addActionListener(new Controller(this));
+                //new Game menu item
+                mNew = new JMenuItem("New Game", KeyEvent.VK_N);
+                gameMenu.add(mNew);
+                mNew.addActionListener(new Controller(this));
+                mNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
+                mNew.setToolTipText("Restart a new game with the same difficulty");
+                //Best scores menu item
+                mScores = new JMenuItem("Best Scores", KeyEvent.VK_B);
+                gameMenu.add(mScores);
+                mScores.addActionListener(new Controller(this));
+                mScores.setToolTipText("Best scores by level");
+                mScores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, KeyEvent.CTRL_MASK));
+                //Statistics menu item
+                mStatistics = new JMenuItem("Statistics", KeyEvent.VK_S);
+                gameMenu.add(mStatistics);
+                mStatistics.addActionListener(new Controller(this));
+                mStatistics.setToolTipText("Statistics about your games");
+                mStatistics.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
+                //Quit menu item
+                mQuit = new JMenuItem("Quit", KeyEvent.VK_Q);
+                gameMenu.add(mQuit);
+                mQuit.addActionListener(new Controller(this));
+                mQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_MASK));
         menuBar.add(gameMenu);
         menuBar.add(Box.createGlue());
         menuBar.add(moreMenu);
-            //"More..." menu
-            mInfo = new JMenuItem("Info", KeyEvent.VK_I);
-            mInfo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_MASK));
-            mInfo.setToolTipText("Software information");
-            moreMenu.add(mInfo);
-            mInfo.addActionListener(new Controller(this));
-            mLicense = new JMenuItem("License", KeyEvent.VK_L);
-            moreMenu.add(mLicense);
-            mLicense.addActionListener(new Controller(this));
-            mLicense.setToolTipText("License information");
-            mLicense.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, KeyEvent.CTRL_MASK));
-            mScores = new JMenuItem("Scores", KeyEvent.VK_S);
-            moreMenu.add(mScores);
-            mScores.addActionListener(new Controller(this));
-            mScores.setToolTipText("Best scores by level");
-            mScores.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
-            //"Game" menu
-            gameMenu.add(difficultyMenu);
-            mNew = new JMenuItem("New Game", KeyEvent.VK_N);
-            gameMenu.add(mNew);
-            mNew.addActionListener(new Controller(this));
-            mNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
-            mNew.setToolTipText("Restart a new game with the same difficulty");
-            mQuit = new JMenuItem("Quit", KeyEvent.VK_Q);
-            gameMenu.add(mQuit);
-            mQuit.addActionListener(new Controller(this));
-            mQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_MASK));
-
-            ButtonGroup bg = new ButtonGroup();
-            easyRadio = new JRadioButtonMenuItem("Easy");
-            mediumRadio = new JRadioButtonMenuItem("Medium");
-            hardRadio = new JRadioButtonMenuItem("Hard");
-            bg.add(easyRadio); bg.add(mediumRadio); bg.add(hardRadio);
-            difficultyMenu.add(easyRadio); difficultyMenu.add(mediumRadio); difficultyMenu.add(hardRadio);
-            checkDifficultyRadioButton();
-            easyRadio.addActionListener(new Controller(this));
-            mediumRadio.addActionListener(new Controller(this));
-            hardRadio.addActionListener(new Controller(this));
         minesweeper.setJMenuBar(menuBar);
 
         //Labels for top panel of the main BorderLayout
@@ -106,7 +117,6 @@ public class Gui extends JPanel {
         topPanel.setLayout(new BorderLayout());
         topPanel.add(difficultyLabel, BorderLayout.WEST);
         flagCounter = new FlagCounter();
-        //flagCounter.setBackground(new Color(189,195,199));
         topPanel.add(flagCounter, BorderLayout.CENTER);
         counter = new Counter();
         topPanel.add(counter, BorderLayout.EAST);
@@ -169,6 +179,14 @@ public class Gui extends JPanel {
      */
     public JButton getQuitButton() {
         return quitButton;
+    }
+
+    /**
+     * Getter for the <code>Statistics</code> menu item
+     * @return the Statistics menu item
+     */
+    public JMenuItem getmStatistics() {
+        return mStatistics;
     }
 
     /**

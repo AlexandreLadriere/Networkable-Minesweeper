@@ -34,7 +34,7 @@ public class Counter extends JPanel implements Runnable {
         gc.fillRect(0, 0, DIM_X, DIM_Y);
         gc.setColor(new Color(44,62,80));
         gc.setFont(new Font("Nunito", Font.BOLD, 18));
-        gc.drawString("Timer: "+String.valueOf(counter), getWidth()/4, getHeight()/2+getHeight()/8);
+        gc.drawString("Timer: "+ counter, getWidth()/4, getHeight()/2+getHeight()/8);
     }
 
     /**

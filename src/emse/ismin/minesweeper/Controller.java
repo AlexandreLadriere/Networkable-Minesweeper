@@ -60,7 +60,7 @@ public class Controller implements ActionListener {
             gui.newGame(Level.HARD);
         }
         else if(cmd.equals(gui.getmInfo())) {
-            JEditorPane ep = new JEditorPane("text/html", "<html><body> <b>Author:</b> <a href=\"https://www.linkedin.com/in/alexandre-ladriere/\">Alexandre Ladrière</a> <br><br> <b>Github:</b> <a href=\"https://github.com/AlexandreLadriere\">AlexandreLadriere</a> <br><br> <b>Date:</b> September 2019 <br><br> <b>Language:</b> JAVA </body></html>");
+            JEditorPane ep = new JEditorPane("text/html", "<html><body> <b>Author:</b> <a href=\"https://www.linkedin.com/in/alexandre-ladriere/\">Alexandre Ladrière</a> <br><br> <b>Repository:</b> <a href=\"https://github.com/AlexandreLadriere/Networkable-Minesweeper\">AlexandreLadriere/Networkable-Minesweeper</a> <br><br> <b>Date:</b> September 2019 <br><br> <b>Language:</b> JAVA <br><br> <b>License:</b> MIT</body></html>");
             ep.addHyperlinkListener(e1 -> {
                 if (e1.getEventType().equals(HyperlinkEvent.EventType.ACTIVATED)) {
                     try {
@@ -73,10 +73,58 @@ public class Controller implements ActionListener {
                 }
             });
             ep.setEditable(false);
-            JOptionPane.showMessageDialog(null, ep);
+            JOptionPane.showMessageDialog(null, ep, "Infos", JOptionPane.PLAIN_MESSAGE);
         }
         else if(cmd.equals(gui.getmScores())) {
-            JOptionPane.showMessageDialog(null, gui.getMinesweeper().getAllScoresToDisplay(), "Best scores by level", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "<html> <h2>The following format is used: <i>LEVEL [dimX, dimY, nbMines] = highestScore </i></h2> </html>\n\n" + gui.getMinesweeper().getAllScoresToDisplay(), "Best scores by level", JOptionPane.PLAIN_MESSAGE);
+        }
+        else if(cmd.equals(gui.getmStatistics())) {
+            if(!gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).isEmpty()) {
+                JEditorPane ep = new JEditorPane("text/html", "<html><body> "
+                        + "<center><b>Games played: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(0) + "<br>\n" +
+                        "<b>Games won: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(1) + "<br>\n" +
+                        "<b>Games lost: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(2) + "<br>\n" +
+                        "<b>Win ratio: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(3) + "</center><br>\n" +
+                        "<br>\n" +
+                        "<table>\n" +
+                        "   <tr>\n" +
+                        "       <th>Level</th>\n" +
+                        "       <th>Played</th>\n" +
+                        "       <th>Wins</th>\n" +
+                        "       <th>Wins ratio</th>\n" +
+                        "   </tr>\n" +
+                        "   <tr>\n" +
+                        "       <th>Easy</th>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(4) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(5) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(6) + "</td>\n" +
+                        "   </tr>\n" +
+                        "   <tr>\n" +
+                        "       <th>Medium</th>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(7) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(8) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(9) + "</td>\n" +
+                        "   </tr>\n" +
+                        "    <tr>\n" +
+                        "       <th>Hard</th>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(10) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(11) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(12) + "</td>\n" +
+                        "   </tr>\n" +
+                        "    <tr>\n" +
+                        "       <th>Custom</th>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(13) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(14) + "</td>\n" +
+                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(15) + "</td>\n" +
+                        "   </tr>\n" +
+                        "</table>"
+                        + "</body></html>");
+                ep.setEditable(false);
+                JOptionPane.showMessageDialog(null, ep, "Statistics", JOptionPane.PLAIN_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "No statistics are available, you didn't play your first game !", "Statistics", JOptionPane.PLAIN_MESSAGE);
+            }
         }
         else if(cmd.equals(gui.getmLicense())) {
             JOptionPane.showMessageDialog(null, "MIT License\n" +

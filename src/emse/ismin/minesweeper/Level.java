@@ -6,7 +6,8 @@ package emse.ismin.minesweeper;
 public enum Level {
     EASY(10, 10, 10),
     MEDIUM(20, 20, 40),
-    HARD(30, 30, 150);
+    HARD(30, 30, 150),
+    CUSTOM(10, 10, 10);
 
     public int dimX;
     public int dimY;
