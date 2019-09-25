@@ -39,7 +39,8 @@ public class ServerGui extends JPanel {
         this.add(topPanel, BorderLayout.NORTH);
 
         // Center panel
-        this.add(msgArea, BorderLayout.CENTER);
+        JScrollPane sp = new JScrollPane(msgArea);
+        this.add(sp, BorderLayout.CENTER);
 
         // Bottom panel
         JPanel bottomPanel = new JPanel();

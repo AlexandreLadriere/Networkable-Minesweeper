@@ -52,20 +52,16 @@ public class Server extends JFrame {
     }
 
     void startServer() {
-        serverGui.addMsg("Waiting for clients...\n");
+        serverGui.addMsg("Waiting for clients...\n\n");
         try {
             ServerSocket serverSock = new ServerSocket(SERVER_PORT);
-            Socket sock = serverSock.accept();
-            DataInputStream inStream = new DataInputStream(sock.getInputStream());
-            DataOutputStream outStream = new DataOutputStream(sock.getOutputStream());
-
-            String clientName = inStream.readUTF();
-            serverGui.addMsg("\n" + clientName + " is connected !\n");
-
-            outStream.close();
-            inStream.close();
-            sock.close();
-            serverSock.close();
+            Socket sock = null;
+            while(true) {
+                sock = serverSock.accept();
+                new EchoThread(sock, serverGui).start();
+            }
+            //sock.close();
+            //serverSock.close();
 
         } catch (IOException e) {
             e.printStackTrace();
