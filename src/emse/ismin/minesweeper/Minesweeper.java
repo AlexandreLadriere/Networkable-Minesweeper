@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * This class is the main app class
  */
-public class Minesweeper extends JFrame {
+public class Minesweeper extends JFrame implements Runnable {
 
     private Field field;
     private boolean isStarted = false;
@@ -25,6 +25,10 @@ public class Minesweeper extends JFrame {
     private Socket sock;
     private DataInputStream inStream;
     private DataOutputStream outStream;
+    private String serverName;
+    private String clientName;
+    private int serverPort;
+    private Thread process;
 
     /**
      * Creates the app
@@ -64,17 +68,44 @@ public class Minesweeper extends JFrame {
     }
 
     public void connectToServer() {
-        String serverName = gui.getServerNameTextField().getText();
-        int serverPort = Integer.parseInt(gui.getServerPortTextField().getText());
-        String clientName = gui.getClientNameTextField().getText();
+        serverName = gui.getServerNameTextField().getText();
+        serverPort = Integer.parseInt(gui.getServerPortTextField().getText());
+        clientName = gui.getClientNameTextField().getText();
         try {
             sock = new Socket(serverName, serverPort);
-            inStream = new DataInputStream(sock.getInputStream());
-            outStream = new DataOutputStream(sock.getOutputStream());
-            outStream.writeUTF(clientName);
+            process = new Thread(this);
+            process.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void run() {
+        try {
+            inStream = new DataInputStream(sock.getInputStream());
+            outStream = new DataOutputStream(sock.getOutputStream());
+            outStream.writeUTF(clientName);
+            String connexionMsg = inStream.readUTF();
+            gui.addMsg(connexionMsg + serverName + " (port: " + serverPort + ")\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        while(process != null) {
+           /* try {
+                //int cmd = inStream.readInt();
+            if(cmd == Demineur.MSG) { // public static final int MSG = 0;
+                String msg = inStream.readUTF();
+                gui.addMsg(msg);
+            }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+        }
+        //lecture dans in
+        //lecture de la commande
+        // en fct de ce que je lis : j'affiche les mines/numeros/fin de partie
+        //lecture du joueur qui a clické en x,y ...
     }
 
     /**
@@ -85,6 +116,7 @@ public class Minesweeper extends JFrame {
             inStream.close();
             outStream.close();
             sock.close();
+            gui.addMsg("Disconnected from the server: " + serverName + " (port: " + serverPort + ")\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

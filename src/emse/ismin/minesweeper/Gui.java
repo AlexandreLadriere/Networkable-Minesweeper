@@ -18,6 +18,7 @@ public class Gui extends JPanel {
     private JTextField serverNameTextField;
     private JTextField serverPortTextField;
     private JTextField clientNameTextField;
+    private JTextArea msgArea;
     private JMenuItem mQuit;
     private JMenuItem mInfo;
     private JMenuItem mLicense;
@@ -136,17 +137,34 @@ public class Gui extends JPanel {
         topPanel.setBackground(new Color(189,195,199));
         this.add(topPanel, BorderLayout.NORTH);
 
-        //bottomPanel of the main BorderLayout
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout());
-        bottomPanel.add(serverNameTextField);
-        bottomPanel.add(serverPortTextField);
-        bottomPanel.add(clientNameTextField);
-        bottomPanel.add(connexionButton);
-        bottomPanel.add(newGameButton);
-        bottomPanel.add(quitButton);
-        bottomPanel.setBackground(new Color(189,195,199));
-        this.add(bottomPanel, BorderLayout.SOUTH);
+        // bottomPanel of the main BorderLayout
+        JPanel bottomBorderLayoutPanel = new JPanel();
+        bottomBorderLayoutPanel.setLayout(new BorderLayout());
+            // North
+            JPanel topPanelBis = new JPanel();
+            JLabel networkChatLabel = new JLabel("Network log", SwingConstants.CENTER);
+            networkChatLabel.setForeground(new Color(44,62,80));
+            networkChatLabel.setFont(new Font("Nunito", Font.BOLD, 18));
+            topPanelBis.add(networkChatLabel);
+            topPanelBis.setBackground(new Color(189,195,199));
+            bottomBorderLayoutPanel.add(topPanelBis, BorderLayout.NORTH);
+            // Center
+            msgArea = new JTextArea(4, 30);
+            msgArea.setEditable(false);
+            JScrollPane sp = new JScrollPane(msgArea);
+            bottomBorderLayoutPanel.add(sp, BorderLayout.CENTER);
+            // South
+            JPanel bottomPanel = new JPanel();
+            bottomPanel.setLayout(new FlowLayout());
+            bottomPanel.add(serverNameTextField);
+            bottomPanel.add(serverPortTextField);
+            bottomPanel.add(clientNameTextField);
+            bottomPanel.add(connexionButton);
+            bottomPanel.add(newGameButton);
+            bottomPanel.add(quitButton);
+            bottomPanel.setBackground(new Color(189,195,199));
+        bottomBorderLayoutPanel.add(bottomPanel, BorderLayout.SOUTH);
+        this.add(bottomBorderLayoutPanel, BorderLayout.SOUTH);
 
         //GridPanel with Field, in the center of the main BorderLayout
         gridPanel = new JPanel();
@@ -172,6 +190,14 @@ public class Gui extends JPanel {
                 hardRadio.setSelected(true);
                 break;
         }
+    }
+
+    /**
+     * Appends message to the client network log
+     * @param msg message you want to add to the network log
+     */
+    public void addMsg(String msg) {
+        msgArea.append(msg);
     }
 
     /**

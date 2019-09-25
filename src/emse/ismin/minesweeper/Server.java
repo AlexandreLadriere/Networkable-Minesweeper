@@ -1,17 +1,20 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Server extends JFrame {
+public class Server extends JFrame implements Runnable {
 
     private static final int SERVER_PORT = 10000;
-    ServerGui serverGui;
+    private ServerGui serverGui;
     private int clientID = 0;
+    private ServerSocket serverSock;
+    private Socket sock;
+    private List<EchoThread> clientThreadList = new ArrayList<>();
 
     /**
      * Server Constructor
@@ -54,18 +57,40 @@ public class Server extends JFrame {
 
     void startServer() {
         serverGui.addMsg("Waiting for clients...\n\n");
+        clientID = 0;
         try {
-            ServerSocket serverSock = new ServerSocket(SERVER_PORT);
-            Socket sock = null;
-            while(true) {
-                sock = serverSock.accept();
-                new EchoThread(sock, clientID, serverGui).start();
-                clientID++;
-            }
-            //sock.close();
-            //serverSock.close();
-
+            serverSock = new ServerSocket(SERVER_PORT);
+            sock = null;
+            new Thread(this).start();
         } catch (IOException e) {
+            serverGui.addMsg("\n\nError while opening server socket - shutting down the server");
+            closeServer();
+            e.printStackTrace();
+        }
+    }
+
+    void closeServer() {
+        try {
+            sock.close();
+            serverSock.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void run() {
+        EchoThread clientThread;
+        try {
+            sock = serverSock.accept();
+            clientID++;
+            new Thread(this).start();
+            clientThread = new EchoThread(sock, clientID, serverGui);
+            clientThread.start();
+            clientThreadList.add(clientThread);
+        } catch (IOException e) {
+            serverGui.addMsg("\n\nError while listening on socket - shutting down server");
+            closeServer();
             e.printStackTrace();
         }
     }
