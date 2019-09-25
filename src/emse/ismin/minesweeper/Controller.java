@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 /**
  * This class implements the Controller for the application
@@ -80,11 +81,12 @@ public class Controller implements ActionListener {
         }
         else if(cmd.equals(gui.getmStatistics())) {
             if(!gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).isEmpty()) {
+                List<String> allLines = gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString());
                 JEditorPane ep = new JEditorPane("text/html", "<html><body> "
-                        + "<center><b>Games played: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(0) + "<br>\n" +
-                        "<b>Games won: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(1) + "<br>\n" +
-                        "<b>Games lost: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(2) + "<br>\n" +
-                        "<b>Win ratio: </b>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(3) + "</center><br>\n" +
+                        + "<center><b>Games played: </b>" + allLines.get(0) + "<br>\n" +
+                        "<b>Games won: </b>" + allLines.get(1) + "<br>\n" +
+                        "<b>Games lost: </b>" + allLines.get(2) + "<br>\n" +
+                        "<b>Win ratio: </b>" + allLines.get(3) + "</center><br>\n" +
                         "<br>\n" +
                         "<table>\n" +
                         "   <tr>\n" +
@@ -95,27 +97,27 @@ public class Controller implements ActionListener {
                         "   </tr>\n" +
                         "   <tr>\n" +
                         "       <th>Easy</th>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(4) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(5) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(6) + "</td>\n" +
+                        "       <td>" + allLines.get(4) + "</td>\n" +
+                        "       <td>" + allLines.get(5) + "</td>\n" +
+                        "       <td>" + allLines.get(6) + "</td>\n" +
                         "   </tr>\n" +
                         "   <tr>\n" +
                         "       <th>Medium</th>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(7) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(8) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(9) + "</td>\n" +
+                        "       <td>" + allLines.get(7) + "</td>\n" +
+                        "       <td>" + allLines.get(8) + "</td>\n" +
+                        "       <td>" + allLines.get(9) + "</td>\n" +
                         "   </tr>\n" +
                         "    <tr>\n" +
                         "       <th>Hard</th>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(10) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(11) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(12) + "</td>\n" +
+                        "       <td>" + allLines.get(10) + "</td>\n" +
+                        "       <td>" + allLines.get(11) + "</td>\n" +
+                        "       <td>" + allLines.get(12) + "</td>\n" +
                         "   </tr>\n" +
                         "    <tr>\n" +
                         "       <th>Custom</th>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(13) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(14) + "</td>\n" +
-                        "       <td>" + gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).get(15) + "</td>\n" +
+                        "       <td>" + allLines.get(13) + "</td>\n" +
+                        "       <td>" + allLines.get(14) + "</td>\n" +
+                        "       <td>" + allLines.get(15) + "</td>\n" +
                         "   </tr>\n" +
                         "</table>"
                         + "</body></html>");
