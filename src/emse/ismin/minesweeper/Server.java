@@ -11,6 +11,7 @@ public class Server extends JFrame {
 
     private static final int SERVER_PORT = 10000;
     ServerGui serverGui;
+    private int clientID = 0;
 
     /**
      * Server Constructor
@@ -58,7 +59,8 @@ public class Server extends JFrame {
             Socket sock = null;
             while(true) {
                 sock = serverSock.accept();
-                new EchoThread(sock, serverGui).start();
+                new EchoThread(sock, clientID, serverGui).start();
+                clientID++;
             }
             //sock.close();
             //serverSock.close();
@@ -66,6 +68,5 @@ public class Server extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

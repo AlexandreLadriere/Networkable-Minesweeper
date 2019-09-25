@@ -8,14 +8,16 @@ import java.net.Socket;
 public class EchoThread extends Thread {
     private Socket socket;
     private ServerGui serverGui;
+    private int clientID;
 
     /**
      * Constructor for EchoThread
      * @param clientSocket client socket
      */
-    public EchoThread(Socket clientSocket, ServerGui serverGui) {
+    public EchoThread(Socket clientSocket, int clientID, ServerGui serverGui) {
         this.socket = clientSocket;
         this.serverGui = serverGui;
+        this.clientID = clientID;
     }
 
     public void start() {

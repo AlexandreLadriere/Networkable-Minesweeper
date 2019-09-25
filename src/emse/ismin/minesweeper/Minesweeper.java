@@ -22,6 +22,10 @@ public class Minesweeper extends JFrame {
     private boolean isLost = false;
     private int nbRevealed = 0;
 
+    private Socket sock;
+    private DataInputStream inStream;
+    private DataOutputStream outStream;
+
     /**
      * Creates the app
      */
@@ -64,10 +68,20 @@ public class Minesweeper extends JFrame {
         int serverPort = Integer.parseInt(gui.getServerPortTextField().getText());
         String clientName = gui.getClientNameTextField().getText();
         try {
-            Socket sock = new Socket(serverName, serverPort);
-            DataInputStream inStream = new DataInputStream(sock.getInputStream());
-            DataOutputStream outStream = new DataOutputStream(sock.getOutputStream());
+            sock = new Socket(serverName, serverPort);
+            inStream = new DataInputStream(sock.getInputStream());
+            outStream = new DataOutputStream(sock.getOutputStream());
             outStream.writeUTF(clientName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Disconnect the client from the server
+     */
+    public void DisconnectFromServer() {
+        try {
             inStream.close();
             outStream.close();
             sock.close();
