@@ -2,19 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5abd3417-2b4b-408a-9018-83429485001a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/Minesweeper/stats.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerMessageTypes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/EchoThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/EchoThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Server.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerGui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -61,7 +61,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Minesweeper">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Minesweeper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="emse.ismin.minesweeper.Minesweeper" />
       <module name="Minesweeper" />
@@ -90,8 +90,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Minesweeper" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Minesweeper" />
       </list>
     </recent_temporary>
   </component>
@@ -110,7 +110,7 @@
       <workItem from="1568718648312" duration="20015000" />
       <workItem from="1568978853592" duration="34063000" />
       <workItem from="1569340976279" duration="16708000" />
-      <workItem from="1569398483209" duration="18414000" />
+      <workItem from="1569398483209" duration="24571000" />
     </task>
     <servers />
   </component>

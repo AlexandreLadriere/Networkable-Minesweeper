@@ -57,4 +57,20 @@ public class ServerGui extends JPanel {
     public void addMsg(String msg) {
         msgArea.append(msg);
     }
+
+    /**
+     * Getter for the server start button
+     * @return startButton Button
+     */
+    public JButton getStartButton() {
+        return startButton;
+    }
+
+    /**
+     * Getter for the gui server
+     * @return Server object associated to this GUI
+     */
+    public Server getServer() {
+        return server;
+    }
 }

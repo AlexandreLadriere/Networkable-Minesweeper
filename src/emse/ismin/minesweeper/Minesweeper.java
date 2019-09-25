@@ -29,6 +29,7 @@ public class Minesweeper extends JFrame implements Runnable {
     private String clientName;
     private int serverPort;
     private Thread process;
+    private int clientID;
 
     /**
      * Creates the app
@@ -85,25 +86,35 @@ public class Minesweeper extends JFrame implements Runnable {
         try {
             inStream = new DataInputStream(sock.getInputStream());
             outStream = new DataOutputStream(sock.getOutputStream());
+            outStream.writeInt(ServerMessageTypes.CONNEXION.value());
             outStream.writeUTF(clientName);
-            String connexionMsg = inStream.readUTF();
-            gui.addMsg(connexionMsg + serverName + " (port: " + serverPort + ")\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
         while(process != null) {
-           /* try {
-                //int cmd = inStream.readInt();
-            if(cmd == Demineur.MSG) { // public static final int MSG = 0;
-                String msg = inStream.readUTF();
-                gui.addMsg(msg);
-            }
+            try {
+                int cmd = inStream.readInt();
+                if(cmd == ServerMessageTypes.MSG.value()) {
+                    String msg = inStream.readUTF();
+                    gui.addMsg(msg);
+                }
+                else if(cmd == ServerMessageTypes.CONNEXION.value()) {
+                    String connexionMsg = inStream.readUTF();
+                    gui.addMsg(connexionMsg + serverName + " (port: " + serverPort + ")\n");
+                    clientID = inStream.readInt();
+                    gui.addMsg("Player ID: " + clientID + "\n");
+                }
+                else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
+                    process = null;
+                    inStream.close();
+                    outStream.close();
+                    sock.close();
+                    gui.addMsg("Disconnected from the server: " + serverName + " (port: " + serverPort + ")\n");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
         }
-        //lecture dans in
-        //lecture de la commande
         // en fct de ce que je lis : j'affiche les mines/numeros/fin de partie
         //lecture du joueur qui a clické en x,y ...
     }
@@ -113,6 +124,8 @@ public class Minesweeper extends JFrame implements Runnable {
      */
     public void DisconnectFromServer() {
         try {
+            outStream.writeInt(ServerMessageTypes.DISCONNECTION.value());
+            process = null;
             inStream.close();
             outStream.close();
             sock.close();

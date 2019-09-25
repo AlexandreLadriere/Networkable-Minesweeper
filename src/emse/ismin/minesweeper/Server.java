@@ -56,7 +56,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     void startServer() {
-        serverGui.addMsg("Waiting for clients...\n\n");
+        serverGui.addMsg("Waiting for clients...\n");
         clientID = 0;
         try {
             serverSock = new ServerSocket(SERVER_PORT);
@@ -69,6 +69,9 @@ public class Server extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Closes the server socket
+     */
     void closeServer() {
         try {
             sock.close();
@@ -83,15 +86,63 @@ public class Server extends JFrame implements Runnable {
         EchoThread clientThread;
         try {
             sock = serverSock.accept();
-            clientID++;
             new Thread(this).start();
             clientThread = new EchoThread(sock, clientID, serverGui);
-            clientThread.start();
+            //clientThread.start();
             clientThreadList.add(clientThread);
+            clientID++;
         } catch (IOException e) {
             serverGui.addMsg("\n\nError while listening on socket - shutting down server");
             closeServer();
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Broadcast a <code>String</code> message
+     * @param msg <code>String</code> message you want to broadcast
+     */
+    public void broadcast(String msg) {
+        for (EchoThread echoThread : clientThreadList) {
+            try {
+                echoThread.getOutStream().writeInt(ServerMessageTypes.MSG.value());
+                echoThread.getOutStream().writeUTF(msg);
+            } catch (IOException e) {
+                serverGui.addMsg("Impossible to broadcast string message \n");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Broadcast a <code>int</code> message
+     * @param msg <code>int</code> message you want to broadcast
+     */
+    public void broadcast(int msg) {
+        for (EchoThread echoThread : clientThreadList) {
+            try {
+                echoThread.getOutStream().writeInt(ServerMessageTypes.INT.value());
+                echoThread.getOutStream().writeInt(msg);
+            } catch (IOException e) {
+                serverGui.addMsg("Impossible to broadcast string message \n");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Broadcast a <code>boolean</code> message
+     * @param msg <code>boolean</code> message you want to broadcast
+     */
+    public void broadcast(boolean msg) {
+        for (EchoThread echoThread : clientThreadList) {
+            try {
+                echoThread.getOutStream().writeInt(ServerMessageTypes.BOOL.value());
+                echoThread.getOutStream().writeBoolean(msg);
+            } catch (IOException e) {
+                serverGui.addMsg("Impossible to broadcast string message \n");
+                e.printStackTrace();
+            }
         }
     }
 }
