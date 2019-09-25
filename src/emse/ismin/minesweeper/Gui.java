@@ -12,8 +12,12 @@ public class Gui extends JPanel {
 
     private Minesweeper minesweeper;
     private JPanel gridPanel;
+    private JButton connexionButton;
     private JButton quitButton;
     private JButton newGameButton;
+    private JTextField serverNameTextField;
+    private JTextField serverPortTextField;
+    private JTextField clientNameTextField;
     private JMenuItem mQuit;
     private JMenuItem mInfo;
     private JMenuItem mLicense;
@@ -112,6 +116,15 @@ public class Gui extends JPanel {
         newGameButton.setFont(new Font("Nunito", Font.BOLD, 18));
         newGameButton.addActionListener(new Controller(this));
 
+        serverNameTextField = new JTextField("localhost", 5);
+        serverPortTextField = new JTextField("10000", 4);
+        clientNameTextField = new JTextField("Your name", 6);
+        connexionButton = new JButton("Connexion");
+        connexionButton.setForeground(new Color(44,62,80));
+        connexionButton.setFont(new Font("Nunito", Font.BOLD, 18));
+        connexionButton.addActionListener(new Controller(this));
+
+
         //topPanel of the main BorderLayout
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
@@ -126,6 +139,10 @@ public class Gui extends JPanel {
         //bottomPanel of the main BorderLayout
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());
+        bottomPanel.add(serverNameTextField);
+        bottomPanel.add(serverPortTextField);
+        bottomPanel.add(clientNameTextField);
+        bottomPanel.add(connexionButton);
         bottomPanel.add(newGameButton);
         bottomPanel.add(quitButton);
         bottomPanel.setBackground(new Color(189,195,199));
@@ -182,11 +199,43 @@ public class Gui extends JPanel {
     }
 
     /**
+     * Getter for the server name
+     * @return serverNameTextField
+     */
+    public JTextField getServerNameTextField() {
+        return serverNameTextField;
+    }
+
+    /**
+     * Getter for the server port
+     * @return serverPortTextField
+     */
+    public JTextField getServerPortTextField() {
+        return serverPortTextField;
+    }
+
+    /**
+     * Getter for the client name
+     * @return clientNameTextField
+     */
+    public JTextField getClientNameTextField() {
+        return clientNameTextField;
+    }
+
+    /**
      * Getter for the <code>Statistics</code> menu item
      * @return the Statistics menu item
      */
     public JMenuItem getmStatistics() {
         return mStatistics;
+    }
+
+    /**
+     * Getter for the connexion button
+     * @return connexionButton
+     */
+    public JButton getConnexionButton() {
+        return connexionButton;
     }
 
     /**

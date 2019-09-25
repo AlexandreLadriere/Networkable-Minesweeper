@@ -48,6 +48,9 @@ public class Controller implements ActionListener {
                 System.exit(0);
             }
         }
+        else if(cmd.equals(gui.getConnexionButton())) {
+            gui.getMinesweeper().connectToServer();
+        }
         else if(cmd.equals(gui.getnewGameButton()) || cmd.equals(gui.getmNew())) {
             gui.newGame();;
         }

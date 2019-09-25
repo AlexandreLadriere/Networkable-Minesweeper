@@ -1,7 +1,10 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,8 +16,6 @@ import java.util.List;
  */
 public class Minesweeper extends JFrame {
 
-    private static final String SCORE_FILENAME = "scores.dat";
-    private static final String STATS_FILENAME = "stats.dat";
     private Field field;
     private boolean isStarted = false;
     private Gui gui;
@@ -27,7 +28,7 @@ public class Minesweeper extends JFrame {
     public Minesweeper() {
         super("Minesweeper - Alexandre Ladriere");
 
-
+        //iOs look
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WikiTeX");
         try {
@@ -56,6 +57,23 @@ public class Minesweeper extends JFrame {
      */
     public static void main(String[] args) {
         new Minesweeper();
+    }
+
+    public void connectToServer() {
+        String serverName = gui.getServerNameTextField().getText();
+        int serverPort = Integer.parseInt(gui.getServerPortTextField().getText());
+        String clientName = gui.getClientNameTextField().getText();
+        try {
+            Socket sock = new Socket(serverName, serverPort);
+            DataInputStream inStream = new DataInputStream(sock.getInputStream());
+            DataOutputStream outStream = new DataOutputStream(sock.getOutputStream());
+            outStream.writeUTF(clientName);
+            inStream.close();
+            outStream.close();
+            sock.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
