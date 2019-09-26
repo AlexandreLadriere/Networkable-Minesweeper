@@ -6,9 +6,6 @@ import java.util.Random;
  * This class represents the mine field
  */
 public class Field {
-    private static final int DIM_EASY = 10;
-    private static final int DIM_MEDIUM = 20;
-    private static final int DIM_HARD = 30;
 
     private Level level;
     private int dimX;

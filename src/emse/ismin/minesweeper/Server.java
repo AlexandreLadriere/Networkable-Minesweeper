@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class Server extends JFrame implements Runnable {
@@ -15,6 +16,7 @@ public class Server extends JFrame implements Runnable {
     private Socket sock;
     private HashSet<EchoThread> clientThreadList = new HashSet<>();
     private Field serverField;
+    private String[][] tabNames;
 
     /**
      * Server Constructor
@@ -104,22 +106,26 @@ public class Server extends JFrame implements Runnable {
         broadcast(ServerMessageTypes.START_GAME.value());
         if(serverGui.getEasyRadio().isSelected()) {
             this.serverField = new Field(Level.EASY);
+            tabNames = new String[Level.EASY.dimX][Level.EASY.dimY];
             broadcast(Level.EASY.toString());
             broadcast(Level.EASY.dimX);
             broadcast(Level.EASY.dimY);
         }
         else if(serverGui.getMediumRadio().isSelected()) {
             this.serverField = new Field(Level.MEDIUM);
+            tabNames = new String[Level.MEDIUM.dimX][Level.MEDIUM.dimY];
             broadcast(Level.MEDIUM.toString());
             broadcast(Level.MEDIUM.dimX);
             broadcast(Level.MEDIUM.dimY);
         }
         else if(serverGui.getHardRadio().isSelected()) {
             this.serverField = new Field(Level.HARD);
+            tabNames = new String[Level.HARD.dimX][Level.HARD.dimY];
             broadcast(Level.HARD.toString());
             broadcast(Level.HARD.dimX);
             broadcast(Level.HARD.dimY);
         }
+        iniTab2D(tabNames, "none");
     }
 
     /**
@@ -168,6 +174,19 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
+     * Initializes a 2D <code>String</code> type array with a initial value
+     * @param tab <code>String[][]</code> array you want to initialize
+     * @param iniValue value that you want to initialize your array with.
+     */
+    private void iniTab2D(String[][] tab, String iniValue) {
+        for(int i = 0; i < tab.length; i++) {
+            for(int j = 0; j < tab[0].length; j++) {
+                tab[i][j] = iniValue;
+            }
+        }
+    }
+
+    /**
      * Getter for the server GUI
      * @return the server GUI
      */
@@ -189,5 +208,13 @@ public class Server extends JFrame implements Runnable {
      */
     public Field getServerField() {
         return serverField;
+    }
+
+    /**
+     * Getter for the array of names
+     * @return the array of case-player names
+     */
+    public String[][] getTabNames() {
+        return tabNames;
     }
 }

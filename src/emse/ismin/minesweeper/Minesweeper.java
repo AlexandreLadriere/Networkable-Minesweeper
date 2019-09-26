@@ -1,6 +1,8 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -55,9 +57,18 @@ public class Minesweeper extends JFrame implements Runnable {
         this.field = new Field(Level.EASY);
         gui = new Gui(this);
         setContentPane(gui);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
+        // Disconnect from server when window is closed
+        this.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                if(isOnline) {
+                    disconnectFromServer();
+                }
+            }
+        });
     }
 
     /**
@@ -148,7 +159,7 @@ public class Minesweeper extends JFrame implements Runnable {
     /**
      * Disconnect the client from the server
      */
-    public void DisconnectFromServer() {
+    public void disconnectFromServer() {
         try {
             outStream.writeInt(ServerMessageTypes.DISCONNECTION.value());
             process = null;

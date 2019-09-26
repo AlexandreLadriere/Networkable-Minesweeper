@@ -45,6 +45,9 @@ public class Controller implements ActionListener {
         Object cmd = e.getSource();
         if (cmd.equals(gui.getQuitButton()) || cmd.equals(gui.getmQuit())) {
             if(JOptionPane.showConfirmDialog(null, "Are you sure ?", "Exit Confimation", JOptionPane.YES_NO_OPTION)==JOptionPane.OK_OPTION) {
+                if(gui.getMinesweeper().getIsOnline()) {
+                    gui.getMinesweeper().disconnectFromServer();
+                }
                 System.exit(0);
             }
         }
@@ -55,10 +58,10 @@ public class Controller implements ActionListener {
         }
         else if(cmd.equals(gui.getConnexionButton()) && gui.getConnexionButton().getText().equals("Disconnect")) {
             gui.getConnexionButton().setText("Connexion");
-            gui.getMinesweeper().DisconnectFromServer();
+            gui.getMinesweeper().disconnectFromServer();
         }
         else if(cmd.equals(gui.getnewGameButton()) || cmd.equals(gui.getmNew())) {
-            gui.newGame();;
+            gui.newGame();
         }
         else if(cmd.equals(gui.getEasyRadio())) {
             gui.newGame(Level.EASY);

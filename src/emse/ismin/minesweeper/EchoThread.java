@@ -38,7 +38,14 @@ public class EchoThread implements Runnable {
                 else if(cmd == ServerMessageTypes.CASE_CLICKED.value()) {
                     int x = inStream.readInt();
                     int y = inStream.readInt();
-                    server.getServerGui().addMsg(clientName + " has clicked on (" + x + ", " + y + ")\n");
+                    if(server.getTabNames()[x][y].equals("none")) {
+                        server.getServerGui().addMsg(clientName + " has clicked on (" + x + ", " + y + ")\n");
+                        server.getTabNames()[x][y] = clientName;
+                    }
+                    else {
+                        outStream.writeInt(ServerMessageTypes.MSG.value());
+                        outStream.writeUTF("Case already clicked by " + server.getTabNames()[x][y] + "\n");
+                    }
                 }
                 else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
                     server.getServerGui().addMsg(clientName + " is disconnected !\n");
