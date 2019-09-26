@@ -342,6 +342,22 @@ public class Gui extends JPanel {
     }
 
     /**
+     * Getter for the gridpanel
+     * @return the gridPanel
+     */
+    public JPanel getGridPanel() {
+        return gridPanel;
+    }
+
+    /**
+     * Getter for the difficulty Label
+     * @return difficultyLabel
+     */
+    public JLabel getDifficultyLabel() {
+        return difficultyLabel;
+    }
+
+    /**
      * Getter for the Minesweeper
      * @return <code>minesweeper</code>
      */
@@ -366,6 +382,23 @@ public class Gui extends JPanel {
         tabCase = new Case[minesweeper.getField().getDimX()][minesweeper.getField().getDimY()];
         for(int i=0; i<minesweeper.getField().getDimX(); i++) {
             for(int j=0; j<minesweeper.getField().getDimY(); j++) {
+                tabCase[i][j] = new Case(minesweeper, i, j);
+                gridPanel.add(tabCase[i][j]);
+            }
+        }
+    }
+
+    /**
+     * Fills the GUI Mine field according to the level of difficulty selected by the server
+     * @param gridPanel gridPanel that need to be filled
+     * @param dimX number of columns
+     * @param dimY number of rows
+     */
+    public void fillGridPanelOnline(JPanel gridPanel, int dimX, int dimY) {
+        gridPanel.setLayout(new GridLayout(dimX, dimY));
+        tabCase = new Case[dimX][dimY];
+        for(int i = 0; i<dimX; i++) {
+            for(int j = 0; j<dimY; j++) {
                 tabCase[i][j] = new Case(minesweeper, i, j);
                 gridPanel.add(tabCase[i][j]);
             }

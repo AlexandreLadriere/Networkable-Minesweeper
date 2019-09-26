@@ -3,17 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="5abd3417-2b4b-408a-9018-83429485001a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Case.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Case.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/EchoThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/EchoThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Gui.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Minesweeper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerGui.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Minesweeper/emse/ismin/minesweeper/ServerGui.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Case.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Case.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -110,7 +113,7 @@
       <workItem from="1568718648312" duration="20015000" />
       <workItem from="1568978853592" duration="34063000" />
       <workItem from="1569340976279" duration="16708000" />
-      <workItem from="1569398483209" duration="29612000" />
+      <workItem from="1569398483209" duration="39729000" />
     </task>
     <servers />
   </component>

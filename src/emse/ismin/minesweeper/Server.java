@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class Server extends JFrame implements Runnable {
 
     private static final int SERVER_PORT = 10000;
     private ServerGui serverGui;
-    private int clientID = 0;
     private ServerSocket serverSock;
     private Socket sock;
-    private List<EchoThread> clientThreadList = new ArrayList<>();
+    private HashSet<EchoThread> clientThreadList = new HashSet<>();
+    private Field serverField;
 
     /**
      * Server Constructor
@@ -57,13 +57,12 @@ public class Server extends JFrame implements Runnable {
 
     void startServer() {
         serverGui.addMsg("Waiting for clients...\n");
-        clientID = 0;
         try {
             serverSock = new ServerSocket(SERVER_PORT);
             sock = null;
             new Thread(this).start();
         } catch (IOException e) {
-            serverGui.addMsg("\n\nError while opening server socket - shutting down the server");
+            serverGui.addMsg("\n\nERROR: Error while opening server socket - shutting down the server");
             closeServer();
             e.printStackTrace();
         }
@@ -87,13 +86,39 @@ public class Server extends JFrame implements Runnable {
         try {
             sock = serverSock.accept();
             new Thread(this).start();
-            clientThread = new EchoThread(sock, clientID, serverGui);
+            clientThread = new EchoThread(sock, this);
             clientThreadList.add(clientThread);
-            clientID++;
         } catch (IOException e) {
-            serverGui.addMsg("\n\nError while listening on socket - shutting down server");
+            serverGui.addMsg("\n\nERROR: Error while listening on socket - shutting down server");
             closeServer();
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Starts a new game for the server (and the client). The server Field is initialized here
+     */
+    public void startGame() {
+        broadcast(ServerMessageTypes.MSG.value());
+        broadcast("New game started ! \n");
+        broadcast(ServerMessageTypes.START_GAME.value());
+        if(serverGui.getEasyRadio().isSelected()) {
+            this.serverField = new Field(Level.EASY);
+            broadcast(Level.EASY.toString());
+            broadcast(Level.EASY.dimX);
+            broadcast(Level.EASY.dimY);
+        }
+        else if(serverGui.getMediumRadio().isSelected()) {
+            this.serverField = new Field(Level.MEDIUM);
+            broadcast(Level.MEDIUM.toString());
+            broadcast(Level.MEDIUM.dimX);
+            broadcast(Level.MEDIUM.dimY);
+        }
+        else if(serverGui.getHardRadio().isSelected()) {
+            this.serverField = new Field(Level.HARD);
+            broadcast(Level.HARD.toString());
+            broadcast(Level.HARD.dimX);
+            broadcast(Level.HARD.dimY);
         }
     }
 
@@ -104,10 +129,9 @@ public class Server extends JFrame implements Runnable {
     public void broadcast(String msg) {
         for (EchoThread echoThread : clientThreadList) {
             try {
-                echoThread.getOutStream().writeInt(ServerMessageTypes.MSG.value());
                 echoThread.getOutStream().writeUTF(msg);
             } catch (IOException e) {
-                serverGui.addMsg("Impossible to broadcast string message \n");
+                serverGui.addMsg("ERROR: Impossible to broadcast string message \n");
                 e.printStackTrace();
             }
         }
@@ -120,10 +144,9 @@ public class Server extends JFrame implements Runnable {
     public void broadcast(int msg) {
         for (EchoThread echoThread : clientThreadList) {
             try {
-                echoThread.getOutStream().writeInt(ServerMessageTypes.INT.value());
                 echoThread.getOutStream().writeInt(msg);
             } catch (IOException e) {
-                serverGui.addMsg("Impossible to broadcast string message \n");
+                serverGui.addMsg("ERROR: Impossible to broadcast string message \n");
                 e.printStackTrace();
             }
         }
@@ -136,12 +159,35 @@ public class Server extends JFrame implements Runnable {
     public void broadcast(boolean msg) {
         for (EchoThread echoThread : clientThreadList) {
             try {
-                echoThread.getOutStream().writeInt(ServerMessageTypes.BOOL.value());
                 echoThread.getOutStream().writeBoolean(msg);
             } catch (IOException e) {
-                serverGui.addMsg("Impossible to broadcast string message \n");
+                serverGui.addMsg("ERROR: Impossible to broadcast string message \n");
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Getter for the server GUI
+     * @return the server GUI
+     */
+    public ServerGui getServerGui() {
+        return serverGui;
+    }
+
+    /**
+     * Getter for the server client-thread HashSet
+     * @return the server client-thread HashSet
+     */
+    public HashSet<EchoThread> getClientThreadList() {
+        return clientThreadList;
+    }
+
+    /**
+     * Getter for the server Field
+     * @return the server field <code>serverField</code>
+     */
+    public Field getServerField() {
+        return serverField;
     }
 }

@@ -161,41 +161,46 @@ public class Case extends JPanel implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        rClick = SwingUtilities.isRightMouseButton(e);
+        if(!minesweeper.getIsOnline()) {
+            rClick = SwingUtilities.isRightMouseButton(e);
 
-        if(!rClick) {
-            isClicked = true;
-        }
+            if (!rClick) {
+                isClicked = true;
+            }
 
-        if(!minesweeper.getIsLost()) {
-            nearbyMinesCount = minesweeper.getField().countNearbyMines(x, y);
-            if(nearbyMinesCount == 0 && !isRevealed && !rClick) {
-                revealZeros(x, y);
+            if (!minesweeper.getIsLost()) {
+                nearbyMinesCount = minesweeper.getField().countNearbyMines(x, y);
+                if (nearbyMinesCount == 0 && !isRevealed && !rClick) {
+                    revealZeros(x, y);
+                }
+                if (nearbyMinesCount != -1 && !isRevealed && !rClick && nearbyMinesCount != 0) {
+                    minesweeper.setNbRevealed(minesweeper.getNbRevealed() + 1);
+                    isRevealed = true;
+                }
+                if (!minesweeper.getIsStarted()) {
+                    minesweeper.getGui().getCounter().restart();
+                    minesweeper.setIsStarted(true);
+                    minesweeper.setIsLost(false);
+                }
+                repaint();
+                if (nearbyMinesCount == -1 && !rClick && !isFlaged) {
+                    minesweeper.getGui().getCounter().stop2();
+                    minesweeper.setIsLost(true);
+                    JOptionPane.showMessageDialog(null, "You suck !", "Try Again !", JOptionPane.WARNING_MESSAGE);
+                    minesweeper.getGui().newGame();
+                    minesweeper.updateStats(false, minesweeper.getField().getLevel());
+                }
             }
-            if(nearbyMinesCount != -1 && !isRevealed && !rClick && nearbyMinesCount != 0) {
-                minesweeper.setNbRevealed(minesweeper.getNbRevealed()+1);
-                isRevealed = true;
-            }
-            if (!minesweeper.getIsStarted()) {
-                minesweeper.getGui().getCounter().restart();
-                minesweeper.setIsStarted(true);
-                minesweeper.setIsLost(false);
-            }
-            repaint();
-            if(nearbyMinesCount == -1 && !rClick && !isFlaged) {
+            if (minesweeper.isWin()) {
                 minesweeper.getGui().getCounter().stop2();
-                minesweeper.setIsLost(true);
-                JOptionPane.showMessageDialog(null, "You suck !", "Try Again !", JOptionPane.WARNING_MESSAGE);
-                minesweeper.getGui().newGame();
-                minesweeper.updateStats(false, minesweeper.getField().getLevel());
+                minesweeper.setNbRevealed(minesweeper.getNbRevealed() - 1); //to make sure that the dialog box will not pop-up again
+                if (JOptionPane.showConfirmDialog(null, "You are a genius !!\nYour Score: " + minesweeper.getGui().getCounter().getCounterValue() + "\n\nDo you want to restart a game ?", "Wahou !!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    minesweeper.getGui().newGame();
+                }
             }
         }
-        if(minesweeper.isWin()) {
-            minesweeper.getGui().getCounter().stop2();
-            minesweeper.setNbRevealed(minesweeper.getNbRevealed()-1); //to make sure that the dialog box will not pop-up again
-            if(JOptionPane.showConfirmDialog(null, "You are a genius !!\nYour Score: "+minesweeper.getGui().getCounter().getCounterValue() + "\n\nDo you want to restart a game ?", "Wahou !!", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                minesweeper.getGui().newGame();
-            }
+        else if(minesweeper.getIsStarted()){
+            minesweeper.sendCaseClicked(x, y);
         }
     }
 

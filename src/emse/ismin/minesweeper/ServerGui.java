@@ -94,4 +94,28 @@ public class ServerGui extends JPanel {
     public Server getServer() {
         return server;
     }
+
+    /**
+     * Getter for the EASY level radio button
+     * @return the easyRadioButton value
+     */
+    public JRadioButtonMenuItem getEasyRadio() {
+        return easyRadio;
+    }
+
+    /**
+     * Getter for the MEDIUM level radio button
+     * @return the mediumRadioButton value
+     */
+    public JRadioButtonMenuItem getMediumRadio() {
+        return mediumRadio;
+    }
+
+    /**
+     * Getter for the HARD level radio button
+     * @return the hardRadioButton value
+     */
+    public JRadioButtonMenuItem getHardRadio() {
+        return hardRadio;
+    }
 }

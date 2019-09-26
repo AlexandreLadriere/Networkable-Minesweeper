@@ -29,7 +29,7 @@ public class Minesweeper extends JFrame implements Runnable {
     private String clientName;
     private int serverPort;
     private Thread process;
-    private int clientID;
+    private boolean isOnline = false;
 
     /**
      * Creates the app
@@ -77,6 +77,7 @@ public class Minesweeper extends JFrame implements Runnable {
             sock = new Socket(serverName, serverPort);
             process = new Thread(this);
             process.start();
+            isOnline = true;
         } catch (IOException e) {
             gui.addMsg("CONNEXION ERROR: Impossible to reach the server, please check the server name and server port\n");
             success = false;
@@ -105,8 +106,20 @@ public class Minesweeper extends JFrame implements Runnable {
                 else if(cmd == ServerMessageTypes.CONNEXION.value()) {
                     String connexionMsg = inStream.readUTF();
                     gui.addMsg(connexionMsg + serverName + " (port: " + serverPort + ")\n");
-                    clientID = inStream.readInt();
-                    gui.addMsg("Player ID: " + clientID + "\n");
+                }
+                else if(cmd == ServerMessageTypes.START_GAME.value()) {
+                    String level = inStream.readUTF();
+                    int dimX = inStream.readInt();
+                    int dimY = inStream.readInt();
+                    gui.addMsg(level + " (" + dimX + ", " + dimY + ") level started\n");
+                    gui.getGridPanel().removeAll();
+                    gui.fillGridPanelOnline(gui.getGridPanel(), dimX, dimY);
+                    gui.getDifficultyLabel().setText("         Level: "+level.toString());
+                    this.pack();
+                    isStarted = true;
+                    isLost = false;
+                    gui.getFlagCounter().setNbMines(0);
+                    gui.getFlagCounter().setOperation(0);
                 }
                 else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
                     process = null;
@@ -114,13 +127,22 @@ public class Minesweeper extends JFrame implements Runnable {
                     outStream.close();
                     sock.close();
                     gui.addMsg("Disconnected from the server: " + serverName + " (port: " + serverPort + ")\n");
+                    isOnline = false;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
-        // en fct de ce que je lis : j'affiche les mines/numeros/fin de partie
-        //lecture du joueur qui a clické en x,y ...
+    }
+
+    public void sendCaseClicked(int x, int y) {
+        try {
+            outStream.writeInt(ServerMessageTypes.CASE_CLICKED.value());
+            outStream.writeInt(x);
+            outStream.writeInt(y);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -346,6 +368,14 @@ public class Minesweeper extends JFrame implements Runnable {
      */
     public int getNbRevealed() {
         return nbRevealed;
+    }
+
+    /**
+     * Getter for the boolean that indicates if the client is online or not
+     * @return boolean isOnline
+     */
+    public boolean getIsOnline() {
+        return isOnline;
     }
 
     /**

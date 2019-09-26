@@ -9,20 +9,17 @@ public class EchoThread implements Runnable {
     private Socket socket;
     private DataInputStream inStream;
     private DataOutputStream outStream;
-    private ServerGui serverGui;
-    private int clientID;
+    private Server server;
     private String clientName;
-    //
     private Thread process;
 
     /**
      * Constructor for EchoThread
      * @param clientSocket client socket
      */
-    public EchoThread(Socket clientSocket, int clientID, ServerGui serverGui) {
+    public EchoThread(Socket clientSocket, Server server) {
         this.socket = clientSocket;
-        this.serverGui = serverGui;
-        this.clientID = clientID;
+        this.server = server;
         process = new Thread(this);
         process.start();
     }
@@ -38,12 +35,18 @@ public class EchoThread implements Runnable {
                 if(cmd == ServerMessageTypes.CONNEXION.value()) {
                     sendConnectionMessage();
                 }
+                else if(cmd == ServerMessageTypes.CASE_CLICKED.value()) {
+                    int x = inStream.readInt();
+                    int y = inStream.readInt();
+                    server.getServerGui().addMsg(clientName + " has clicked on (" + x + ", " + y + ")\n");
+                }
                 else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
-                    serverGui.addMsg(clientName + " is disconnected !");
+                    server.getServerGui().addMsg(clientName + " is disconnected !\n");
                     process = null;
                     inStream.close();
                     outStream.close();
                     socket.close();
+                    server.getClientThreadList().remove(this);
                 }
             }
         } catch (IOException e) {
@@ -57,11 +60,10 @@ public class EchoThread implements Runnable {
             clientName = inStream.readUTF();
             outStream.writeInt(ServerMessageTypes.CONNEXION.value());
             outStream.writeUTF("Connected to the server: ");
-            outStream.writeInt(clientID);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        serverGui.addMsg("\n" + clientName + " is connected !\n");
+        server.getServerGui().addMsg(clientName + " is connected !\n");
     }
 
     /**

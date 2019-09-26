@@ -15,8 +15,9 @@ public class ServerController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object cmd = e.getSource();
         if(cmd.equals(serverGui.getStartButton())) {
-            serverGui.getServer().broadcast("New game started ! \n");
-            serverGui.addMsg("Broadcasting...\n");
+            serverGui.getStartButton().setText("Game started...");
+            serverGui.getStartButton().setEnabled(false);
+            serverGui.getServer().startGame();
         }
     }
 }
