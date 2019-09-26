@@ -8,10 +8,23 @@ First, you need to compile all the files. In order to do that, run the [compile.
 $ sh compile.sh
 ```
 
-Then, to run the application, you just have to run the [run.sh] file:
+You can also install the fonts used by the app, by running the [fonts.install.sh] file (it is not mandatory):
 ```sh
-$ sh run.sh
+$ sh fonts.install.sh
 ```
+
+Then, if you want to play solo, you just have to run the [client.run.sh] file:
+```sh
+$ sh client.run.sh
+```
+
+If you want to test the client/server part of this app on your computer, you need to run at least a second client, and then to run the [server.run.sh] file. Full example:
+```sh
+$ sh client.run.sh &
+$ sh client.run.sh &
+$ sh server.run.sh &
+```
+Then, to connect to the server, you just need to change your _player name_ (if you are testing only on your computer, you don't need to change the _server name_: __localhost__, or the _server port_: __10000__), and to click on the __Connexion__ button. 
 
 ## Developed with
   - Java 12.0.2 2019-07-16
@@ -24,4 +37,6 @@ This project is licensed under the MIT License - see the [LICENSE] file for deta
 
    [LICENSE]: <LICENSE>
    [compile.sh]: <compile.sh>
-   [run.sh]: <run.sh>
+   [server.run.sh]: <server.run.sh>
+   [client.run.sh]: <client.run.sh>
+   [fonts.install.sh]: <fonts.install.sh>

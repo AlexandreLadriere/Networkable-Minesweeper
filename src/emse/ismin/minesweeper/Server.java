@@ -88,7 +88,6 @@ public class Server extends JFrame implements Runnable {
             sock = serverSock.accept();
             new Thread(this).start();
             clientThread = new EchoThread(sock, clientID, serverGui);
-            //clientThread.start();
             clientThreadList.add(clientThread);
             clientID++;
         } catch (IOException e) {

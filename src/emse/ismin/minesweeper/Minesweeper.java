@@ -68,7 +68,8 @@ public class Minesweeper extends JFrame implements Runnable {
         new Minesweeper();
     }
 
-    public void connectToServer() {
+    public boolean connectToServer() {
+        boolean success = true;
         serverName = gui.getServerNameTextField().getText();
         serverPort = Integer.parseInt(gui.getServerPortTextField().getText());
         clientName = gui.getClientNameTextField().getText();
@@ -77,8 +78,11 @@ public class Minesweeper extends JFrame implements Runnable {
             process = new Thread(this);
             process.start();
         } catch (IOException e) {
+            gui.addMsg("CONNEXION ERROR: Impossible to reach the server, please check the server name and server port\n");
+            success = false;
             e.printStackTrace();
         }
+        return success;
     }
 
     @Override
@@ -257,7 +261,7 @@ public class Minesweeper extends JFrame implements Runnable {
         mediumPlayed = Float.parseFloat(allLines.get(7)); mediumWon = Float.parseFloat(allLines.get(8)); mediumWinRatio = Float.parseFloat(allLines.get(9));
         hardPlayed = Float.parseFloat(allLines.get(10)); hardWon = Float.parseFloat(allLines.get(11)); hardWinRatio = Float.parseFloat(allLines.get(12));
         customPlayed = Float.parseFloat(allLines.get(13)); customWon = Float.parseFloat(allLines.get(14));
-        customWinRatio = Float.parseFloat(allLines.get(15));
+        //customWinRatio = Float.parseFloat(allLines.get(15));
         played += 1;
         if(win) {
             won += 1;

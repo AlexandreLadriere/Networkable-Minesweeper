@@ -38,10 +38,8 @@ public class Gui extends JPanel {
      * @param minesweeper <code>Minesweeper</code> you want to use
      */
     public Gui(Minesweeper minesweeper) {
-        //main layout
         this.minesweeper = minesweeper;
-        this.setLayout(new BorderLayout());
-        setBackground(new Color(189,195,199));
+
         //menu bar
         JMenuBar menuBar = new JMenuBar();
             //"More..." menu
@@ -101,13 +99,12 @@ public class Gui extends JPanel {
         menuBar.add(moreMenu);
         minesweeper.setJMenuBar(menuBar);
 
-        //Labels for top panel of the main BorderLayout
+        // Objects for NORTH panel of the main BorderLayout
         difficultyLabel = new JLabel("         Level: "+minesweeper.getField().getLevel().toString());
         difficultyLabel.setForeground(new Color(44,62,80));
         difficultyLabel.setFont(new Font("Nunito", Font.BOLD, 18));
         difficultyLabel.setHorizontalAlignment(JLabel.CENTER);
-
-        //Labels for bottom panel of the main BorderLayout
+        // Objects for SOUTH panel of the main BorderLayout
         quitButton = new JButton("Quit");
         quitButton.setForeground(new Color(44,62,80));
         quitButton.setFont(new Font("Nunito", Font.BOLD, 18));
@@ -117,6 +114,7 @@ public class Gui extends JPanel {
         newGameButton.setFont(new Font("Nunito", Font.BOLD, 18));
         newGameButton.addActionListener(new Controller(this));
 
+        // Objects for the SOUTH panel of the eastBorderLayout of the main BorderLayout
         serverNameTextField = new JTextField("localhost", 5);
         serverPortTextField = new JTextField("10000", 4);
         clientNameTextField = new JTextField("Your name", 6);
@@ -125,52 +123,59 @@ public class Gui extends JPanel {
         connexionButton.setFont(new Font("Nunito", Font.BOLD, 18));
         connexionButton.addActionListener(new Controller(this));
 
-
-        //topPanel of the main BorderLayout
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(new BorderLayout());
-        topPanel.add(difficultyLabel, BorderLayout.WEST);
-        flagCounter = new FlagCounter();
-        topPanel.add(flagCounter, BorderLayout.CENTER);
-        counter = new Counter();
-        topPanel.add(counter, BorderLayout.EAST);
-        topPanel.setBackground(new Color(189,195,199));
+        // Main BorderLayout
+        this.setLayout(new BorderLayout());
+        setBackground(new Color(189,195,199));
+        // NORTH of the main BorderLayout
+            JPanel topPanel = new JPanel();
+            topPanel.setLayout(new BorderLayout());
+            topPanel.add(difficultyLabel, BorderLayout.WEST);
+            flagCounter = new FlagCounter();
+            topPanel.add(flagCounter, BorderLayout.CENTER);
+            counter = new Counter();
+            topPanel.add(counter, BorderLayout.EAST);
+            topPanel.setBackground(new Color(189,195,199));
         this.add(topPanel, BorderLayout.NORTH);
+        // SOUTH of the main BorderLayout
+            JPanel bottomPanel = new JPanel();
+            bottomPanel.setLayout(new FlowLayout());
+            bottomPanel.add(newGameButton);
+            bottomPanel.add(quitButton);
+            bottomPanel.setBackground(new Color(189,195,199));
+        this.add(bottomPanel, BorderLayout.SOUTH);
+        // CENTER of the main BorderLayout
+            gridPanel = new JPanel();
+            gridPanel.setBackground(new Color(189,195,199));
+            fillGridPanel(gridPanel);
+        this.add(gridPanel, BorderLayout.CENTER);
 
-        // bottomPanel of the main BorderLayout
-        JPanel bottomBorderLayoutPanel = new JPanel();
-        bottomBorderLayoutPanel.setLayout(new BorderLayout());
-            // North
+        // East BorderLayout of the main BorderLayout
+        JPanel eastBorderLayout = new JPanel();
+        eastBorderLayout.setLayout(new BorderLayout());
+        // North
             JPanel topPanelBis = new JPanel();
             JLabel networkChatLabel = new JLabel("Network log", SwingConstants.CENTER);
             networkChatLabel.setForeground(new Color(44,62,80));
             networkChatLabel.setFont(new Font("Nunito", Font.BOLD, 18));
             topPanelBis.add(networkChatLabel);
-            topPanelBis.setBackground(new Color(189,195,199));
-            bottomBorderLayoutPanel.add(topPanelBis, BorderLayout.NORTH);
-            // Center
+            topPanelBis.setBackground(new Color(232,232,232));
+            eastBorderLayout.add(topPanelBis, BorderLayout.NORTH);
+        // Center
             msgArea = new JTextArea(4, 30);
             msgArea.setEditable(false);
+            msgArea.setFont(new Font("Nunito", Font.PLAIN, 14));
             JScrollPane sp = new JScrollPane(msgArea);
-            bottomBorderLayoutPanel.add(sp, BorderLayout.CENTER);
-            // South
-            JPanel bottomPanel = new JPanel();
-            bottomPanel.setLayout(new FlowLayout());
-            bottomPanel.add(serverNameTextField);
-            bottomPanel.add(serverPortTextField);
-            bottomPanel.add(clientNameTextField);
-            bottomPanel.add(connexionButton);
-            bottomPanel.add(newGameButton);
-            bottomPanel.add(quitButton);
-            bottomPanel.setBackground(new Color(189,195,199));
-        bottomBorderLayoutPanel.add(bottomPanel, BorderLayout.SOUTH);
-        this.add(bottomBorderLayoutPanel, BorderLayout.SOUTH);
-
-        //GridPanel with Field, in the center of the main BorderLayout
-        gridPanel = new JPanel();
-        gridPanel.setBackground(new Color(189,195,199));
-        fillGridPanel(gridPanel);
-        this.add(gridPanel, BorderLayout.CENTER);
+            eastBorderLayout.add(sp, BorderLayout.CENTER);
+        // South
+            JPanel southPanelBis = new JPanel();
+            southPanelBis.setLayout(new FlowLayout());
+            southPanelBis.add(serverNameTextField);
+            southPanelBis.add(serverPortTextField);
+            southPanelBis.add(clientNameTextField);
+            southPanelBis.add(connexionButton);
+            southPanelBis.setBackground(new Color(232,232,232));
+            eastBorderLayout.add(southPanelBis, BorderLayout.SOUTH);
+        this.add(eastBorderLayout, BorderLayout.EAST);
 
         flagCounter.setNbMines(minesweeper.getField().getNbMines());
     }

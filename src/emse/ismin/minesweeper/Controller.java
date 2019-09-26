@@ -49,8 +49,9 @@ public class Controller implements ActionListener {
             }
         }
         else if(cmd.equals(gui.getConnexionButton()) && gui.getConnexionButton().getText().equals("Connexion")) {
-            gui.getMinesweeper().connectToServer();
-            gui.getConnexionButton().setText("Disconnect");
+            if(gui.getMinesweeper().connectToServer()) {
+                gui.getConnexionButton().setText("Disconnect");
+            }
         }
         else if(cmd.equals(gui.getConnexionButton()) && gui.getConnexionButton().getText().equals("Disconnect")) {
             gui.getConnexionButton().setText("Connexion");
