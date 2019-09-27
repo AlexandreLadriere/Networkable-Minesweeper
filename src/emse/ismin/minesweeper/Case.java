@@ -203,7 +203,7 @@ public class Case extends JPanel implements MouseListener {
                 }
             }
         }
-        else if(minesweeper.getIsStarted()){
+        else if(minesweeper.getIsStarted() && !minesweeper.getIsLost()){
             minesweeper.sendCaseClicked(x, y);
         }
     }

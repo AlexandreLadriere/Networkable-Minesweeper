@@ -45,7 +45,11 @@ public class EchoThread implements Runnable {
                         server.broadcast(ServerMessageTypes.CASE_CLICKED.value());
                         server.broadcast(x);
                         server.broadcast(y);
-                        server.broadcast(server.getServerField().countNearbyMines(x, y));
+                        int nearbyCount = server.getServerField().countNearbyMines(x, y);
+                        server.broadcast(nearbyCount);
+                        if(nearbyCount == -1) {
+                            outStream.writeInt(ServerMessageTypes.MINE_CLICKED.value());
+                        }
 
                         //Appeler isWin
 

@@ -139,6 +139,10 @@ public class Minesweeper extends JFrame implements Runnable {
                     int nbMines = inStream.readInt();
                     gui.getTabCase()[x][y].paintCaseOnline(nbMines);
                 }
+                else if(cmd == ServerMessageTypes.MINE_CLICKED.value()) {
+                    isLost = true;
+                    JOptionPane.showMessageDialog(null, "You suck !\n\nNow you can watch your friends playing...", "Looser", JOptionPane.WARNING_MESSAGE);
+                }
                 else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
                     process = null;
                     inStream.close();
