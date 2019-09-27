@@ -33,7 +33,7 @@ public class EchoThread implements Runnable {
             while(process != null) {
                 int cmd = inStream.readInt();
                 if(cmd == ServerMessageTypes.CONNEXION.value()) {
-                    sendConnectionMessage();
+                    sendConnexionMessage();
                 }
                 else if(cmd == ServerMessageTypes.CASE_CLICKED.value()) {
                     int x = inStream.readInt();
@@ -50,9 +50,7 @@ public class EchoThread implements Runnable {
                         if(nearbyCount == -1) {
                             outStream.writeInt(ServerMessageTypes.MINE_CLICKED.value());
                         }
-
-                        //Appeler isWin
-
+                        server.isWin();
                     }
                     else {
                         outStream.writeInt(ServerMessageTypes.MSG.value());
@@ -61,11 +59,7 @@ public class EchoThread implements Runnable {
                 }
                 else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
                     server.getServerGui().addMsg(clientName + " is disconnected !\n");
-                    process = null;
-                    inStream.close();
-                    outStream.close();
-                    socket.close();
-                    server.getClientThreadList().remove(this);
+                    disconnectClient();
                 }
             }
         } catch (IOException e) {
@@ -73,16 +67,58 @@ public class EchoThread implements Runnable {
         }
     }
 
-    private void sendConnectionMessage() {
+    /**
+     * Sends a connexion message
+     */
+    private void sendConnexionMessage() {
         clientName = null;
         try {
             clientName = inStream.readUTF();
-            outStream.writeInt(ServerMessageTypes.CONNEXION.value());
-            outStream.writeUTF("Connected to the server: ");
+            if(!needToChangeName(clientName)) {
+                outStream.writeInt(ServerMessageTypes.CONNEXION.value());
+                outStream.writeUTF("Connected to the server: ");
+                server.getServerGui().addMsg(clientName + " is connected !\n");
+                if(server.getGameStarted()) {
+                    outStream.writeInt(ServerMessageTypes.ALREADY_STARTED.value());
+                }
+            }
+            else {
+                outStream.writeInt(ServerMessageTypes.CHANGE_NAME.value());
+                disconnectClient();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        server.getServerGui().addMsg(clientName + " is connected !\n");
+    }
+
+    /**
+     * Checks if the client name already exists or not
+     * @param clientName name that you want to check
+     * @return a boolean that indicates if the name already exists or not
+     */
+    private boolean needToChangeName(String clientName) {
+        boolean exist = false;
+        for (EchoThread echoThread : server.getClientThreadList()) {
+            if(echoThread.clientName.equals(clientName) && echoThread != this) {
+                exist = true;
+            }
+        }
+        return exist;
+    }
+
+    /**
+     * Close the connection between the server and the client, and remove the client form the server's client list
+     */
+    private void disconnectClient() {
+        process = null;
+        try {
+            inStream.close();
+            outStream.close();
+            socket.close();
+            server.getClientThreadList().remove(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -99,5 +135,13 @@ public class EchoThread implements Runnable {
      */
     public DataOutputStream getOutStream() {
         return outStream;
+    }
+
+    /**
+     * Getter for the client name
+     * @return client name
+     */
+    public String getClientName() {
+        return clientName;
     }
 }

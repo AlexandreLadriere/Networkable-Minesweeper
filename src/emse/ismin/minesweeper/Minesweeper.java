@@ -90,6 +90,7 @@ public class Minesweeper extends JFrame implements Runnable {
             process = new Thread(this);
             process.start();
             isOnline = true;
+            isStarted = false;
         } catch (IOException e) {
             gui.addMsg("CONNEXION ERROR: Impossible to reach the server, please check the server name and server port\n");
             success = false;
@@ -143,15 +144,35 @@ public class Minesweeper extends JFrame implements Runnable {
                     isLost = true;
                     JOptionPane.showMessageDialog(null, "You suck !\n\nNow you can watch your friends playing...", "Looser", JOptionPane.WARNING_MESSAGE);
                 }
+                else if(cmd == ServerMessageTypes.CHANGE_NAME.value()) {
+                    JOptionPane.showMessageDialog(null, "Player name already used by someone else, please change yours.", "Player name already used", JOptionPane.WARNING_MESSAGE);
+                    process = null;
+                    inStream.close();
+                    outStream.close();
+                    sock.close();
+                    isOnline = false;
+                    gui.newGame(Level.EASY);
+                    gui.getConnexionButton().setText("Connexion");
+                }
+                else if(cmd == ServerMessageTypes.ALREADY_STARTED.value()) {
+                    gui.addMsg("A game is already in progress, please be patient...");
+                    JOptionPane.showMessageDialog(null, "A game is already in progress, please be patient...", "Game already in progress", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else if(cmd == ServerMessageTypes.END_GAME.value()) {
+                    String results = inStream.readUTF();
+                    gui.addMsg(results);
+                    isStarted = false;
+                }
                 else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
                     process = null;
                     inStream.close();
                     outStream.close();
                     sock.close();
-                    gui.addMsg("Disconnected from the server: " + serverName + " (port: " + serverPort + ")\n");
                     isOnline = false;
+                    isStarted = false;
                     gui.newGame(Level.EASY);
                     gui.getConnexionButton().setText("Connexion");
+                    gui.addMsg("Disconnected from the server: " + serverName + " (port: " + serverPort + ")\n");
                 }
             } catch (IOException e) {
                 //e.printStackTrace();

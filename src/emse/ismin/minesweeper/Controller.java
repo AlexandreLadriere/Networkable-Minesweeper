@@ -60,6 +60,7 @@ public class Controller implements ActionListener {
             gui.getConnexionButton().setText("Connexion");
             gui.getMinesweeper().disconnectFromServer();
             gui.getMinesweeper().setOnline(false);
+            gui.newGame(Level.EASY);
         }
         else if(cmd.equals(gui.getnewGameButton()) || cmd.equals(gui.getmNew())) {
             if(gui.getMinesweeper().getIsOnline()) {

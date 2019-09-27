@@ -37,7 +37,7 @@ public class ServerGui extends JPanel {
         this.add(sp, BorderLayout.CENTER);
 
         // SOUTH panel of the main BorderLayout
-        startButton = new JButton("Start game");
+        startButton = new JButton("Start Game");
         startButton.setForeground(new Color(44,62,80));
         startButton.setFont(new Font("Nunito", Font.BOLD, 18));
         startButton.addActionListener(new ServerController(this));

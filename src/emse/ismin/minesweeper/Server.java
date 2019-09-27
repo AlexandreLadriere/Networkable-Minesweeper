@@ -6,8 +6,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class Server extends JFrame implements Runnable {
@@ -17,9 +16,11 @@ public class Server extends JFrame implements Runnable {
     private ServerSocket serverSock;
     private Socket sock;
     private HashSet<EchoThread> clientThreadList = new HashSet<>();
+    private HashMap<String, Integer> clientNameScoreMap;
     private Field serverField;
     private String[][] tabNames;
     private int nbRevealed;
+    private boolean gameStarted;
 
     /**
      * Server Constructor
@@ -137,6 +138,8 @@ public class Server extends JFrame implements Runnable {
         }
         iniTab2D(tabNames, "none");
         nbRevealed = 0;
+        storeAllNames();
+        gameStarted = true;
     }
 
     /**
@@ -197,6 +200,50 @@ public class Server extends JFrame implements Runnable {
         }
     }
 
+    private void storeAllNames() {
+        clientNameScoreMap = new HashMap<String, Integer>();
+        for (EchoThread echoThread : clientThreadList) {
+            clientNameScoreMap.put(echoThread.getClientName(), 0);
+        }
+    }
+
+    /**
+     * Gets the score for each player which played a game
+     */
+    private String getAllScores() {
+        clientNameScoreMap.replaceAll((k, v) -> getScore(k));
+        String results = "Results: \n";
+        for(String key : clientNameScoreMap.keySet()) {
+            results = results.concat("  " + key + ": " + clientNameScoreMap.get(key) + "\n");
+        }
+        return results;
+    }
+
+    private int getScore(String name) {
+        int score = 0;
+        for(int i = 0; i<tabNames.length; i++) {
+            for(int j = 0; j<tabNames[0].length; j++) {
+                if(tabNames[i][j].equals(name)) {
+                    score++;
+                }
+            }
+        }
+        return score;
+    }
+
+    public boolean isWin() {
+        boolean win = serverField.getDimX()*serverField.getDimY()-nbRevealed == serverField.getNbMines();
+        if(win) {
+            String results = getAllScores();
+            serverGui.addMsg("Game finished !\n" + results);
+            broadcast(ServerMessageTypes.END_GAME.value());
+            broadcast(results);
+            serverGui.getStartButton().setText("Start Game");
+            gameStarted = false;
+        }
+        return win;
+    }
+
     /**
      * Getter for the server GUI
      * @return the server GUI
@@ -243,5 +290,21 @@ public class Server extends JFrame implements Runnable {
      */
     public void setNbRevealed(int nbRevealed) {
         this.nbRevealed = nbRevealed;
+    }
+
+    /**
+     * Getter for the <code>HashMap</code> that stores the client name (key) and its score (value)
+     * @return <code>HashMap</code> object that stores the client name (key) and its score (value)
+     */
+    public HashMap<String, Integer> getClientNameScoreMap() {
+        return clientNameScoreMap;
+    }
+
+    /**
+     * Getter for the boolean that indicates if a game is already started by the server
+     * @return <code>boolean</code> that indicates if a game is already started by the server
+     */
+    public boolean getGameStarted() {
+        return gameStarted;
     }
 }

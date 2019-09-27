@@ -7,6 +7,9 @@ public enum ServerMessageTypes {
     START_GAME(3),
     CASE_CLICKED(4),
     MINE_CLICKED(5),
+    END_GAME(6),
+    CHANGE_NAME(7),
+    ALREADY_STARTED(8),
     INT(20),
     BOOL(21);
 
