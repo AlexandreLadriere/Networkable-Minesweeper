@@ -100,7 +100,7 @@ public class Case extends JPanel implements MouseListener {
                 drawAdaptativeImage(gc, "/img/8.png");
                 break;
         }
-    };
+    }
 
     /**
      * Draws an image adapted to the case size
@@ -113,6 +113,10 @@ public class Case extends JPanel implements MouseListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void paintCaseOnline(int nearbyCount) {
+        drawImageNumber(this.getGraphics(), nearbyCount);
     }
 
     /**

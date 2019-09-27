@@ -1,6 +1,8 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,6 +19,7 @@ public class Server extends JFrame implements Runnable {
     private HashSet<EchoThread> clientThreadList = new HashSet<>();
     private Field serverField;
     private String[][] tabNames;
+    private int nbRevealed;
 
     /**
      * Server Constructor
@@ -41,12 +44,19 @@ public class Server extends JFrame implements Runnable {
         serverGui = new ServerGui(this);
 
         setContentPane(serverGui);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         setVisible(true);
-
         serverGui.addMsg("Server started\n");
         startServer();
+        // Disconnect from server when window is closed
+        this.addWindowListener(new WindowAdapter()
+        {
+            public void windowClosing(WindowEvent e)
+            {
+                broadcast(ServerMessageTypes.DISCONNECTION.value());
+            }
+        });
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -126,6 +136,7 @@ public class Server extends JFrame implements Runnable {
             broadcast(Level.HARD.dimY);
         }
         iniTab2D(tabNames, "none");
+        nbRevealed = 0;
     }
 
     /**
@@ -216,5 +227,21 @@ public class Server extends JFrame implements Runnable {
      */
     public String[][] getTabNames() {
         return tabNames;
+    }
+
+    /**
+     * Getter for the int indicating how many Cases were clicked
+     * @return number of cases clicked
+     */
+    public int getNbRevealed() {
+        return nbRevealed;
+    }
+
+    /**
+     * Setter for the int indicating how many Cases were clicked
+     * @param nbRevealed new number of cases clicked
+     */
+    public void setNbRevealed(int nbRevealed) {
+        this.nbRevealed = nbRevealed;
     }
 }

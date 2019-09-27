@@ -69,6 +69,7 @@ public class Minesweeper extends JFrame implements Runnable {
                 }
             }
         });
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     /**
@@ -132,6 +133,12 @@ public class Minesweeper extends JFrame implements Runnable {
                     gui.getFlagCounter().setNbMines(0);
                     gui.getFlagCounter().setOperation(0);
                 }
+                else if (cmd == ServerMessageTypes.CASE_CLICKED.value()) {
+                    int x = inStream.readInt();
+                    int y = inStream.readInt();
+                    int nbMines = inStream.readInt();
+                    gui.getTabCase()[x][y].paintCaseOnline(nbMines);
+                }
                 else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
                     process = null;
                     inStream.close();
@@ -139,6 +146,8 @@ public class Minesweeper extends JFrame implements Runnable {
                     sock.close();
                     gui.addMsg("Disconnected from the server: " + serverName + " (port: " + serverPort + ")\n");
                     isOnline = false;
+                    gui.newGame(Level.EASY);
+                    gui.getConnexionButton().setText("Connexion");
                 }
             } catch (IOException e) {
                 //e.printStackTrace();
@@ -443,5 +452,13 @@ public class Minesweeper extends JFrame implements Runnable {
      */
     public void setField(Field field) {
         this.field = field;
+    }
+
+    /**
+     * Setter for the boolean that indicates if the client is connected to a server or not
+     * @param online <code>boolean</code> that indicates if the client is connected to a server or not
+     */
+    public void setOnline(boolean online) {
+        isOnline = online;
     }
 }

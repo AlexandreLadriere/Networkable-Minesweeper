@@ -41,6 +41,14 @@ public class EchoThread implements Runnable {
                     if(server.getTabNames()[x][y].equals("none")) {
                         server.getServerGui().addMsg(clientName + " has clicked on (" + x + ", " + y + ")\n");
                         server.getTabNames()[x][y] = clientName;
+                        server.setNbRevealed(server.getNbRevealed() + 1);
+                        server.broadcast(ServerMessageTypes.CASE_CLICKED.value());
+                        server.broadcast(x);
+                        server.broadcast(y);
+                        server.broadcast(server.getServerField().countNearbyMines(x, y));
+
+                        //Appeler isWin
+
                     }
                     else {
                         outStream.writeInt(ServerMessageTypes.MSG.value());

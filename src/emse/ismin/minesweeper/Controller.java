@@ -59,18 +59,39 @@ public class Controller implements ActionListener {
         else if(cmd.equals(gui.getConnexionButton()) && gui.getConnexionButton().getText().equals("Disconnect")) {
             gui.getConnexionButton().setText("Connexion");
             gui.getMinesweeper().disconnectFromServer();
+            gui.getMinesweeper().setOnline(false);
         }
         else if(cmd.equals(gui.getnewGameButton()) || cmd.equals(gui.getmNew())) {
-            gui.newGame();
+            if(gui.getMinesweeper().getIsOnline()) {
+                JOptionPane.showMessageDialog(null, "Impossible ! You are still connected to a server.\nPlease log out from this server if you want to use this functionality.", "Not authorized", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                gui.newGame();
+            }
         }
         else if(cmd.equals(gui.getEasyRadio())) {
-            gui.newGame(Level.EASY);
+            if(gui.getMinesweeper().getIsOnline()) {
+                JOptionPane.showMessageDialog(null, "Impossible ! You are still connected to a server.\nPlease log out from this server if you want to use this functionality.", "Not authorized", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                gui.newGame(Level.EASY);
+            }
         }
         else if(cmd.equals(gui.getMediumRadio())) {
-            gui.newGame(Level.MEDIUM);
+            if(gui.getMinesweeper().getIsOnline()) {
+                JOptionPane.showMessageDialog(null, "Impossible ! You are still connected to a server.\nPlease log out from this server if you want to use this functionality.", "Not authorized", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                gui.newGame(Level.MEDIUM);
+            }
         }
         else if(cmd.equals(gui.getHardRadio())) {
-            gui.newGame(Level.HARD);
+            if(gui.getMinesweeper().getIsOnline()) {
+                JOptionPane.showMessageDialog(null, "Impossible ! You are still connected to a server.\nPlease log out from this server if you want to use this functionality.", "Not authorized", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                gui.newGame(Level.HARD);
+            }
         }
         else if(cmd.equals(gui.getmInfo())) {
             JEditorPane ep = new JEditorPane("text/html", "<html><body> <b>Author:</b> <a href=\"https://www.linkedin.com/in/alexandre-ladriere/\">Alexandre Ladrière</a> <br><br> <b>Repository:</b> <a href=\"https://github.com/AlexandreLadriere/Networkable-Minesweeper\">AlexandreLadriere/Networkable-Minesweeper</a> <br><br> <b>Date:</b> September 2019 <br><br> <b>Language:</b> JAVA <br><br> <b>License:</b> MIT</body></html>");
