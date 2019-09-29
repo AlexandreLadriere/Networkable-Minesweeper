@@ -33,6 +33,11 @@ public class Gui extends JPanel {
     private Counter counter;
     private FlagCounter flagCounter;
 
+    private static final Color FOREGROUND_COLOR = new Color(44,62,80);
+    private static final Color BACKGROUND_COLOR = new Color(189,195,199);
+    private static final Color BACKGROUND_COLOR_2 = new Color(232,232,232);
+    private static final Font BUTTON_FONT = new Font("Nunito", Font.BOLD, 18);
+
     /**
      * Creates a Gui according to the given <code>Minesweeper</code>
      * @param minesweeper <code>Minesweeper</code> you want to use
@@ -101,17 +106,17 @@ public class Gui extends JPanel {
 
         // Objects for NORTH panel of the main BorderLayout
         difficultyLabel = new JLabel("         Level: "+minesweeper.getField().getLevel().toString());
-        difficultyLabel.setForeground(new Color(44,62,80));
-        difficultyLabel.setFont(new Font("Nunito", Font.BOLD, 18));
+        difficultyLabel.setForeground(FOREGROUND_COLOR);
+        difficultyLabel.setFont(BUTTON_FONT);
         difficultyLabel.setHorizontalAlignment(JLabel.CENTER);
         // Objects for SOUTH panel of the main BorderLayout
         quitButton = new JButton("Quit");
-        quitButton.setForeground(new Color(44,62,80));
-        quitButton.setFont(new Font("Nunito", Font.BOLD, 18));
+        quitButton.setForeground(FOREGROUND_COLOR);
+        quitButton.setFont(BUTTON_FONT);
         quitButton.addActionListener(new Controller(this));
         newGameButton = new JButton("New Game");
-        newGameButton.setForeground(new Color(44,62,80));
-        newGameButton.setFont(new Font("Nunito", Font.BOLD, 18));
+        newGameButton.setForeground(FOREGROUND_COLOR);
+        newGameButton.setFont(BUTTON_FONT);
         newGameButton.addActionListener(new Controller(this));
 
         // Objects for the SOUTH panel of the eastBorderLayout of the main BorderLayout
@@ -119,13 +124,13 @@ public class Gui extends JPanel {
         serverPortTextField = new JTextField("10000", 4);
         clientNameTextField = new JTextField("Your name", 6);
         connexionButton = new JButton("Connexion");
-        connexionButton.setForeground(new Color(44,62,80));
-        connexionButton.setFont(new Font("Nunito", Font.BOLD, 18));
+        connexionButton.setForeground(FOREGROUND_COLOR);
+        connexionButton.setFont(BUTTON_FONT);
         connexionButton.addActionListener(new Controller(this));
 
         // Main BorderLayout
         this.setLayout(new BorderLayout());
-        setBackground(new Color(189,195,199));
+        setBackground(BACKGROUND_COLOR);
         // NORTH of the main BorderLayout
             JPanel topPanel = new JPanel();
             topPanel.setLayout(new BorderLayout());
@@ -134,18 +139,18 @@ public class Gui extends JPanel {
             topPanel.add(flagCounter, BorderLayout.CENTER);
             counter = new Counter();
             topPanel.add(counter, BorderLayout.EAST);
-            topPanel.setBackground(new Color(189,195,199));
+            topPanel.setBackground(BACKGROUND_COLOR);
         this.add(topPanel, BorderLayout.NORTH);
         // SOUTH of the main BorderLayout
             JPanel bottomPanel = new JPanel();
             bottomPanel.setLayout(new FlowLayout());
             bottomPanel.add(newGameButton);
             bottomPanel.add(quitButton);
-            bottomPanel.setBackground(new Color(189,195,199));
+            bottomPanel.setBackground(BACKGROUND_COLOR);
         this.add(bottomPanel, BorderLayout.SOUTH);
         // CENTER of the main BorderLayout
             gridPanel = new JPanel();
-            gridPanel.setBackground(new Color(189,195,199));
+            gridPanel.setBackground(BACKGROUND_COLOR);
             fillGridPanel(gridPanel);
         this.add(gridPanel, BorderLayout.CENTER);
 
@@ -155,10 +160,10 @@ public class Gui extends JPanel {
         // North
             JPanel topPanelBis = new JPanel();
             JLabel networkChatLabel = new JLabel("Network log", SwingConstants.CENTER);
-            networkChatLabel.setForeground(new Color(44,62,80));
-            networkChatLabel.setFont(new Font("Nunito", Font.BOLD, 18));
+            networkChatLabel.setForeground(FOREGROUND_COLOR);
+            networkChatLabel.setFont(BUTTON_FONT);
             topPanelBis.add(networkChatLabel);
-            topPanelBis.setBackground(new Color(232,232,232));
+            topPanelBis.setBackground(BACKGROUND_COLOR_2);
             eastBorderLayout.add(topPanelBis, BorderLayout.NORTH);
         // Center
             msgArea = new JTextArea(4, 30);
@@ -173,7 +178,7 @@ public class Gui extends JPanel {
             southPanelBis.add(serverPortTextField);
             southPanelBis.add(clientNameTextField);
             southPanelBis.add(connexionButton);
-            southPanelBis.setBackground(new Color(232,232,232));
+            southPanelBis.setBackground(BACKGROUND_COLOR_2);
             eastBorderLayout.add(southPanelBis, BorderLayout.SOUTH);
         this.add(eastBorderLayout, BorderLayout.EAST);
 

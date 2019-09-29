@@ -13,21 +13,26 @@ public class ServerGui extends JPanel {
     private JRadioButtonMenuItem mediumRadio;
     private JRadioButtonMenuItem hardRadio;
 
+    private static final Color FOREGROUND_COLOR = new Color(44,62,80);
+    private static final Color BACKGROUND_COLOR = new Color(189,195,199);
+    private static final Font BUTTON_FONT = new Font("Nunito", Font.BOLD, 18);
+    private static final Font RADIO_BUTTON_FONT = new Font("Nunito", Font.BOLD, 14);
+
     public ServerGui(Server server) {
         this.server = server;
 
         this.setPreferredSize(new Dimension(300, 400));
         this.setLayout(new BorderLayout());
-        setBackground(new Color(189,195,199));
+        setBackground(BACKGROUND_COLOR);
 
         // NORTH panel of the main BorderLayout
         JLabel titleLabel = new JLabel("Minesweeper server");
-            titleLabel.setForeground(new Color(44,62,80));
-            titleLabel.setFont(new Font("Nunito", Font.BOLD, 18));
+            titleLabel.setForeground(FOREGROUND_COLOR);
+            titleLabel.setFont(BUTTON_FONT);
         JPanel topPanel = new JPanel();
             topPanel.setLayout(new FlowLayout());
             topPanel.add(titleLabel);
-            topPanel.setBackground(new Color(189,195,199));
+            topPanel.setBackground(BACKGROUND_COLOR);
         this.add(topPanel, BorderLayout.NORTH);
 
         // CENTER panel of the main BorderLayout
@@ -39,13 +44,14 @@ public class ServerGui extends JPanel {
 
         // SOUTH panel of the main BorderLayout
         startButton = new JButton("Start Game");
-        startButton.setForeground(new Color(44,62,80));
-        startButton.setFont(new Font("Nunito", Font.BOLD, 18));
+        startButton.setForeground(FOREGROUND_COLOR);
+        startButton.setFont(BUTTON_FONT);
         startButton.addActionListener(new ServerController(this));
+        startButton.setEnabled(false);
 
         startServerButton = new JButton("Start Server");
-        startServerButton.setForeground(new Color(44,62,80));
-        startServerButton.setFont(new Font("Nunito", Font.BOLD, 18));
+        startServerButton.setForeground(FOREGROUND_COLOR);
+        startServerButton.setFont(BUTTON_FONT);
         startServerButton.addActionListener(new ServerController(this));
 
         JPanel southPanel = new JPanel();
@@ -53,24 +59,24 @@ public class ServerGui extends JPanel {
         JPanel northPanelBis = new JPanel();
             ButtonGroup group = new ButtonGroup();
             northPanelBis.setLayout(new FlowLayout());
-            northPanelBis.setBackground(new Color(189,195,199));
+            northPanelBis.setBackground(BACKGROUND_COLOR);
             easyRadio = new JRadioButtonMenuItem("Easy");
             easyRadio.setSelected(true);
-            easyRadio.setForeground(new Color(44,62,80));
-            easyRadio.setFont(new Font("Nunito", Font.BOLD, 14));
+            easyRadio.setForeground(FOREGROUND_COLOR);
+            easyRadio.setFont(RADIO_BUTTON_FONT);
             group.add(easyRadio);
             mediumRadio = new JRadioButtonMenuItem("Medium");
-            mediumRadio.setForeground(new Color(44,62,80));
-            mediumRadio.setFont(new Font("Nunito", Font.BOLD, 14));
+            mediumRadio.setForeground(FOREGROUND_COLOR);
+            mediumRadio.setFont(RADIO_BUTTON_FONT);
             group.add(mediumRadio);
             hardRadio = new JRadioButtonMenuItem("Hard");
-            hardRadio.setForeground(new Color(44,62,80));
-            hardRadio.setFont(new Font("Nunito", Font.BOLD, 14));
+            hardRadio.setForeground(FOREGROUND_COLOR);
+            hardRadio.setFont(RADIO_BUTTON_FONT);
             group.add(hardRadio);
         northPanelBis.add(easyRadio); northPanelBis.add(mediumRadio); northPanelBis.add(hardRadio);
         JPanel southPanelBis = new JPanel();
             southPanelBis.setLayout(new FlowLayout());
-            southPanelBis.setBackground(new Color(189,195,199));
+            southPanelBis.setBackground(BACKGROUND_COLOR);
             southPanelBis.add(startServerButton);
             southPanelBis.add(startButton);
         southPanel.add(northPanelBis, BorderLayout.NORTH);

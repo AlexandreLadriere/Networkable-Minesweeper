@@ -22,7 +22,7 @@ public class Server extends JFrame implements Runnable {
     private int nbRevealed;
     private int nbMineClicked;
     private boolean gameStarted;
-    public boolean serverDown;
+    private boolean serverDown;
 
     /**
      * Server Constructor
@@ -92,8 +92,8 @@ public class Server extends JFrame implements Runnable {
             clientThreadList.clear();
             gameStarted = false;
             serverDown = true;
-            sock.close();
             serverSock.close();
+            sock.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

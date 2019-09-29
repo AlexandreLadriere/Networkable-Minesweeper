@@ -146,11 +146,7 @@ public class Minesweeper extends JFrame implements Runnable {
                 }
                 else if(cmd == ServerMessageTypes.CHANGE_NAME.value()) {
                     JOptionPane.showMessageDialog(null, "Player name already used by someone else, please change yours.", "Player name already used", JOptionPane.WARNING_MESSAGE);
-                    process = null;
-                    inStream.close();
-                    outStream.close();
-                    sock.close();
-                    isOnline = false;
+                    disconnectFromServerWithoutMessage();
                     gui.newGame(Level.EASY);
                     gui.getConnexionButton().setText("Connexion");
                 }
@@ -164,12 +160,7 @@ public class Minesweeper extends JFrame implements Runnable {
                     isStarted = false;
                 }
                 else if(cmd == ServerMessageTypes.SERVER_DISCONNECTION.value()) {
-                    process = null;
-                    inStream.close();
-                    outStream.close();
-                    sock.close();
-                    isOnline = false;
-                    isStarted = false;
+                    disconnectFromServerWithoutMessage();
                     gui.newGame(Level.EASY);
                     gui.getConnexionButton().setText("Connexion");
                     gui.addMsg("Disconnected from the server: " + serverName + " (port: " + serverPort + ")\n");
@@ -191,12 +182,31 @@ public class Minesweeper extends JFrame implements Runnable {
     }
 
     /**
+     * Disconnects the client from the server without sending any message to the server. Please don't use this function if you can
+     * @see #disconnectFromServerWithoutMessage()
+     */
+    private void disconnectFromServerWithoutMessage() {
+        try {
+            inStream.close();
+            outStream.close();
+            sock.close();
+            isOnline = false;
+            isStarted = false;
+            process = null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Disconnect the client from the server
      */
     public void disconnectFromServer() {
         try {
             outStream.writeInt(ServerMessageTypes.CLIENT_DISCONNECTION.value());
             process = null;
+            isStarted = false;
+            isOnline = false;
             inStream.close();
             outStream.close();
             sock.close();
