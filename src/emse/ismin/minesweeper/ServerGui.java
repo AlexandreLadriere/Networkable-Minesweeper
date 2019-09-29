@@ -21,7 +21,7 @@ public class ServerGui extends JPanel {
     public ServerGui(Server server) {
         this.server = server;
 
-        this.setPreferredSize(new Dimension(300, 400));
+        //this.setPreferredSize(new Dimension(300, 400));
         this.setLayout(new BorderLayout());
         setBackground(BACKGROUND_COLOR);
 
@@ -36,7 +36,7 @@ public class ServerGui extends JPanel {
         this.add(topPanel, BorderLayout.NORTH);
 
         // CENTER panel of the main BorderLayout
-        msgArea = new JTextArea();
+        msgArea = new JTextArea(18, 25);
         msgArea.setEditable(false);
         msgArea.setFont(new Font("Nunito", Font.PLAIN, 14));
         JScrollPane sp = new JScrollPane(msgArea);
