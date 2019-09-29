@@ -48,7 +48,9 @@ public class EchoThread implements Runnable {
                         int nearbyCount = server.getServerField().countNearbyMines(x, y);
                         server.broadcast(nearbyCount);
                         if(nearbyCount == -1) {
+                            server.setNbMineClicked(server.getNbMineClicked()+1);
                             outStream.writeInt(ServerMessageTypes.MINE_CLICKED.value());
+                            server.checkAllClientLost();
                         }
                         server.isWin();
                     }
@@ -57,7 +59,7 @@ public class EchoThread implements Runnable {
                         outStream.writeUTF("Case already clicked by " + server.getTabNames()[x][y] + "\n");
                     }
                 }
-                else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
+                else if(cmd == ServerMessageTypes.CLIENT_DISCONNECTION.value()) {
                     server.getServerGui().addMsg(clientName + " is disconnected !\n");
                     disconnectClient();
                 }
@@ -80,6 +82,10 @@ public class EchoThread implements Runnable {
                 server.getServerGui().addMsg(clientName + " is connected !\n");
                 if(server.getGameStarted()) {
                     outStream.writeInt(ServerMessageTypes.ALREADY_STARTED.value());
+                }
+                else {
+                    outStream.writeInt(ServerMessageTypes.MSG.value());
+                    outStream.writeUTF("A game will soon start...\n");
                 }
             }
             else {
@@ -116,6 +122,7 @@ public class EchoThread implements Runnable {
             outStream.close();
             socket.close();
             server.getClientThreadList().remove(this);
+            server.checkAllClientConnected();
         } catch (IOException e) {
             e.printStackTrace();
         }

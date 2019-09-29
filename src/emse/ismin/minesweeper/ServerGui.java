@@ -7,6 +7,7 @@ public class ServerGui extends JPanel {
 
     private Server server;
     private JButton startButton;
+    private JButton startServerButton;
     private JTextArea msgArea;
     private JRadioButtonMenuItem easyRadio;
     private JRadioButtonMenuItem mediumRadio;
@@ -42,6 +43,11 @@ public class ServerGui extends JPanel {
         startButton.setFont(new Font("Nunito", Font.BOLD, 18));
         startButton.addActionListener(new ServerController(this));
 
+        startServerButton = new JButton("Start Server");
+        startServerButton.setForeground(new Color(44,62,80));
+        startServerButton.setFont(new Font("Nunito", Font.BOLD, 18));
+        startServerButton.addActionListener(new ServerController(this));
+
         JPanel southPanel = new JPanel();
             southPanel.setLayout(new BorderLayout());
         JPanel northPanelBis = new JPanel();
@@ -65,6 +71,7 @@ public class ServerGui extends JPanel {
         JPanel southPanelBis = new JPanel();
             southPanelBis.setLayout(new FlowLayout());
             southPanelBis.setBackground(new Color(189,195,199));
+            southPanelBis.add(startServerButton);
             southPanelBis.add(startButton);
         southPanel.add(northPanelBis, BorderLayout.NORTH);
         southPanel.add(southPanelBis, BorderLayout.SOUTH);
@@ -117,5 +124,13 @@ public class ServerGui extends JPanel {
      */
     public JRadioButtonMenuItem getHardRadio() {
         return hardRadio;
+    }
+
+    /**
+     * Getter for the start server button
+     * @return the start server button
+     */
+    public JButton getStartServerButton() {
+        return startServerButton;
     }
 }

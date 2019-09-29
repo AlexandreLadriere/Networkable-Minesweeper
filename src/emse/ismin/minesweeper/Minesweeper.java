@@ -155,7 +155,7 @@ public class Minesweeper extends JFrame implements Runnable {
                     gui.getConnexionButton().setText("Connexion");
                 }
                 else if(cmd == ServerMessageTypes.ALREADY_STARTED.value()) {
-                    gui.addMsg("A game is already in progress, please be patient...");
+                    gui.addMsg("A game is already in progress, please be patient...\n");
                     JOptionPane.showMessageDialog(null, "A game is already in progress, please be patient...", "Game already in progress", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else if(cmd == ServerMessageTypes.END_GAME.value()) {
@@ -163,7 +163,7 @@ public class Minesweeper extends JFrame implements Runnable {
                     gui.addMsg(results);
                     isStarted = false;
                 }
-                else if(cmd == ServerMessageTypes.DISCONNECTION.value()) {
+                else if(cmd == ServerMessageTypes.SERVER_DISCONNECTION.value()) {
                     process = null;
                     inStream.close();
                     outStream.close();
@@ -195,7 +195,7 @@ public class Minesweeper extends JFrame implements Runnable {
      */
     public void disconnectFromServer() {
         try {
-            outStream.writeInt(ServerMessageTypes.DISCONNECTION.value());
+            outStream.writeInt(ServerMessageTypes.CLIENT_DISCONNECTION.value());
             process = null;
             inStream.close();
             outStream.close();

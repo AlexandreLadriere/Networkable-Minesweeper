@@ -20,7 +20,9 @@ public class Server extends JFrame implements Runnable {
     private Field serverField;
     private String[][] tabNames;
     private int nbRevealed;
+    private int nbMineClicked;
     private boolean gameStarted;
+    public boolean serverDown;
 
     /**
      * Server Constructor
@@ -47,14 +49,12 @@ public class Server extends JFrame implements Runnable {
         setContentPane(serverGui);
         pack();
         setVisible(true);
-        serverGui.addMsg("Server started\n");
-        startServer();
         // Disconnect from server when window is closed
         this.addWindowListener(new WindowAdapter()
         {
             public void windowClosing(WindowEvent e)
             {
-                broadcast(ServerMessageTypes.DISCONNECTION.value());
+                broadcast(ServerMessageTypes.SERVER_DISCONNECTION.value());
             }
         });
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -68,14 +68,16 @@ public class Server extends JFrame implements Runnable {
         new Server();
     }
 
-    void startServer() {
+    public void startServer() {
+        serverDown = false;
+        serverGui.addMsg("Server started\n");
         serverGui.addMsg("Waiting for clients...\n");
         try {
             serverSock = new ServerSocket(SERVER_PORT);
             sock = null;
             new Thread(this).start();
         } catch (IOException e) {
-            serverGui.addMsg("\n\nERROR: Error while opening server socket - shutting down the server");
+            //serverGui.addMsg("\n\nSTART - ERROR: Error while opening server socket - shutting down the server");
             closeServer();
             e.printStackTrace();
         }
@@ -86,6 +88,10 @@ public class Server extends JFrame implements Runnable {
      */
     void closeServer() {
         try {
+            broadcast(ServerMessageTypes.SERVER_DISCONNECTION.value());
+            clientThreadList.clear();
+            gameStarted = false;
+            serverDown = true;
             sock.close();
             serverSock.close();
         } catch (IOException e) {
@@ -96,15 +102,17 @@ public class Server extends JFrame implements Runnable {
     @Override
     public void run() {
         EchoThread clientThread;
-        try {
-            sock = serverSock.accept();
-            new Thread(this).start();
-            clientThread = new EchoThread(sock, this);
-            clientThreadList.add(clientThread);
-        } catch (IOException e) {
-            serverGui.addMsg("\n\nERROR: Error while listening on socket - shutting down server");
-            closeServer();
-            e.printStackTrace();
+        while(!serverDown) {
+            try {
+                sock = serverSock.accept();
+                new Thread(this).start();
+                clientThread = new EchoThread(sock, this);
+                clientThreadList.add(clientThread);
+            } catch (IOException e) {
+                //serverGui.addMsg("\n\nRUN - ERROR: Error while listening on socket - shutting down server");
+                closeServer();
+                e.printStackTrace();
+            }
         }
     }
 
@@ -140,6 +148,7 @@ public class Server extends JFrame implements Runnable {
         nbRevealed = 0;
         storeAllNames();
         gameStarted = true;
+        nbMineClicked = 0;
     }
 
     /**
@@ -184,6 +193,12 @@ public class Server extends JFrame implements Runnable {
                 serverGui.addMsg("ERROR: Impossible to broadcast string message \n");
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void checkAllClientConnected() {
+        if(clientThreadList.isEmpty() && gameStarted) {
+            JOptionPane.showMessageDialog(null, "All players logged out before the end of the game.\nThe game was stopped.", "All players logged out", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -242,6 +257,23 @@ public class Server extends JFrame implements Runnable {
             gameStarted = false;
         }
         return win;
+    }
+
+    public void stopGame() {
+        broadcast(ServerMessageTypes.END_GAME.value());
+        broadcast(getAllScores());
+        serverGui.getStartButton().setText("Start Game");
+        gameStarted = false;
+    }
+
+    public void checkAllClientLost() {
+        if(nbMineClicked == clientThreadList.size()) {
+            broadcast(ServerMessageTypes.MSG.value());
+            broadcast("All players eliminated before the end of the game !\n");
+            serverGui.addMsg("All players eliminated before the end of the game !\n");
+            serverGui.addMsg("End of the game\n");
+            stopGame();
+        }
     }
 
     /**
@@ -306,5 +338,21 @@ public class Server extends JFrame implements Runnable {
      */
     public boolean getGameStarted() {
         return gameStarted;
+    }
+
+    /**
+     * Setter for the number of mines revealed by the clients
+     * @param nbMineClicked new number of mines revealed
+     */
+    public void setNbMineClicked(int nbMineClicked) {
+        this.nbMineClicked = nbMineClicked;
+    }
+
+    /**
+     * Getter for the number of mines revealed by the clients
+     * @return the number of mines revealed by the clients
+     */
+    public int getNbMineClicked() {
+        return nbMineClicked;
     }
 }

@@ -21,6 +21,17 @@ public class ServerController implements ActionListener {
         }
         else if(cmd.equals(serverGui.getStartButton()) && serverGui.getStartButton().getText().equals("Stop Game")) {
             serverGui.addMsg("Game stopped\n");
+            serverGui.getServer().stopGame();
+            serverGui.getStartButton().setText("Start Game");
+        }
+        else if(cmd.equals(serverGui.getStartServerButton()) && serverGui.getStartServerButton().getText().equals("Start Server")) {
+            serverGui.getStartServerButton().setText("Stop Server");
+            serverGui.getServer().startServer();
+        }
+        else if(cmd.equals(serverGui.getStartServerButton()) && serverGui.getStartServerButton().getText().equals("Stop Server")) {
+            serverGui.getServer().serverDown = true;
+            serverGui.getStartServerButton().setText("Start Server");
+            serverGui.getServer().closeServer();
         }
     }
 }
