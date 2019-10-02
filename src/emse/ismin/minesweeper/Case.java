@@ -12,7 +12,7 @@ import java.io.IOException;
  * This class represents a case in the minesweeper field, and react to mouse clicks
  */
 public class Case extends JPanel implements MouseListener {
-    private final static int DIM = 50;
+    private final static int DIM = 40;
     private int x;
     private int y;
     private int nearbyMinesCount;
@@ -43,6 +43,7 @@ public class Case extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics gc) {
         super.paintComponent(gc);
+        gc.setColor(new Color(189,195,199));
         if (!isClicked) {
             if (rClick && !isFlaged) {
                 isFlaged = true;
@@ -107,11 +108,28 @@ public class Case extends JPanel implements MouseListener {
      * @param gc <code>Graphics</code> object on which you want to draw the image
      */
     private void drawAdaptativeImage(Graphics gc, String filePath) {
-        try {
-            BufferedImage mineImage = ImageIO.read(getClass().getResourceAsStream(filePath));
-            gc.drawImage(mineImage, 0, 0, this.getWidth(), this.getHeight(), this);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(!minesweeper.getIsOnline()) {
+            try {
+                BufferedImage mineImage = ImageIO.read(getClass().getResourceAsStream(filePath));
+                gc.drawImage(mineImage, 0, 0, this.getWidth(), this.getHeight(), this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            try {
+                BufferedImage mineImage = ImageIO.read(getClass().getResourceAsStream(filePath));
+                if(filePath.equals("/img/bomb.png")) {
+                    gc.setColor(new Color(255, 0, 0));
+                }
+                else if(!filePath.equals("/img/tile.png")){
+                    gc.setColor(new Color(56,195,199));
+                }
+                gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+                gc.drawImage(mineImage, 5, 5, this.getWidth() - 10, this.getHeight() - 10, this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

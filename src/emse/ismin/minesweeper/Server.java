@@ -10,7 +10,6 @@ import java.util.*;
 
 public class Server extends JFrame implements Runnable {
 
-    private static final int SERVER_PORT = 10000;
     private ServerGui serverGui;
     private ServerSocket serverSock;
     private Socket sock;
@@ -22,8 +21,6 @@ public class Server extends JFrame implements Runnable {
     private int nbMineClicked;
     private boolean gameStarted;
     private boolean serverDown;
-    private List<String> directScoreMax;
-    private List<Integer> directScorePlayer;
 
     /**
      * Server Constructor
