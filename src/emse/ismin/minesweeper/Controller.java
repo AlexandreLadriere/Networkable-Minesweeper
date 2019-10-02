@@ -51,6 +51,16 @@ public class Controller implements ActionListener {
                 System.exit(0);
             }
         }
+        else if(cmd.equals(gui.getGoOnlineButton()) && gui.getGoOnlineButton().getText().equals("Go online")) {
+            gui.getGoOnlineButton().setText("Hide online panel");
+            gui.getEastBorderLayout().setVisible(true);
+            gui.getMinesweeper().pack();
+        }
+        else if(cmd.equals(gui.getGoOnlineButton()) && gui.getGoOnlineButton().getText().equals("Hide online panel")) {
+            gui.getGoOnlineButton().setText("Go online");
+            gui.getEastBorderLayout().setVisible(false);
+            gui.getMinesweeper().pack();
+        }
         else if(cmd.equals(gui.getConnexionButton()) && gui.getConnexionButton().getText().equals("Connexion")) {
             if(gui.getMinesweeper().connectToServer()) {
                 gui.getConnexionButton().setText("Disconnect");

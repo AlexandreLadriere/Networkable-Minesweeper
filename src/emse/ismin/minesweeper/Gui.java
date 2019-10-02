@@ -12,9 +12,11 @@ public class Gui extends JPanel {
 
     private Minesweeper minesweeper;
     private JPanel gridPanel;
+    private JPanel eastBorderLayout;
     private JButton connexionButton;
     private JButton quitButton;
     private JButton newGameButton;
+    private JButton goOnlineButton;
     private JTextField serverNameTextField;
     private JTextField serverPortTextField;
     private JTextField clientNameTextField;
@@ -118,6 +120,10 @@ public class Gui extends JPanel {
         newGameButton.setForeground(FOREGROUND_COLOR);
         newGameButton.setFont(BUTTON_FONT);
         newGameButton.addActionListener(new Controller(this));
+        goOnlineButton = new JButton("Go online");
+        goOnlineButton.setForeground(FOREGROUND_COLOR);
+        goOnlineButton.setFont(BUTTON_FONT);
+        goOnlineButton.addActionListener(new Controller(this));
 
         // Objects for the SOUTH panel of the eastBorderLayout of the main BorderLayout
         serverNameTextField = new JTextField("localhost", 5);
@@ -145,6 +151,7 @@ public class Gui extends JPanel {
             JPanel bottomPanel = new JPanel();
             bottomPanel.setLayout(new FlowLayout());
             bottomPanel.add(newGameButton);
+            bottomPanel.add(goOnlineButton);
             bottomPanel.add(quitButton);
             bottomPanel.setBackground(BACKGROUND_COLOR);
         this.add(bottomPanel, BorderLayout.SOUTH);
@@ -155,8 +162,9 @@ public class Gui extends JPanel {
         this.add(gridPanel, BorderLayout.CENTER);
 
         // East BorderLayout of the main BorderLayout
-        JPanel eastBorderLayout = new JPanel();
+        eastBorderLayout = new JPanel();
         eastBorderLayout.setLayout(new BorderLayout());
+        eastBorderLayout.setVisible(false);
         // North
             JPanel topPanelBis = new JPanel();
             JLabel networkChatLabel = new JLabel("Network log", SwingConstants.CENTER);
@@ -376,6 +384,22 @@ public class Gui extends JPanel {
      */
     public Case[][] getTabCase() {
         return tabCase;
+    }
+
+    /**
+     * Getter for the Online Panel
+     * @return the Online panel
+     */
+    public JPanel getEastBorderLayout() {
+        return eastBorderLayout;
+    }
+
+    /**
+     * Getter for the go online button
+     * @return the GoOnline button
+     */
+    public JButton getGoOnlineButton() {
+        return goOnlineButton;
     }
 
     /**
