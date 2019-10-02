@@ -11,9 +11,8 @@ public class ServerGui extends JPanel {
     private JTextArea msgArea;
     private JTextField serverPort;
     private JTextField serverName;
-    private JRadioButtonMenuItem easyRadio;
-    private JRadioButtonMenuItem mediumRadio;
-    private JRadioButtonMenuItem hardRadio;
+    private Level[] levelTab = {Level.EASY, Level.MEDIUM, Level.HARD, Level.CUSTOM};
+    private JComboBox levelComboBox;
 
     private static final Color FOREGROUND_COLOR = new Color(44,62,80);
     private static final Color BACKGROUND_COLOR = new Color(189,195,199);
@@ -58,31 +57,19 @@ public class ServerGui extends JPanel {
 
         JPanel southPanel = new JPanel();
             southPanel.setLayout(new BorderLayout());
-        JPanel northPanelBis = new JPanel();
-            ButtonGroup group = new ButtonGroup();
-            northPanelBis.setLayout(new FlowLayout());
-            northPanelBis.setBackground(BACKGROUND_COLOR);
-            easyRadio = new JRadioButtonMenuItem("Easy");
-            easyRadio.setSelected(true);
-            easyRadio.setForeground(FOREGROUND_COLOR);
-            easyRadio.setFont(RADIO_BUTTON_FONT);
-            group.add(easyRadio);
-            mediumRadio = new JRadioButtonMenuItem("Medium");
-            mediumRadio.setForeground(FOREGROUND_COLOR);
-            mediumRadio.setFont(RADIO_BUTTON_FONT);
-            group.add(mediumRadio);
-            hardRadio = new JRadioButtonMenuItem("Hard");
-            hardRadio.setForeground(FOREGROUND_COLOR);
-            hardRadio.setFont(RADIO_BUTTON_FONT);
-            group.add(hardRadio);
-        northPanelBis.add(easyRadio); northPanelBis.add(mediumRadio); northPanelBis.add(hardRadio);
+        JPanel northPanelBis = new JPanel(); // unused for the moment
+
         JPanel centerPanelBis = new JPanel();
             centerPanelBis.setLayout(new FlowLayout());
             centerPanelBis.setBackground(BACKGROUND_COLOR);
-            serverPort = new JTextField("10000", 9);
-            serverName = new JTextField("localhost", 9);
+            serverPort = new JTextField("10000", 5);
+            serverName = new JTextField("localhost", 5);
+            levelComboBox = new JComboBox(levelTab);
+            levelComboBox.setSelectedIndex(0);
+            levelComboBox.addActionListener(new ServerController(this));
             centerPanelBis.add(serverName);
             centerPanelBis.add(serverPort);
+            centerPanelBis.add(levelComboBox);
         JPanel southPanelBis = new JPanel();
             southPanelBis.setLayout(new FlowLayout());
             southPanelBis.setBackground(BACKGROUND_COLOR);
@@ -119,30 +106,6 @@ public class ServerGui extends JPanel {
     }
 
     /**
-     * Getter for the EASY level radio button
-     * @return the easyRadioButton value
-     */
-    public JRadioButtonMenuItem getEasyRadio() {
-        return easyRadio;
-    }
-
-    /**
-     * Getter for the MEDIUM level radio button
-     * @return the mediumRadioButton value
-     */
-    public JRadioButtonMenuItem getMediumRadio() {
-        return mediumRadio;
-    }
-
-    /**
-     * Getter for the HARD level radio button
-     * @return the hardRadioButton value
-     */
-    public JRadioButtonMenuItem getHardRadio() {
-        return hardRadio;
-    }
-
-    /**
      * Getter for the start server button
      * @return the start server button
      */
@@ -164,5 +127,13 @@ public class ServerGui extends JPanel {
      */
     public JTextField getServerPort() {
         return serverPort;
+    }
+
+    /**
+     * Getter for the Combo Box
+     * @return <code>levelComboBox</code>
+     */
+    public JComboBox getLevelComboBox() {
+        return levelComboBox;
     }
 }

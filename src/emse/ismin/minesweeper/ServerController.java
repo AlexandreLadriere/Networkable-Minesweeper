@@ -1,5 +1,6 @@
 package emse.ismin.minesweeper;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -34,6 +35,14 @@ public class ServerController implements ActionListener {
             serverGui.getStartServerButton().setText("Start Server");
             serverGui.getStartButton().setEnabled(false);
             serverGui.getServer().closeServer();
+        }
+        else if(cmd.equals(serverGui.getLevelComboBox()) && serverGui.getLevelComboBox().getSelectedItem() == Level.CUSTOM) {
+            CustomJOptionPane customPanel = new CustomJOptionPane();
+            if(JOptionPane.showConfirmDialog(null, customPanel, "Custom parameters", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+                Level.CUSTOM.dimX = Integer.parseInt(customPanel.getDimXTextField().getText());
+                Level.CUSTOM.dimY = Integer.parseInt(customPanel.getDimYTextField().getText());
+                Level.CUSTOM.nbMines = Integer.parseInt(customPanel.getNbMinesTextField().getText());
+            }
         }
     }
 }

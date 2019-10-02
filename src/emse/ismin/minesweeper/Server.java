@@ -124,26 +124,33 @@ public class Server extends JFrame implements Runnable {
         broadcast(ServerMessageTypes.MSG.value());
         broadcast("New game started ! \n");
         broadcast(ServerMessageTypes.START_GAME.value());
-        if(serverGui.getEasyRadio().isSelected()) {
+        if(serverGui.getLevelComboBox().getSelectedItem() == Level.EASY) {
             this.serverField = new Field(Level.EASY);
             tabNames = new String[Level.EASY.dimX][Level.EASY.dimY];
             broadcast(Level.EASY.toString());
             broadcast(Level.EASY.dimX);
             broadcast(Level.EASY.dimY);
         }
-        else if(serverGui.getMediumRadio().isSelected()) {
+        else if(serverGui.getLevelComboBox().getSelectedItem() == Level.MEDIUM) {
             this.serverField = new Field(Level.MEDIUM);
             tabNames = new String[Level.MEDIUM.dimX][Level.MEDIUM.dimY];
             broadcast(Level.MEDIUM.toString());
             broadcast(Level.MEDIUM.dimX);
             broadcast(Level.MEDIUM.dimY);
         }
-        else if(serverGui.getHardRadio().isSelected()) {
+        else if(serverGui.getLevelComboBox().getSelectedItem() == Level.HARD) {
             this.serverField = new Field(Level.HARD);
             tabNames = new String[Level.HARD.dimX][Level.HARD.dimY];
             broadcast(Level.HARD.toString());
             broadcast(Level.HARD.dimX);
             broadcast(Level.HARD.dimY);
+        }
+        else if(serverGui.getLevelComboBox().getSelectedItem() == Level.CUSTOM) {
+            this.serverField = new Field(Level.CUSTOM);
+            tabNames = new String[Level.CUSTOM.dimX][Level.CUSTOM.dimY];
+            broadcast(Level.CUSTOM.toString());
+            broadcast(Level.CUSTOM.dimX);
+            broadcast(Level.CUSTOM.dimY);
         }
         iniTab2D(tabNames, "none");
         nbRevealed = 0;
