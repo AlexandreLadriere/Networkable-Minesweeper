@@ -69,6 +69,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     public void startServer(int serverPort) {
+
         serverDown = false;
         serverGui.addMsg("Server started\n");
         serverGui.addMsg("Waiting for clients...\n");

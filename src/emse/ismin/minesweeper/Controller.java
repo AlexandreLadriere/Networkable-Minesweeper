@@ -104,6 +104,20 @@ public class Controller implements ActionListener {
                 gui.newGame(Level.HARD);
             }
         }
+        else if(cmd.equals(gui.getCustomRadio())) {
+            if(gui.getMinesweeper().getIsOnline()) {
+                JOptionPane.showMessageDialog(null, "Impossible ! You are still connected to a server.\nPlease log out from this server if you want to use this functionality.", "Not authorized", JOptionPane.WARNING_MESSAGE);
+            }
+            else {
+                CustomJOptionPane customPanel = new CustomJOptionPane();
+                if(JOptionPane.showConfirmDialog(null, customPanel, "Custom parameters", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+                    Level.CUSTOM.dimX = Integer.parseInt(customPanel.getDimXTextField().getText());
+                    Level.CUSTOM.dimY = Integer.parseInt(customPanel.getDimYTextField().getText());
+                    Level.CUSTOM.nbMines = Integer.parseInt(customPanel.getNbMinesTextField().getText());
+                    gui.newGame(Level.CUSTOM);
+                }
+            }
+        }
         else if(cmd.equals(gui.getmInfo())) {
             JEditorPane ep = new JEditorPane("text/html", "<html><body> <b>Author:</b> <a href=\"https://www.linkedin.com/in/alexandre-ladriere/\">Alexandre Ladrière</a> <br><br> <b>Repository:</b> <a href=\"https://github.com/AlexandreLadriere/Networkable-Minesweeper\">AlexandreLadriere/Networkable-Minesweeper</a> <br><br> <b>Date:</b> September 2019 <br><br> <b>Language:</b> JAVA <br><br> <b>License:</b> MIT</body></html>");
             ep.addHyperlinkListener(e1 -> {

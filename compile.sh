@@ -15,6 +15,7 @@ javac -d $DEST_PATH emse/ismin/minesweeper/Case.java
 javac -d $DEST_PATH emse/ismin/minesweeper/Server.java
 javac -d $DEST_PATH emse/ismin/minesweeper/ServerGui.java
 javac -d $DEST_PATH emse/ismin/minesweeper/EchoThread.java
+javac -d $DEST_PATH emse/ismin/minesweeper/CustomJOptionPane.java
 
 cp -avr img $DEST_PATH
 

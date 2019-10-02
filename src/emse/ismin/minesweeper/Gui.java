@@ -31,6 +31,7 @@ public class Gui extends JPanel {
     private JRadioButtonMenuItem easyRadio;
     private JRadioButtonMenuItem mediumRadio;
     private JRadioButtonMenuItem hardRadio;
+    private JRadioButtonMenuItem customRadio;
     private Case[][] tabCase;
     private Counter counter;
     private FlagCounter flagCounter;
@@ -72,12 +73,14 @@ public class Gui extends JPanel {
                 easyRadio = new JRadioButtonMenuItem("Easy");
                 mediumRadio = new JRadioButtonMenuItem("Medium");
                 hardRadio = new JRadioButtonMenuItem("Hard");
-                bg.add(easyRadio); bg.add(mediumRadio); bg.add(hardRadio);
-                difficultyMenu.add(easyRadio); difficultyMenu.add(mediumRadio); difficultyMenu.add(hardRadio);
+                customRadio = new JRadioButtonMenuItem("Custom");
+                bg.add(easyRadio); bg.add(mediumRadio); bg.add(hardRadio); bg.add(customRadio);
+                difficultyMenu.add(easyRadio); difficultyMenu.add(mediumRadio); difficultyMenu.add(hardRadio); difficultyMenu.add(customRadio);
                 checkDifficultyRadioButton();
                 easyRadio.addActionListener(new Controller(this));
                 mediumRadio.addActionListener(new Controller(this));
                 hardRadio.addActionListener(new Controller(this));
+                customRadio.addActionListener(new Controller(this));
                 //new Game menu item
                 mNew = new JMenuItem("New Game", KeyEvent.VK_N);
                 gameMenu.add(mNew);
@@ -206,6 +209,9 @@ public class Gui extends JPanel {
                 break;
             case HARD:
                 hardRadio.setSelected(true);
+                break;
+            case CUSTOM:
+                customRadio.setSelected(true);
                 break;
         }
     }
@@ -352,6 +358,14 @@ public class Gui extends JPanel {
      */
     public JRadioButtonMenuItem getMediumRadio() {
         return mediumRadio;
+    }
+
+    /**
+     * Getter for the Custom radio button
+     * @return <code>customRadio</code> radio button
+     */
+    public JRadioButtonMenuItem getCustomRadio() {
+        return customRadio;
     }
 
     /**
