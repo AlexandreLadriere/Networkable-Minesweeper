@@ -3,9 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5abd3417-2b4b-408a-9018-83429485001a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerMessageTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerMessageTypes.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,6 +35,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
@@ -110,7 +113,7 @@
       <workItem from="1569757021664" duration="11554000" />
       <workItem from="1569825137247" duration="803000" />
       <workItem from="1569845440967" duration="842000" />
-      <workItem from="1570015422157" duration="10849000" />
+      <workItem from="1570015422157" duration="15321000" />
     </task>
     <servers />
   </component>

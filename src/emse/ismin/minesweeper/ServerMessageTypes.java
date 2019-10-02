@@ -11,6 +11,7 @@ public enum ServerMessageTypes {
     CHANGE_NAME(7),
     ALREADY_STARTED(8),
     CLIENT_DISCONNECTION(9),
+    CHAT_MSG(10),
     INT(20),
     BOOL(21);
 

@@ -20,6 +20,7 @@ public class Gui extends JPanel {
     private JTextField serverNameTextField;
     private JTextField serverPortTextField;
     private JTextField clientNameTextField;
+    private JTextField chatMsg;
     private JTextArea msgArea;
     private JMenuItem mQuit;
     private JMenuItem mInfo;
@@ -177,11 +178,23 @@ public class Gui extends JPanel {
             topPanelBis.setBackground(BACKGROUND_COLOR_2);
             eastBorderLayout.add(topPanelBis, BorderLayout.NORTH);
         // Center
-            msgArea = new JTextArea(4, 30);
-            msgArea.setEditable(false);
-            msgArea.setFont(new Font("Nunito", Font.PLAIN, 14));
-            JScrollPane sp = new JScrollPane(msgArea);
-            eastBorderLayout.add(sp, BorderLayout.CENTER);
+            // sub-center panel
+            JPanel centerPanel = new JPanel();
+            centerPanel.setLayout(new BorderLayout());
+                // sub-north
+                msgArea = new JTextArea(18, 30);
+                msgArea.setEditable(false);
+                msgArea.setFont(new Font("Nunito", Font.PLAIN, 14));
+                JScrollPane sp = new JScrollPane(msgArea);
+                centerPanel.add(sp, BorderLayout.NORTH);
+                // sub-center
+                chatMsg = new JTextField();
+                chatMsg.setFont(new Font("Nunito", Font.PLAIN, 14));
+                chatMsg.addActionListener(new Controller(this));
+                JScrollPane sp2 = new JScrollPane(chatMsg);
+                centerPanel.add(sp2, BorderLayout.CENTER);
+                // sub-south
+            eastBorderLayout.add(centerPanel, BorderLayout.CENTER);
         // South
             JPanel southPanelBis = new JPanel();
             southPanelBis.setLayout(new FlowLayout());
@@ -366,6 +379,14 @@ public class Gui extends JPanel {
      */
     public JRadioButtonMenuItem getCustomRadio() {
         return customRadio;
+    }
+
+    /**
+     * Getter for the chat message area
+     * @return <code>chatMsg</code>
+     */
+    public JTextField getChatMsg() {
+        return chatMsg;
     }
 
     /**

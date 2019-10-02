@@ -181,6 +181,15 @@ public class Minesweeper extends JFrame implements Runnable {
         }
     }
 
+    public void sendChatMsg(String chatMsg) {
+        try {
+            outStream.writeInt(ServerMessageTypes.CHAT_MSG.value());
+            outStream.writeUTF(chatMsg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Disconnects the client from the server without sending any message to the server. Please don't use this function if you can
      * @see #disconnectFromServerWithoutMessage()

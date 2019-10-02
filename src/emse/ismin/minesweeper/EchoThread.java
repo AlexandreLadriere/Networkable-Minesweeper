@@ -59,6 +59,11 @@ public class EchoThread implements Runnable {
                         outStream.writeUTF("Case already clicked by " + server.getTabNames()[x][y] + "\n");
                     }
                 }
+                else if(cmd == ServerMessageTypes.CHAT_MSG.value()) {
+                    String chatMsg = inStream.readUTF();
+                    server.broadcast(ServerMessageTypes.MSG.value());
+                    server.broadcast("[CHAT] " + clientName + ": " + chatMsg + "\n");
+                }
                 else if(cmd == ServerMessageTypes.CLIENT_DISCONNECTION.value()) {
                     server.getServerGui().addMsg(clientName + " is disconnected !\n");
                     disconnectClient();

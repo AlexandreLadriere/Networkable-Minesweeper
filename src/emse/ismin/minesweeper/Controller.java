@@ -72,6 +72,11 @@ public class Controller implements ActionListener {
             gui.getMinesweeper().setOnline(false);
             gui.newGame(Level.EASY);
         }
+        else if(cmd.equals(gui.getChatMsg())) {
+            String msg = gui.getChatMsg().getText();
+            gui.getChatMsg().setText("");
+            gui.getMinesweeper().sendChatMsg(msg);
+        }
         else if(cmd.equals(gui.getnewGameButton()) || cmd.equals(gui.getmNew())) {
             if(gui.getMinesweeper().getIsOnline()) {
                 JOptionPane.showMessageDialog(null, "Impossible ! You are still connected to a server.\nPlease log out from this server if you want to use this functionality.", "Not authorized", JOptionPane.WARNING_MESSAGE);
