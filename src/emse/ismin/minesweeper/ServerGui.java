@@ -9,6 +9,8 @@ public class ServerGui extends JPanel {
     private JButton startButton;
     private JButton startServerButton;
     private JTextArea msgArea;
+    private JTextField serverPort;
+    private JTextField serverName;
     private JRadioButtonMenuItem easyRadio;
     private JRadioButtonMenuItem mediumRadio;
     private JRadioButtonMenuItem hardRadio;
@@ -74,12 +76,20 @@ public class ServerGui extends JPanel {
             hardRadio.setFont(RADIO_BUTTON_FONT);
             group.add(hardRadio);
         northPanelBis.add(easyRadio); northPanelBis.add(mediumRadio); northPanelBis.add(hardRadio);
+        JPanel centerPanelBis = new JPanel();
+            centerPanelBis.setLayout(new FlowLayout());
+            centerPanelBis.setBackground(BACKGROUND_COLOR);
+            serverPort = new JTextField("10000", 9);
+            serverName = new JTextField("localhost", 9);
+            centerPanelBis.add(serverName);
+            centerPanelBis.add(serverPort);
         JPanel southPanelBis = new JPanel();
             southPanelBis.setLayout(new FlowLayout());
             southPanelBis.setBackground(BACKGROUND_COLOR);
             southPanelBis.add(startServerButton);
             southPanelBis.add(startButton);
         southPanel.add(northPanelBis, BorderLayout.NORTH);
+        southPanel.add(centerPanelBis, BorderLayout.CENTER);
         southPanel.add(southPanelBis, BorderLayout.SOUTH);
         this.add(southPanel, BorderLayout.SOUTH);
     }
@@ -138,5 +148,21 @@ public class ServerGui extends JPanel {
      */
     public JButton getStartServerButton() {
         return startServerButton;
+    }
+
+    /**
+     * Getter for the server name
+     * @return return the value in the server name text field
+     */
+    public JTextField getServerName() {
+        return serverName;
+    }
+
+    /**
+     * Getter for the server port
+     * @return return the value in the server port text field
+     */
+    public JTextField getServerPort() {
+        return serverPort;
     }
 }

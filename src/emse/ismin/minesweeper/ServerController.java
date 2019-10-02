@@ -27,7 +27,8 @@ public class ServerController implements ActionListener {
         else if(cmd.equals(serverGui.getStartServerButton()) && serverGui.getStartServerButton().getText().equals("Start Server")) {
             serverGui.getStartServerButton().setText("Stop Server");
             serverGui.getStartButton().setEnabled(true);
-            serverGui.getServer().startServer();
+            int port = Integer.parseInt(serverGui.getServerPort().getText());
+            serverGui.getServer().startServer(port);
         }
         else if(cmd.equals(serverGui.getStartServerButton()) && serverGui.getStartServerButton().getText().equals("Stop Server")) {
             serverGui.getStartServerButton().setText("Start Server");
