@@ -22,6 +22,7 @@ public class Gui extends JPanel {
     private JTextField clientNameTextField;
     private JTextField chatMsg;
     private JTextArea msgArea;
+    private JLabel scoreDirectLabel;
     private JMenuItem mQuit;
     private JMenuItem mInfo;
     private JMenuItem mLicense;
@@ -192,9 +193,21 @@ public class Gui extends JPanel {
                 chatMsg.setFont(new Font("Nunito", Font.PLAIN, 14));
                 chatMsg.addActionListener(new Controller(this));
                 JScrollPane sp2 = new JScrollPane(chatMsg);
-                centerPanel.add(sp2, BorderLayout.CENTER);
+            centerPanel.add(sp2, BorderLayout.CENTER);
                 // sub-south
-            eastBorderLayout.add(centerPanel, BorderLayout.CENTER);
+                JPanel subSouthPanel  = new JPanel();
+                subSouthPanel.setLayout(new BorderLayout());
+                subSouthPanel.setBackground(BACKGROUND_COLOR_2);
+                JLabel scoreDirect = new JLabel("  Scores: ");
+                scoreDirect.setFont(BUTTON_FONT);
+                scoreDirect.setBackground(BACKGROUND_COLOR_2);
+                scoreDirectLabel = new JLabel("", SwingConstants.CENTER);
+                scoreDirectLabel.setBackground(BACKGROUND_COLOR_2);
+                scoreDirectLabel.setFont(new Font("Nunito", Font.PLAIN, 14));
+                subSouthPanel.add(scoreDirect, BorderLayout.WEST);
+                subSouthPanel.add(scoreDirectLabel, BorderLayout.CENTER);
+            centerPanel.add(subSouthPanel, BorderLayout.SOUTH);
+        eastBorderLayout.add(centerPanel, BorderLayout.CENTER);
         // South
             JPanel southPanelBis = new JPanel();
             southPanelBis.setLayout(new FlowLayout());
@@ -259,6 +272,14 @@ public class Gui extends JPanel {
      */
     public JButton getQuitButton() {
         return quitButton;
+    }
+
+    /**
+     * Getter for the direct score label
+     * @return <code>scoreDirectLabel</code>
+     */
+    public JLabel getScoreDirectLabel() {
+        return scoreDirectLabel;
     }
 
     /**

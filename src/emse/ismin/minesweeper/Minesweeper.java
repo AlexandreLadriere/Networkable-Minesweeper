@@ -143,6 +143,11 @@ public class Minesweeper extends JFrame implements Runnable {
                 else if(cmd == ServerMessageTypes.MINE_CLICKED.value()) {
                     isLost = true;
                     JOptionPane.showMessageDialog(null, "You suck !\n\nNow you can watch your friends playing...", "Looser", JOptionPane.WARNING_MESSAGE);
+                    gui.addMsg("You are eliminated !");
+                }
+                else if(cmd == ServerMessageTypes.DIRECT_SCORE.value()) {
+                    String directScores = inStream.readUTF();
+                    gui.getScoreDirectLabel().setText(directScores);
                 }
                 else if(cmd == ServerMessageTypes.CHANGE_NAME.value()) {
                     JOptionPane.showMessageDialog(null, "Player name already used by someone else, please change yours.", "Player name already used", JOptionPane.WARNING_MESSAGE);

@@ -6,8 +6,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class Server extends JFrame implements Runnable {
 
@@ -23,6 +22,8 @@ public class Server extends JFrame implements Runnable {
     private int nbMineClicked;
     private boolean gameStarted;
     private boolean serverDown;
+    private List<String> directScoreMax;
+    private List<Integer> directScorePlayer;
 
     /**
      * Server Constructor
@@ -180,7 +181,7 @@ public class Server extends JFrame implements Runnable {
      */
     public void broadcast(int msg) {
         for (EchoThread echoThread : clientThreadList) {
-            try {
+            try {https://www.javatpoint.com/java-collections-max-method
                 echoThread.getOutStream().writeInt(msg);
             } catch (IOException e) {
                 serverGui.addMsg("ERROR: Impossible to broadcast string message \n");
@@ -228,6 +229,43 @@ public class Server extends JFrame implements Runnable {
         for (EchoThread echoThread : clientThreadList) {
             clientNameScoreMap.put(echoThread.getClientName(), 0);
         }
+    }
+
+    /**
+     * Broadcast the top 3 players to client in order for them to have direct scores
+     */
+    public void getDirectScores() {
+        broadcast(ServerMessageTypes.DIRECT_SCORE.value());
+        clientNameScoreMap.replaceAll((k, v) -> getScore(k));
+        String player1 = ""; String player2 = ""; String player3 = "";
+        HashMap<String, Integer> tmpHeshMap = (HashMap<String, Integer>) clientNameScoreMap.clone();
+        String tmpMaxKeyStr = findMaxInHashMap(tmpHeshMap);
+        player1 = "1: " + tmpMaxKeyStr + " (" + tmpHeshMap.get(tmpMaxKeyStr) + ")";
+        tmpHeshMap.remove(tmpMaxKeyStr);
+        if(clientNameScoreMap.size() > 1) {
+            tmpMaxKeyStr = findMaxInHashMap(tmpHeshMap);
+            player2 = "     2: " + tmpMaxKeyStr + " (" + tmpHeshMap.get(tmpMaxKeyStr) + ")";
+            tmpHeshMap.remove(tmpMaxKeyStr);
+            if(clientNameScoreMap.size() > 2) {
+                tmpMaxKeyStr = findMaxInHashMap(tmpHeshMap);
+                player3 = "     3: " + tmpMaxKeyStr + " (" + tmpHeshMap.get(tmpMaxKeyStr) + ")";
+                tmpHeshMap.remove(tmpMaxKeyStr);
+            }
+        }
+        String directScore = player1 + player2 + player3;
+        broadcast(directScore);
+    }
+
+    private String findMaxInHashMap(HashMap<String, Integer> hashMap) {
+        int maxValue = 0;
+        String maxKey = "";
+        for(String key : hashMap.keySet()) {
+            if(hashMap.get(key) >= maxValue) {
+                maxValue = hashMap.get(key);
+                maxKey = key;
+            }
+        }
+        return maxKey;
     }
 
     /**

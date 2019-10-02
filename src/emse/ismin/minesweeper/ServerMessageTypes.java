@@ -12,6 +12,7 @@ public enum ServerMessageTypes {
     ALREADY_STARTED(8),
     CLIENT_DISCONNECTION(9),
     CHAT_MSG(10),
+    DIRECT_SCORE(11),
     INT(20),
     BOOL(21);
 

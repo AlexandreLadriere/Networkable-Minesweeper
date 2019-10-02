@@ -53,6 +53,7 @@ public class EchoThread implements Runnable {
                             server.checkAllClientLost();
                         }
                         server.isWin();
+                        server.getDirectScores();
                     }
                     else {
                         outStream.writeInt(ServerMessageTypes.MSG.value());
