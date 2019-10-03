@@ -1,12 +1,14 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import java.util.List;
 
 public class Server extends JFrame implements Runnable {
 
@@ -150,6 +152,7 @@ public class Server extends JFrame implements Runnable {
             broadcast(Level.CUSTOM.dimX);
             broadcast(Level.CUSTOM.dimY);
         }
+        sendColorToPlayers();
         iniTab2D(tabNames, "none");
         nbRevealed = 0;
         storeAllNames();
@@ -317,6 +320,38 @@ public class Server extends JFrame implements Runnable {
             serverGui.addMsg("End of the game\n");
             stopGame();
         }
+    }
+
+    /**
+     * Sends the player's color to each player in the game
+     */
+    private void sendColorToPlayers() {
+        List<Integer> colorList = getColorList(clientThreadList.size());
+        int i = 0;
+        for(EchoThread client : clientThreadList) {
+            try {
+                client.setPlayerColor(colorList.get(i));
+                client.getOutStream().writeInt(colorList.get(i));
+                i++;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Gets a list of x colors, where x is the number of players
+     * @param nbPlayers number of players in the game
+     * @return a list of color in integer format
+     */
+    private List<Integer> getColorList(int nbPlayers) {
+        List<Integer> colorList = new ArrayList<>();
+        int offset = 255 / nbPlayers;
+        colorList.add(new Color(offset, offset, offset).getRGB());
+        for(int i = 1; i<nbPlayers; i++) {
+            colorList.add(colorList.get(i-1) + offset);
+        }
+        return colorList;
     }
 
     /**

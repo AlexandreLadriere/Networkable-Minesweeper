@@ -13,6 +13,7 @@ public class Gui extends JPanel {
     private Minesweeper minesweeper;
     private JPanel gridPanel;
     private JPanel eastBorderLayout;
+    private JPanel topPanelBis;
     private JButton connexionButton;
     private JButton quitButton;
     private JButton newGameButton;
@@ -23,6 +24,7 @@ public class Gui extends JPanel {
     private JTextField chatMsg;
     private JTextArea msgArea;
     private JLabel scoreDirectLabel;
+    private JLabel networkLogLabel;
     private JMenuItem mQuit;
     private JMenuItem mInfo;
     private JMenuItem mLicense;
@@ -171,11 +173,11 @@ public class Gui extends JPanel {
         eastBorderLayout.setLayout(new BorderLayout());
         eastBorderLayout.setVisible(false);
         // North
-            JPanel topPanelBis = new JPanel();
-            JLabel networkChatLabel = new JLabel("Network log", SwingConstants.CENTER);
-            networkChatLabel.setForeground(FOREGROUND_COLOR);
-            networkChatLabel.setFont(BUTTON_FONT);
-            topPanelBis.add(networkChatLabel);
+            topPanelBis = new JPanel();
+            networkLogLabel = new JLabel("Network log", SwingConstants.CENTER);
+            networkLogLabel.setForeground(FOREGROUND_COLOR);
+            networkLogLabel.setFont(BUTTON_FONT);
+            topPanelBis.add(networkLogLabel);
             topPanelBis.setBackground(BACKGROUND_COLOR_2);
             eastBorderLayout.add(topPanelBis, BorderLayout.NORTH);
         // Center
@@ -347,6 +349,14 @@ public class Gui extends JPanel {
     }
 
     /**
+     * Getter for the top panel this (the one with the "Network log" label
+     * @return <code>topPanelBis</code>
+     */
+    public JPanel getTopPanelBis() {
+        return topPanelBis;
+    }
+
+    /**
      * Getter for the <code>Scores</code> button
      * @return Scores button
      */
@@ -416,6 +426,14 @@ public class Gui extends JPanel {
      */
     public JPanel getGridPanel() {
         return gridPanel;
+    }
+
+    /**
+     * Getter for the "networ log" label
+     * @return <code>networkLogLabel</code>
+     */
+    public JLabel getNetworkLogLabel() {
+        return networkLogLabel;
     }
 
     /**

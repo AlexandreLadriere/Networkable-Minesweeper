@@ -12,6 +12,7 @@ public class EchoThread implements Runnable {
     private Server server;
     private String clientName;
     private Thread process;
+    private int playerColor;
 
     /**
      * Constructor for EchoThread
@@ -47,6 +48,7 @@ public class EchoThread implements Runnable {
                         server.broadcast(y);
                         int nearbyCount = server.getServerField().countNearbyMines(x, y);
                         server.broadcast(nearbyCount);
+                        server.broadcast(playerColor);
                         if(nearbyCount == -1) {
                             server.setNbMineClicked(server.getNbMineClicked()+1);
                             outStream.writeInt(ServerMessageTypes.MINE_CLICKED.value());
@@ -156,5 +158,13 @@ public class EchoThread implements Runnable {
      */
     public String getClientName() {
         return clientName;
+    }
+
+    /**
+     * Setter for the player's color
+     * @param playerColor color of the player (integer format)
+     */
+    public void setPlayerColor(int playerColor) {
+        this.playerColor = playerColor;
     }
 }

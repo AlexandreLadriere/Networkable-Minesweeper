@@ -1,6 +1,7 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.DataInputStream;
@@ -32,6 +33,7 @@ public class Minesweeper extends JFrame implements Runnable {
     private int serverPort;
     private Thread process;
     private boolean isOnline = false;
+    private Color playerColor;
 
     /**
      * Creates the app
@@ -124,10 +126,13 @@ public class Minesweeper extends JFrame implements Runnable {
                     String level = inStream.readUTF();
                     int dimX = inStream.readInt();
                     int dimY = inStream.readInt();
+                    int color = inStream.readInt();
+                    playerColor = new Color(color);
                     gui.addMsg(level + " (" + dimX + ", " + dimY + ") level started\n");
                     gui.getGridPanel().removeAll();
                     gui.fillGridPanelOnline(gui.getGridPanel(), dimX, dimY);
                     gui.getDifficultyLabel().setText("         Level: "+level.toString());
+                    gui.getTopPanelBis().setBackground(playerColor);
                     this.pack();
                     isStarted = true;
                     isLost = false;
@@ -138,7 +143,8 @@ public class Minesweeper extends JFrame implements Runnable {
                     int x = inStream.readInt();
                     int y = inStream.readInt();
                     int nbMines = inStream.readInt();
-                    gui.getTabCase()[x][y].paintCaseOnline(nbMines);
+                    int colorClicked = inStream.readInt();
+                    gui.getTabCase()[x][y].paintCaseOnline(nbMines, colorClicked);
                 }
                 else if(cmd == ServerMessageTypes.MINE_CLICKED.value()) {
                     isLost = true;
@@ -485,6 +491,14 @@ public class Minesweeper extends JFrame implements Runnable {
      */
     public Gui getGui() {
         return gui;
+    }
+
+    /**
+     * Getter for the player color
+     * @return
+     */
+    public Color getPlayerColor() {
+        return playerColor;
     }
 
     /**

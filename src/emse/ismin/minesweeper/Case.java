@@ -16,6 +16,7 @@ public class Case extends JPanel implements MouseListener {
     private int x;
     private int y;
     private int nearbyMinesCount;
+    private int currentPlayerColor;
     private Minesweeper minesweeper;
     private boolean isClicked = false;
     private boolean rClick = false;
@@ -123,7 +124,7 @@ public class Case extends JPanel implements MouseListener {
                     gc.setColor(new Color(255, 0, 0));
                 }
                 else if(!filePath.equals("/img/tile.png")){
-                    gc.setColor(new Color(56,195,199));
+                    gc.setColor(new Color(currentPlayerColor));
                 }
                 gc.fillRect(0, 0, this.getWidth(), this.getHeight());
                 gc.drawImage(mineImage, 5, 5, this.getWidth() - 10, this.getHeight() - 10, this);
@@ -133,7 +134,8 @@ public class Case extends JPanel implements MouseListener {
         }
     }
 
-    public void paintCaseOnline(int nearbyCount) {
+    public void paintCaseOnline(int nearbyCount, int playerColor) {
+        currentPlayerColor = playerColor;
         drawImageNumber(this.getGraphics(), nearbyCount);
     }
 
