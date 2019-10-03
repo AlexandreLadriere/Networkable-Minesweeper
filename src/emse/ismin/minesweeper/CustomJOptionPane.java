@@ -25,7 +25,7 @@ public class CustomJOptionPane extends JPanel {
             // dimX Label
             JLabel dimXLabel = new JLabel("Number of rows");
             // dimX text field
-            dimXTextField = new JTextField(5);
+            dimXTextField = new JTextField("0", 5);
         dimXPanel.add(dimXLabel);
         dimXPanel.add(dimXTextField);
 
@@ -34,7 +34,7 @@ public class CustomJOptionPane extends JPanel {
             // dimY Label
             JLabel dimYLabel = new JLabel("Number of columns");
             // dimY text field
-            dimYTextField = new JTextField(5);
+            dimYTextField = new JTextField("0", 5);
         dimYPanel.add(dimYLabel);
         dimYPanel.add(dimYTextField);
 
@@ -43,7 +43,7 @@ public class CustomJOptionPane extends JPanel {
             // nbMines Label
             JLabel nbMinesLabel = new JLabel("Number of mines");
             // nbMines text field
-            nbMinesTextField = new JTextField(5);
+            nbMinesTextField = new JTextField("0", 5);
         nbMinesPanel.add(nbMinesLabel);
         nbMinesPanel.add(nbMinesTextField);
 

@@ -75,7 +75,9 @@ public class Controller implements ActionListener {
         else if(cmd.equals(gui.getChatMsg())) {
             String msg = gui.getChatMsg().getText();
             gui.getChatMsg().setText("");
-            gui.getMinesweeper().sendChatMsg(msg);
+            if(gui.getMinesweeper().getIsOnline()) {
+                gui.getMinesweeper().sendChatMsg(msg);
+            }
         }
         else if(cmd.equals(gui.getnewGameButton()) || cmd.equals(gui.getmNew())) {
             if(gui.getMinesweeper().getIsOnline()) {
@@ -115,10 +117,25 @@ public class Controller implements ActionListener {
             }
             else {
                 CustomJOptionPane customPanel = new CustomJOptionPane();
-                if(JOptionPane.showConfirmDialog(null, customPanel, "Custom parameters", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
-                    Level.CUSTOM.dimX = Integer.parseInt(customPanel.getDimXTextField().getText());
-                    Level.CUSTOM.dimY = Integer.parseInt(customPanel.getDimYTextField().getText());
-                    Level.CUSTOM.nbMines = Integer.parseInt(customPanel.getNbMinesTextField().getText());
+                int dimX = 0;
+                int dimY = 0;
+                int nbMines = 1;
+                boolean cancel = false;
+                while (dimX < 3 || dimY < 3 || dimX * dimY == 0 || nbMines >= dimX * dimY) {
+                    if (JOptionPane.showConfirmDialog(null, customPanel, "Custom parameters", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
+                        dimX = Integer.parseInt(customPanel.getDimXTextField().getText());
+                        dimY = Integer.parseInt(customPanel.getDimYTextField().getText());
+                        nbMines = Integer.parseInt(customPanel.getNbMinesTextField().getText());
+                    }
+                    else {
+                        cancel = true;
+                        break;
+                    }
+                }
+                if(!cancel) {
+                    Level.CUSTOM.dimX = dimX;
+                    Level.CUSTOM.dimY = dimY;
+                    Level.CUSTOM.nbMines = nbMines;
                     gui.newGame(Level.CUSTOM);
                 }
             }
