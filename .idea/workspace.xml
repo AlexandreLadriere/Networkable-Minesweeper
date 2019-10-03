@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="5abd3417-2b4b-408a-9018-83429485001a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Case.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Case.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/EchoThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Gui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Minesweeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/emse/ismin/minesweeper/ServerGui.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Minesweeper">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="Minesweeper" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="emse.ismin.minesweeper.Minesweeper" />
       <module name="Minesweeper" />
@@ -88,8 +87,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Minesweeper" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.Minesweeper" />
       </list>
     </recent_temporary>
   </component>
@@ -114,7 +113,7 @@
       <workItem from="1569825137247" duration="803000" />
       <workItem from="1569845440967" duration="842000" />
       <workItem from="1570015422157" duration="24529000" />
-      <workItem from="1570111713888" duration="1294000" />
+      <workItem from="1570111713888" duration="2673000" />
     </task>
     <servers />
   </component>

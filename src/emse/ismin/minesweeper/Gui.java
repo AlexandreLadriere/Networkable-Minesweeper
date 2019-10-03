@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import javax.swing.KeyStroke;
+import javax.swing.text.DefaultCaret;
 
 /**
  * This class implements the GUI of the application
@@ -188,6 +189,8 @@ public class Gui extends JPanel {
                 msgArea = new JTextArea(18, 30);
                 msgArea.setEditable(false);
                 msgArea.setFont(new Font("Nunito", Font.PLAIN, 14));
+                DefaultCaret caret = (DefaultCaret)msgArea.getCaret();
+                caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
                 JScrollPane sp = new JScrollPane(msgArea);
                 centerPanel.add(sp, BorderLayout.NORTH);
                 // sub-center

@@ -1,6 +1,7 @@
 package emse.ismin.minesweeper;
 
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 import java.awt.*;
 
 public class ServerGui extends JPanel {
@@ -40,6 +41,8 @@ public class ServerGui extends JPanel {
         msgArea = new JTextArea(18, 25);
         msgArea.setEditable(false);
         msgArea.setFont(new Font("Nunito", Font.PLAIN, 14));
+        DefaultCaret caret = (DefaultCaret)msgArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         JScrollPane sp = new JScrollPane(msgArea);
         this.add(sp, BorderLayout.CENTER);
 

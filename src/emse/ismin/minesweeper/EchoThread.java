@@ -53,6 +53,7 @@ public class EchoThread implements Runnable {
                             server.setNbMineClicked(server.getNbMineClicked()+1);
                             outStream.writeInt(ServerMessageTypes.MINE_CLICKED.value());
                             server.checkAllClientLost();
+                            server.broadcast(clientName + " is eliminated !\n");
                         }
                         server.isWin();
                         server.getDirectScores();

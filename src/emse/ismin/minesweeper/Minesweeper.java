@@ -149,7 +149,7 @@ public class Minesweeper extends JFrame implements Runnable {
                 else if(cmd == ServerMessageTypes.MINE_CLICKED.value()) {
                     isLost = true;
                     JOptionPane.showMessageDialog(null, "You suck !\n\nNow you can watch your friends playing...", "Looser", JOptionPane.WARNING_MESSAGE);
-                    gui.addMsg("You are eliminated !");
+                    gui.addMsg("You are eliminated !\n");
                 }
                 else if(cmd == ServerMessageTypes.DIRECT_SCORE.value()) {
                     String directScores = inStream.readUTF();
