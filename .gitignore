@@ -1,3 +1,5 @@
 .idea/
-scores.dat
-stats.dat
+*.dat
+*.class
+*.iml
+out/
