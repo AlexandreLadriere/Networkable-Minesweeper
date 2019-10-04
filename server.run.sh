@@ -1,5 +1,5 @@
-MAIN_PATH='./out/production/Minesweeper/'
-MAIN_NAME='emse.ismin.minesweeper.Server'
+MAIN_PATH='./out/'
+MAIN_NAME='ismin/minesweeper/server/Server'
 
 cd $MAIN_PATH
 

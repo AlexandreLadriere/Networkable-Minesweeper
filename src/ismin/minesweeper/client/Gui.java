@@ -1,4 +1,8 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.client;
+
+import ismin.minesweeper.enums.Level;
+import ismin.minesweeper.utils.Case;
+import ismin.minesweeper.utils.Counter;
 
 import javax.swing.*;
 import java.awt.*;

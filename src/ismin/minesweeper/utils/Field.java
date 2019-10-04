@@ -1,4 +1,6 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.utils;
+
+import ismin.minesweeper.enums.Level;
 
 import java.util.Random;
 
@@ -95,7 +97,7 @@ public class Field {
     /**
      * Places the mines in the field
      */
-    void placeMines() {
+    public void placeMines() {
         this.iniTabMines();
         for(int nbMinesRestantes = nbMines; nbMinesRestantes > 0;) {
             int x = alea.nextInt(tabMines.length);

@@ -1,4 +1,4 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.enums;
 
 public enum FileNames {
     SCORE_FILENAME("scores.dat"),

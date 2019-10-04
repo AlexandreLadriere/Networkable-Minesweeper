@@ -1,4 +1,4 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.enums;
 
 /**
  * Defines the levels of difficulty

@@ -1,4 +1,6 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.utils;
+
+import ismin.minesweeper.client.Minesweeper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

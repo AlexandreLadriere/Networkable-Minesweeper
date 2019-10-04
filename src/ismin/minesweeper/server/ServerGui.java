@@ -1,4 +1,6 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.server;
+
+import ismin.minesweeper.enums.Level;
 
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;

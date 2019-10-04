@@ -1,4 +1,4 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.utils;
 
 import javax.swing.*;
 import java.awt.*;

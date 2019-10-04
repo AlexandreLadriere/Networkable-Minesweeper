@@ -1,4 +1,8 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.client;
+
+import ismin.minesweeper.enums.FileNames;
+import ismin.minesweeper.enums.Level;
+import ismin.minesweeper.utils.CustomJOptionPane;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;

@@ -1,4 +1,8 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.server;
+
+import ismin.minesweeper.enums.Level;
+import ismin.minesweeper.enums.ServerMessageTypes;
+import ismin.minesweeper.utils.Field;
 
 import javax.swing.*;
 import java.awt.*;

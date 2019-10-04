@@ -1,4 +1,4 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class CustomJOptionPane extends JPanel {
     private JTextField dimYTextField;
     private JTextField nbMinesTextField;
 
-    CustomJOptionPane() {
+    public CustomJOptionPane() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 

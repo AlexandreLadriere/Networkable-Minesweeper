@@ -37,22 +37,26 @@ If you are testing only on your computer, you don't need to change the name of t
 ```
 ├── Javadoc
 ├── src
-│    ├── emse.ismin.minesweeper 
-│    │    ├── Case.java
-│    │    ├── Controller.java
-│    │    ├── Counter.java
-│    │    ├── CustomJOptionPane.java
-│    │    ├── EchoThread.java
-│    │    ├── Field.java
-│    │    ├── FileNames.java
-│    │    ├── FlagCounter.java
-│    │    ├── Gui.java
-│    │    ├── Level.java
-│    │    ├── Minesweeper.java
-│    │    ├── Server.java
-│    │    ├── ServerController.java
-│    │    ├── ServerGui.java
-│    │    └── ServerMessageTypes.java
+│    ├── ismin.minesweeper
+│    │    ├── client
+│    │    │    ├── Controller.java
+│    │    │    ├── FlagCounter.java
+│    │    │    ├── Gui.java
+│    │    │    └── Minesweeper.java
+│    │    ├── enums
+│    │    │    ├── FileNames.java
+│    │    │    ├── Level.java
+│    │    │    └── ServerMessageTypes.java
+│    │    ├── server
+│    │    │    ├── EchoThread.java
+│    │    │    ├── Server.java
+│    │    │    ├── ServerController.java
+│    │    │    └── ServerGui.java
+│    │    ├── utils
+│    │    │    ├── Case.java
+│    │    │    ├── Counter.java
+│    │    │    ├── CustomJOptionPane.java
+│    │    │    └── Field.java
 │    ├── fonts
 │    │    └── Nunito.zip
 │    ├── img

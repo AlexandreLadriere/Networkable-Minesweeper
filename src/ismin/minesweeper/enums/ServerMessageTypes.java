@@ -1,4 +1,4 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.enums;
 
 public enum ServerMessageTypes {
     CONNEXION(0),

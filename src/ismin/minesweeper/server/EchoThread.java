@@ -1,4 +1,6 @@
-package emse.ismin.minesweeper;
+package ismin.minesweeper.server;
+
+import ismin.minesweeper.enums.ServerMessageTypes;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
