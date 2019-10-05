@@ -58,7 +58,7 @@ public class Field {
         this.dimX = dimX;
         this.dimY = dimY;
         this.nbMines = nbMines;
-        this.tabMines  = new boolean[dimY][dimX];
+        this.tabMines  = new boolean[dimX][dimY];
         placeMines();
     }
 
