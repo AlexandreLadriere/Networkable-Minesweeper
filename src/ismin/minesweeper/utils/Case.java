@@ -114,6 +114,10 @@ public class Case extends JPanel implements MouseListener {
         if(!minesweeper.getIsOnline()) {
             try {
                 BufferedImage mineImage = ImageIO.read(getClass().getResourceAsStream(filePath));
+                if (filePath.equals("/img/bomb.png")) {
+                    gc.setColor(new Color(255, 0, 0));
+                    gc.fillRect(0, 0, this.getWidth(), this.getHeight());
+                }
                 gc.drawImage(mineImage, 0, 0, this.getWidth(), this.getHeight(), this);
             } catch (IOException e) {
                 e.printStackTrace();
