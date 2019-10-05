@@ -95,6 +95,7 @@ If you are testing only on your computer, you don't need to change the name of t
 │    │    ├── restart_icon.png
 │    │    └── tile.png
 ├── .gitignore
+├── build_jar.sh
 ├── client.run.sh
 ├── compile.sh
 ├── fonts.install.sh

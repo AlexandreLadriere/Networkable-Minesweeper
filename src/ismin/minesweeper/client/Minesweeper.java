@@ -326,13 +326,16 @@ public class Minesweeper extends JFrame implements Runnable {
     public String getAllScoresToDisplay() {
         StringBuilder scores = new StringBuilder();
         Path path = Paths.get(FileNames.SCORE_FILENAME.toString());
+        scores.append("<html><body><table><tr><th>Level</th><th>dimX</th><th>dimY</th><th>nbMines</th><th>Best score</th></tr>");
         if(Files.exists(path)) {
             List<String> scoresInFile = getAllLines(FileNames.SCORE_FILENAME.toString());
             for (String s : scoresInFile) {
                 String[] tmpStrTab = s.split(" ");
-                scores.append(tmpStrTab[0]).append(" [").append(tmpStrTab[1]).append("x").append(tmpStrTab[2]).append(", ").append(tmpStrTab[3]).append("] = ").append(tmpStrTab[4]).append("\n\n");
+                scores.append("<tr>\n<th>").append(tmpStrTab[0]).append("</th>\n<td>").append(tmpStrTab[1]).append("</td>\n<td>").append(tmpStrTab[2]).append("</td>\n<td>").append(tmpStrTab[3]).append("</td>\n<td>").append(tmpStrTab[4]).append("</td>\n</tr>\n");
+                //scores.append(tmpStrTab[0]).append(" [").append(tmpStrTab[1]).append("x").append(tmpStrTab[2]).append(", ").append(tmpStrTab[3]).append("] = ").append(tmpStrTab[4]).append("\n\n");
             }
         }
+        scores.append("</table></body></html>");
         return scores.toString();
     }
 

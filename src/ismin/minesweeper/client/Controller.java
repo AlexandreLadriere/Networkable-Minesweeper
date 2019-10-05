@@ -161,7 +161,9 @@ public class Controller implements ActionListener {
             JOptionPane.showMessageDialog(null, ep, "Infos", JOptionPane.PLAIN_MESSAGE);
         }
         else if(cmd.equals(gui.getmScores())) {
-            JOptionPane.showMessageDialog(null, "<html> <h2>The following format is used: <i>LEVEL [dimX, dimY, nbMines] = highestScore </i></h2> </html>\n\n" + gui.getMinesweeper().getAllScoresToDisplay(), "Best scores by level", JOptionPane.PLAIN_MESSAGE);
+            JEditorPane ep = new JEditorPane("text/html", gui.getMinesweeper().getAllScoresToDisplay());
+            ep.setEditable(false);
+            JOptionPane.showMessageDialog(null, ep, "Best scores by level", JOptionPane.PLAIN_MESSAGE);
         }
         else if(cmd.equals(gui.getmStatistics())) {
             if(!gui.getMinesweeper().getAllLines(FileNames.STATS_FILENAME.toString()).isEmpty()) {
