@@ -21,12 +21,30 @@ First, you need to compile all the ```.java``` files. In order to do that, you c
 sh compile.sh
 ```
 
-Then, if you want to play solo, you just have to run the [client.run.sh] file:
+### Building JAR
+
+The easiest way to test this app, is by using ```.jar``` files. In order to do that, you just have to run the [build_jar.sh] file:
+```bash
+sh build_jar.sh
+```
+
+This will create two ```.jar``` files at the root of the project folder: one for the client (i.e.: the solo part), called ```Client.jar```, and another one for the server, called ```Server.jar```. Then you just have to double-click on them if you want to run them.
+
+### Running ```.class``` files
+You can also run the app by directly running the ```.class``` files.
+If you want to play solo, you just have to run the [client.run.sh] file:
 ```bash
 sh client.run.sh
 ```
 
-If you want to test the client/server part of this app on your computer, you need to run at least a second client, and then to run the [server.run.sh] file.
+You can also run the server thanks to the [server.run.sh] file:
+```bash
+sh server.run.sh
+```
+
+## Testing server/client communication
+
+If you want to test the client/server part of this app on your computer, you need to run at least a second client and the server.
 
 When the server is running, you need to start it by clicking on the __Start Server__ button.
 
@@ -99,4 +117,5 @@ This project is licensed under the MIT License - see the [LICENSE] for details
    [server.run.sh]: <server.run.sh>
    [client.run.sh]: <client.run.sh>
    [fonts.install.sh]: <fonts.install.sh>
+   [build_jar.sh]: <build_jar.sh>
    [here]: <https://fonts.google.com/specimen/Nunito>
