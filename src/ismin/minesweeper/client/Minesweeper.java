@@ -63,7 +63,7 @@ public class Minesweeper extends JFrame implements Runnable {
 
         this.field = new Field(Level.EASY);
         gui = new Gui(this);
-        setContentPane(gui);
+        setContentPane(gui);https://wifi.free.fr/Auth
         pack();
         setVisible(true);
         // Disconnect from server when window is closed

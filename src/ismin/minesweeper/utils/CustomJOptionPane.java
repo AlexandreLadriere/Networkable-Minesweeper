@@ -21,31 +21,31 @@ public class CustomJOptionPane extends JPanel {
         mainPanel.setLayout(new BorderLayout());
 
         dimXPanel = new JPanel();
-            dimXPanel.setLayout(new FlowLayout());
+            dimXPanel.setLayout(new BorderLayout());
             // dimX Label
-            JLabel dimXLabel = new JLabel("Number of rows");
+            JLabel dimXLabel = new JLabel("Number of rows: ");
             // dimX text field
             dimXTextField = new JTextField("0", 5);
-        dimXPanel.add(dimXLabel);
-        dimXPanel.add(dimXTextField);
+        dimXPanel.add(dimXLabel, BorderLayout.WEST);
+        dimXPanel.add(dimXTextField, BorderLayout.EAST);
 
         dimYPanel = new JPanel();
-            dimYPanel.setLayout(new FlowLayout());
+            dimYPanel.setLayout(new BorderLayout());
             // dimY Label
-            JLabel dimYLabel = new JLabel("Number of columns");
+            JLabel dimYLabel = new JLabel("Number of columns: ");
             // dimY text field
             dimYTextField = new JTextField("0", 5);
-        dimYPanel.add(dimYLabel);
-        dimYPanel.add(dimYTextField);
+        dimYPanel.add(dimYLabel, BorderLayout.WEST);
+        dimYPanel.add(dimYTextField, BorderLayout.EAST);
 
         nbMinesPanel = new JPanel();
-            nbMinesPanel.setLayout(new FlowLayout());
+            nbMinesPanel.setLayout(new BorderLayout());
             // nbMines Label
-            JLabel nbMinesLabel = new JLabel("Number of mines");
+            JLabel nbMinesLabel = new JLabel("Number of mines: ");
             // nbMines text field
             nbMinesTextField = new JTextField("0", 5);
-        nbMinesPanel.add(nbMinesLabel);
-        nbMinesPanel.add(nbMinesTextField);
+        nbMinesPanel.add(nbMinesLabel, BorderLayout.WEST);
+        nbMinesPanel.add(nbMinesTextField, BorderLayout.EAST);
 
         mainPanel.add(dimXPanel, BorderLayout.NORTH);
         mainPanel.add(dimYPanel, BorderLayout.CENTER);

@@ -196,13 +196,17 @@ public class Gui extends JPanel {
                 DefaultCaret caret = (DefaultCaret)msgArea.getCaret();
                 caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
                 JScrollPane sp = new JScrollPane(msgArea);
-                centerPanel.add(sp, BorderLayout.NORTH);
+            //centerPanel.add(sp, BorderLayout.CENTER);
                 // sub-center
                 chatMsg = new JTextField();
                 chatMsg.setFont(new Font("Nunito", Font.PLAIN, 14));
                 chatMsg.addActionListener(new Controller(this));
                 JScrollPane sp2 = new JScrollPane(chatMsg);
-            centerPanel.add(sp2, BorderLayout.CENTER);
+            JPanel testPanel = new JPanel();
+            testPanel.setLayout(new BorderLayout());
+            testPanel.add(sp, BorderLayout.CENTER);
+            testPanel.add(sp2, BorderLayout.SOUTH);
+            centerPanel.add(testPanel, BorderLayout.CENTER);
                 // sub-south
                 JPanel subSouthPanel  = new JPanel();
                 subSouthPanel.setLayout(new BorderLayout());

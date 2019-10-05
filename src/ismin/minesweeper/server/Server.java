@@ -212,6 +212,9 @@ public class Server extends JFrame implements Runnable {
     public void checkAllClientConnected() {
         if(clientThreadList.isEmpty() && gameStarted) {
             JOptionPane.showMessageDialog(null, "All players logged out before the end of the game.\nThe game was stopped.", "All players logged out", JOptionPane.WARNING_MESSAGE);
+            serverGui.addMsg("Game stopped\n");
+            stopGame();
+            serverGui.getStartButton().setText("Start Game");
         }
     }
 

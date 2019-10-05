@@ -12,6 +12,8 @@ If you are a Linux user, you can simply install it by running the [fonts.install
 sudo sh fonts.install.sh
 ```
 
+However, it is not mandatory to install the _Nunito_ font.
+
 ## Installation & Run
 
 First, you need to compile all the ```.java``` files. In order to do that, you can simply run the [compile.sh] file:
