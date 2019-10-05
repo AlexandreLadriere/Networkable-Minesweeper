@@ -14,4 +14,4 @@ jar cfe Client.jar $CLIENT_ENTRY_POINT $UTILS_CLASS $ENUMS_CLASS $CLIENT_CLASS i
 # Building the server .jar file:
 jar cfe Server.jar $SERVER_ENTRY_POINT $UTILS_CLASS $ENUMS_CLASS $SERVER_CLASS
 
-cp -avr Client.jar Server.jar ./../
+mv Client.jar Server.jar ./../
