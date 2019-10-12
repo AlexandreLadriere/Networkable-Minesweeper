@@ -52,6 +52,26 @@ Then, to connect clients to the server, you just need to give a unique _player n
 
 If you are testing only on your computer, you don't need to change the name of the server (```localhost```) or the port of the server (```10000```).
 
+## Demos
+
+### Solo
+<img alt="easy_demo.gif" src="screenshots/easy_demo.gif" width="402" height="559" /> 
+
+### Multiplayer
+<img alt="easy_multi_demo.gif" src="screenshots/easy_multi_demo.gif" width="800" height="500" /> 
+
+## Screenshots
+
+<img alt="easy_level.png" src="screenshots/easy_level.png" width="201" height="280" /> 
+
+<img alt="custom_level.png" src="screenshots/custom_level.png" width="400" height="280" /> 
+
+<img alt="statistics.png" src="screenshots/statistics.png" width="400" height="280" /> 
+
+<img alt="server.png" src="screenshots/server.png" width="201" height="330" /> 
+
+<img alt="client_multi.png" src="screenshots/client_multi.png" width="400" height="310" /> 
+
 ## Structure
 
 ```
@@ -101,6 +121,7 @@ If you are testing only on your computer, you don't need to change the name of t
 ├── fonts.install.sh
 ├── LICENSE
 ├── README.md
+├── screenshots
 └── server.run.sh
 ```
 
