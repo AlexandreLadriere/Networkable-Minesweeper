@@ -7,6 +7,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+/**
+ * Implements a client thread on the server side, able to manage its own inputStream/outputStream
+ */
 public class EchoThread implements Runnable {
     private Socket socket;
     private DataInputStream inStream;
@@ -19,6 +22,7 @@ public class EchoThread implements Runnable {
     /**
      * Constructor for EchoThread
      * @param clientSocket client socket
+     * @param server server
      */
     public EchoThread(Socket clientSocket, Server server) {
         this.socket = clientSocket;

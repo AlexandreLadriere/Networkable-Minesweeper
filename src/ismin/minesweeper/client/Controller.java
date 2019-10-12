@@ -14,23 +14,11 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 /**
- * This class implements the Controller for the application
+ * This class implements the Controller for the client application
  */
 public class Controller implements ActionListener {
 
-    public static final int QUIT = 0;
     private Gui gui;
-    private int type; //type d'evenement (QUIT, ...)
-
-    /**
-     * Creates a Controller according to the given type and GUI
-     * @param type type you want to use
-     * @param gui gui you want to listen to
-     */
-    public Controller(int type, Gui gui) {
-        this.gui = gui;
-        this.type = type;
-    }
 
     /**
      * Creates a Controller for the given GUI

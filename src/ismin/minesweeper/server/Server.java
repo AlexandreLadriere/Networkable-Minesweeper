@@ -14,6 +14,9 @@ import java.net.Socket;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Implements the server of the application
+ */
 public class Server extends JFrame implements Runnable {
 
     private ServerGui serverGui;
@@ -65,13 +68,17 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
-     * Server main
+     * Server's main
      * @param args
      */
     public static void main(String[] args) {
         new Server();
     }
 
+    /**
+     * Starts the server
+     * @param serverPort server's port on witch you want to open a connexion
+     */
     public void startServer(int serverPort) {
 
         serverDown = false;
@@ -89,7 +96,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
-     * Closes the server socket
+     * Closes the server's socket
      */
     void closeServer() {
         try {
@@ -122,7 +129,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
-     * Starts a new game for the server (and the client). The server Field is initialized here
+     * Starts a new game for the server (and the client). The server's Field is initialized here
      */
     public void startGame() {
         broadcast(ServerMessageTypes.MSG.value());
@@ -165,7 +172,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
-     * Broadcast a <code>String</code> message
+     * Broadcasts a <code>String</code> message
      * @param msg <code>String</code> message you want to broadcast
      */
     public void broadcast(String msg) {
@@ -180,7 +187,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
-     * Broadcast a <code>int</code> message
+     * Broadcasts a <code>int</code> message
      * @param msg <code>int</code> message you want to broadcast
      */
     public void broadcast(int msg) {
@@ -195,7 +202,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
-     * Broadcast a <code>boolean</code> message
+     * Broadcasts a <code>boolean</code> message
      * @param msg <code>boolean</code> message you want to broadcast
      */
     public void broadcast(boolean msg) {
@@ -209,6 +216,9 @@ public class Server extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Checks if all client are still connected to the server. If not, the game is stopped
+     */
     public void checkAllClientConnected() {
         if(clientThreadList.isEmpty() && gameStarted) {
             JOptionPane.showMessageDialog(null, "All players logged out before the end of the game.\nThe game was stopped.", "All players logged out", JOptionPane.WARNING_MESSAGE);
@@ -231,6 +241,9 @@ public class Server extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Saves all players names in a collection when the game is started
+     */
     private void storeAllNames() {
         clientNameScoreMap = new HashMap<String, Integer>();
         for (EchoThread echoThread : clientThreadList) {
@@ -239,7 +252,7 @@ public class Server extends JFrame implements Runnable {
     }
 
     /**
-     * Broadcast the top 3 players to client in order for them to have direct scores
+     * Broadcasts the top 3 players to client in order for them to have direct scores
      */
     public void getDirectScores() {
         broadcast(ServerMessageTypes.DIRECT_SCORE.value());
@@ -263,6 +276,11 @@ public class Server extends JFrame implements Runnable {
         broadcast(directScore);
     }
 
+    /**
+     * Finds the max value in a hashmap
+     * @param hashMap Hashmap you want the maximum of
+     * @return the maximum of the hashmap
+     */
     private String findMaxInHashMap(HashMap<String, Integer> hashMap) {
         int maxValue = 0;
         String maxKey = "";
@@ -277,6 +295,7 @@ public class Server extends JFrame implements Runnable {
 
     /**
      * Gets the score for each player which played a game
+     * @return results in a string format
      */
     private String getAllScores() {
         clientNameScoreMap.replaceAll((k, v) -> getScore(k));
@@ -287,6 +306,11 @@ public class Server extends JFrame implements Runnable {
         return results;
     }
 
+    /**
+     * Gets the score for the given player
+     * @param name name of the player for which you want the score
+     * @return the score of the player
+     */
     private int getScore(String name) {
         int score = 0;
         for(int i = 0; i<tabNames.length; i++) {
@@ -299,6 +323,10 @@ public class Server extends JFrame implements Runnable {
         return score;
     }
 
+    /**
+     * Checks if a game is win or not
+     * @return a boolean that indicates if the game is win (true) or not (false)
+     */
     public boolean isWin() {
         boolean win = serverField.getDimX()*serverField.getDimY()-nbRevealed == serverField.getNbMines();
         if(win) {
@@ -312,6 +340,9 @@ public class Server extends JFrame implements Runnable {
         return win;
     }
 
+    /**
+     * Stops a game and send the information to all clients
+     */
     public void stopGame() {
         broadcast(ServerMessageTypes.END_GAME.value());
         broadcast(getAllScores());
@@ -319,6 +350,9 @@ public class Server extends JFrame implements Runnable {
         gameStarted = false;
     }
 
+    /**
+     * Checks if all players have lost or not
+     */
     public void checkAllClientLost() {
         if(nbMineClicked == clientThreadList.size()) {
             broadcast(ServerMessageTypes.MSG.value());

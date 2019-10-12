@@ -1,1 +1,4 @@
-emse.ismin.minesweeper
+ismin.minesweeper.client
+ismin.minesweeper.enums
+ismin.minesweeper.server
+ismin.minesweeper.utils

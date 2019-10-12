@@ -71,6 +71,12 @@ public class Case extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * Calls the function that draw an image, according to the nearby count of mines
+     * @param gc Graphics object on which you want to draw the image
+     * @param nearByCount nearby count of mines
+     * @see #drawAdaptativeImage(Graphics, String)
+     */
     private void drawImageNumber(Graphics gc, int nearByCount) {
         switch(nearByCount) {
             case -1:
@@ -109,6 +115,7 @@ public class Case extends JPanel implements MouseListener {
     /**
      * Draws an image adapted to the case size
      * @param gc <code>Graphics</code> object on which you want to draw the image
+     * @param filePath file path of the image you want to draw
      */
     private void drawAdaptativeImage(Graphics gc, String filePath) {
         if(!minesweeper.getIsOnline()) {
@@ -140,13 +147,19 @@ public class Case extends JPanel implements MouseListener {
         }
     }
 
+    /**
+     * draw an image on a CAse when the client is playing online
+     * @param nearbyCount nearby count of mines
+     * @param playerColor color code of the player
+     * @see #drawAdaptativeImage(Graphics, String)
+     */
     public void paintCaseOnline(int nearbyCount, int playerColor) {
         currentPlayerColor = playerColor;
         drawImageNumber(this.getGraphics(), nearbyCount);
     }
 
     /**
-     * Reset a case
+     * Resets a case
      */
     public void newCase() {
         isClicked = false;

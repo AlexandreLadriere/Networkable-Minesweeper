@@ -1,5 +1,8 @@
 package ismin.minesweeper.enums;
 
+/**
+ * Defines the files paths
+ */
 public enum FileNames {
     SCORE_FILENAME("scores.dat"),
     STATS_FILENAME("stats.dat");

@@ -20,7 +20,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 /**
- * This class is the main app class
+ * This class is the main app class and the client side of this app
  */
 public class Minesweeper extends JFrame implements Runnable {
 
@@ -87,6 +87,10 @@ public class Minesweeper extends JFrame implements Runnable {
         new Minesweeper();
     }
 
+    /**
+     * Connects the client to the server
+     * @return a boolean that indicates if the connection was successful (true) or not (false)
+     */
     public boolean connectToServer() {
         boolean success = true;
         serverName = gui.getServerNameTextField().getText();
@@ -187,6 +191,11 @@ public class Minesweeper extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Sends the position of the case clicked by the client to the server
+     * @param x position (column)
+     * @param y position (row)
+     */
     public void sendCaseClicked(int x, int y) {
         try {
             outStream.writeInt(ServerMessageTypes.CASE_CLICKED.value());
@@ -197,6 +206,10 @@ public class Minesweeper extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Sends a chat message to the server
+     * @param chatMsg chat message string that you want to send to the server in order to be broadcasted
+     */
     public void sendChatMsg(String chatMsg) {
         try {
             outStream.writeInt(ServerMessageTypes.CHAT_MSG.value());
@@ -412,7 +425,7 @@ public class Minesweeper extends JFrame implements Runnable {
     }
 
     /**
-     * Gets all the lines of a file in a <code>List<String></code> object
+     * Gets all the lines of a file in a <code>List of strings</code> object
      * @param fileName filename of the file you want to get all the lines
      * @return String list of all the lines (one line = one element in the list)
      */
@@ -502,7 +515,7 @@ public class Minesweeper extends JFrame implements Runnable {
 
     /**
      * Getter for the player color
-     * @return
+     * @return player's color code
      */
     public Color getPlayerColor() {
         return playerColor;
@@ -518,7 +531,7 @@ public class Minesweeper extends JFrame implements Runnable {
 
     /**
      * Setter for the Field
-     * @param field
+     * @param field Field of mine
      */
     public void setField(Field field) {
         this.field = field;

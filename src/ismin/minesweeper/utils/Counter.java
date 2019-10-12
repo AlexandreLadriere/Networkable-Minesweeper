@@ -3,6 +3,9 @@ package ismin.minesweeper.utils;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Implements a counter (in seconds)
+ */
 public class Counter extends JPanel implements Runnable {
     private final static int DIM_Y = 50;
     private final static int DIM_X = 150;

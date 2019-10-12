@@ -1,5 +1,8 @@
 package ismin.minesweeper.enums;
 
+/**
+ * Defines the different message types for communication between client and server
+ */
 public enum ServerMessageTypes {
     CONNEXION(0),
     SERVER_DISCONNECTION(1),
@@ -22,6 +25,10 @@ public enum ServerMessageTypes {
         this.code = code;
     }
 
+    /**
+     * Returns the code value
+     * @return code value (int type)
+     */
     public int value() {
         return code;
     }

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"emse.ismin.minesweeper"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ismin.minesweeper.client"},{"l":"ismin.minesweeper.enums"},{"l":"ismin.minesweeper.server"},{"l":"ismin.minesweeper.utils"}]

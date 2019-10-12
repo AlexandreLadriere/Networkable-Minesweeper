@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Implements the controller for the server
+ */
 public class ServerController implements ActionListener {
 
     private ServerGui serverGui;

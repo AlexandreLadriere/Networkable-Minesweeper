@@ -53,6 +53,7 @@ public class Field {
      * Initializes the field by setting the dimensions, the number of mines and placing the mines
      * @param dimX number of columns
      * @param dimY number of rows
+     * @param nbMines number of mines
      */
     private void iniField(int dimX, int dimY, int nbMines) {
         this.dimX = dimX;

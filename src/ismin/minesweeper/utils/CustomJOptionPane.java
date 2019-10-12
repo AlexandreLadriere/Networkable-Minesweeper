@@ -3,6 +3,9 @@ package ismin.minesweeper.utils;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Implements a specific JOptionPane for custom level parameters
+ */
 public class CustomJOptionPane extends JPanel {
     private static final Color FOREGROUND_COLOR = new Color(44,62,80);
     private static final Color BACKGROUND_COLOR = new Color(189,195,199);

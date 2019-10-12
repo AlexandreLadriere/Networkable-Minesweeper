@@ -11,7 +11,7 @@ import javax.swing.KeyStroke;
 import javax.swing.text.DefaultCaret;
 
 /**
- * This class implements the GUI of the application
+ * This class implements the GUI of the client application
  */
 public class Gui extends JPanel {
 

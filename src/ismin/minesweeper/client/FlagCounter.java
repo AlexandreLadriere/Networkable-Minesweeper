@@ -3,6 +3,10 @@ package ismin.minesweeper.client;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * This class implements a JPanel specifically for the flag counter
+ */
+
 public class FlagCounter extends JPanel {
     private final static int DIM_Y = 50;
     private final static int DIM_X = 200;
@@ -34,11 +38,19 @@ public class FlagCounter extends JPanel {
         gc.drawString(counter + "/" + nbMines, getWidth()/3+getWidth()/8, getHeight()/2+getHeight()/8);
     }
 
+    /**
+     * Sets the operation to do on the Panel (+, -, =)
+     * @param operation integer that represents the updating operation to do
+     */
     public void setOperation(int operation) {
         this.operation = operation;
         repaint();
     }
 
+    /**
+     * Sets the total number of mines
+     * @param nbMines total number of mines in the field
+     */
     public void setNbMines(int nbMines) {
         this.nbMines = nbMines;
     }
