@@ -201,6 +201,7 @@ public class Gui extends JPanel {
                 chatMsg = new JTextField();
                 chatMsg.setFont(new Font("Nunito", Font.PLAIN, 14));
                 chatMsg.addActionListener(new Controller(this));
+                chatMsg.setToolTipText("Click here to write a chat message");
                 JScrollPane sp2 = new JScrollPane(chatMsg);
             JPanel testPanel = new JPanel();
             testPanel.setLayout(new BorderLayout());
