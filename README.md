@@ -1,4 +1,4 @@
-# Networkable Minesweeper [STILL UNDER DEVELOPMENT]
+# Networkable Minesweeper
 
 The __Networkable Minesweeper__ is a classic minesweeper game, developped in JAVA and playable both offline and in network.
 
@@ -121,7 +121,6 @@ If you are testing only on your computer, you don't need to change the name of t
 ├── fonts.install.sh
 ├── LICENSE
 ├── README.md
-├── screenshots
 └── server.run.sh
 ```
 
