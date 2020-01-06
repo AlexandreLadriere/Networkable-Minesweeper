@@ -1,5 +1,8 @@
 # Networkable Minesweeper
 
+[![GitHub license](https://img.shields.io/github/license/AlexandreLadriere/Networkable-Minesweeper.svg)](https://github.com/AlexandreLadriere/Networkable-Minesweeper/blob/master/LICENSE)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/805b4ee526194bcfb4de7a9db3024b78)](https://www.codacy.com/manual/alexandre.ladriere77/Networkable-Minesweeper?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlexandreLadriere/Networkable-Minesweeper&amp;utm_campaign=Badge_Grade)
+
 The __Networkable Minesweeper__ is a classic minesweeper game, developped in JAVA and playable both offline and in network.
 
 ## Dependencies
